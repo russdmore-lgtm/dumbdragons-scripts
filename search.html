@@ -4,11 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search — Dumbgeons & Dragons Transcripts</title>
+    
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved) document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
+
     <style>
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: #fafafa; color: #111; line-height: 1.7; }
-    header { background: #f5c518; padding: 1.2rem 2rem; border-bottom: 4px solid #cc2200; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+
+    /* Light mode variables (default) */
+    :root {
+        --bg: #fafafa;
+        --bg-secondary: #ffffff;
+        --text: #111111;
+        --text-muted: #888888;
+        --border: #dddddd;
+        --border-light: #eeeeee;
+        --accent: #cc2200;
+        --accent-hover: #aa1a00;
+        --yellow: #f5c518;
+        --input-bg: #fafafa;
+        --mark-bg: #f5c518;
+        --mark-text: #111111;
+    }
+
+    /* Dark mode variables */
+    [data-theme="dark"] {
+        --bg: #1a1a2e;
+        --bg-secondary: #16213e;
+        --text: #eeeeee;
+        --text-muted: #888888;
+        --border: #333333;
+        --border-light: #222222;
+        --accent: #e94560;
+        --accent-hover: #c73652;
+        --yellow: #f5c518;
+        --input-bg: #0f0f1a;
+        --mark-bg: #e94560;
+        --mark-text: #ffffff;
+    }
+
+    /* Auto dark mode if user hasn't manually chosen */
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+            --bg: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text: #eeeeee;
+            --text-muted: #888888;
+            --border: #333333;
+            --border-light: #222222;
+            --accent: #e94560;
+            --accent-hover: #c73652;
+            --yellow: #f5c518;
+            --input-bg: #0f0f1a;
+            --mark-bg: #e94560;
+            --mark-text: #ffffff;
+        }
+    }
+
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; transition: background 0.2s, color 0.2s; }
+    header { background: var(--yellow); padding: 1.2rem 2rem; border-bottom: 4px solid var(--accent); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
     header .brand { color: #cc2200; text-decoration: none; font-size: 1.1rem; letter-spacing: 1px; font-weight: 900; text-transform: uppercase; }
     header .brand:hover { text-decoration: underline; }
     header nav { display: flex; gap: 1rem; align-items: center; }
@@ -16,29 +75,31 @@
     header nav a:hover { color: #cc2200; }
     header nav a.report { border: 2px solid #111; padding: 0.3rem 0.7rem; border-radius: 3px; }
     header nav a.report:hover { border-color: #cc2200; color: #cc2200; }
-    .search-bar { background: #fff; padding: 1rem 2rem; border-bottom: 1px solid #ddd; }
+    .dark-toggle { background: none; border: 2px solid #111; border-radius: 3px; padding: 0.3rem 0.6rem; cursor: pointer; font-size: 1rem; line-height: 1; color: #111; }
+    .dark-toggle:hover { border-color: #cc2200; }
+    .search-bar { background: var(--bg-secondary); padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
     .search-bar form { max-width: 800px; margin: 0 auto; display: flex; gap: 0.5rem; }
-    .search-bar input { flex: 1; padding: 0.5rem 1rem; background: #fafafa; border: 2px solid #ddd; border-radius: 3px; color: #111; font-size: 0.95rem; }
-    .search-bar input:focus { outline: none; border-color: #f5c518; }
-    .search-bar button { padding: 0.5rem 1.2rem; background: #cc2200; border: none; border-radius: 3px; color: #fff; cursor: pointer; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    .search-bar button:hover { background: #aa1a00; }
-    footer { text-align: center; padding: 2rem; color: #888; font-size: 0.85rem; border-top: 3px solid #f5c518; margin-top: 3rem; background: #fff; }
-    footer a { color: #888; }
-    footer a:hover { color: #cc2200; }
+    .search-bar input { flex: 1; padding: 0.5rem 1rem; background: var(--input-bg); border: 2px solid var(--border); border-radius: 3px; color: var(--text); font-size: 0.95rem; }
+    .search-bar input:focus { outline: none; border-color: var(--yellow); }
+    .search-bar button { padding: 0.5rem 1.2rem; background: var(--accent); border: none; border-radius: 3px; color: #fff; cursor: pointer; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .search-bar button:hover { background: var(--accent-hover); }
+    footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 3px solid var(--yellow); margin-top: 3rem; background: var(--bg-secondary); }
+    footer a { color: var(--text-muted); }
+    footer a:hover { color: var(--accent); }
 
         main { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-        .filters { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; color: #555; font-size: 0.9rem; }
+        .filters { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem; }
         .filters label { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; }
-        .filters input { accent-color: #cc2200; }
-        #results h3 { color: #cc2200; margin-bottom: 1rem; font-weight: 900; text-transform: uppercase; }
+        .filters input { accent-color: var(--accent); }
+        #results h3 { color: var(--accent); margin-bottom: 1rem; font-weight: 900; text-transform: uppercase; }
         #results ul { list-style: none; }
-        #results li { padding: 0.8rem 0; border-bottom: 1px solid #eee; }
-        #results a { color: #111; text-decoration: none; font-size: 1rem; }
-        #results a:hover { color: #cc2200; }
-        #results .meta { color: #999; font-size: 0.8rem; margin-bottom: 0.3rem; }
-        #results .snippet { color: #666; font-size: 0.85rem; margin-top: 0.3rem; line-height: 1.5; }
-        mark { background: #f5c518; color: #111; padding: 0 2px; border-radius: 2px; }
-        .no-results { color: #888; }
+        #results li { padding: 0.8rem 0; border-bottom: 1px solid var(--border-light); }
+        #results a { color: var(--text); text-decoration: none; font-size: 1rem; }
+        #results a:hover { color: var(--accent); }
+        #results .meta { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0.3rem; }
+        #results .snippet { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.3rem; line-height: 1.5; }
+        mark { background: var(--mark-bg); color: var(--mark-text); padding: 0 2px; border-radius: 2px; }
+        .no-results { color: var(--text-muted); }
     </style>
 </head>
 <body>
@@ -46,6 +107,7 @@
         <a href="index.html" class="brand">DUMBGEONS & DRAGONS</a>
         <nav>
             <a href="index.html">Episodes</a>
+            <button class="dark-toggle" id="dark-toggle" title="Toggle dark mode">🌙</button>
         </nav>
     </header>
     <div class="search-bar">
@@ -142,5 +204,27 @@
             });
         });
     </script>
+    
+    <script>
+        const toggleBtn = document.getElementById('dark-toggle');
+        function updateToggle() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = theme === 'dark' || (!theme && sysDark);
+            toggleBtn.textContent = isDark ? '☀️' : '🌙';
+            toggleBtn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+        }
+        toggleBtn.addEventListener('click', function() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = current === 'dark' || (!current && sysDark);
+            const next = isDark ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateToggle();
+        });
+        updateToggle();
+    </script>
+
 </body>
 </html>
