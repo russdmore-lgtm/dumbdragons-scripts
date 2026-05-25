@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search — Dumbgeons & Dragons Transcripts</title>
+    <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #fafafa; color: #111; line-height: 1.7; }
+    header { background: #f5c518; padding: 1.2rem 2rem; border-bottom: 4px solid #cc2200; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    header .brand { color: #cc2200; text-decoration: none; font-size: 1.1rem; letter-spacing: 1px; font-weight: 900; text-transform: uppercase; }
+    header .brand:hover { text-decoration: underline; }
+    header nav { display: flex; gap: 1rem; align-items: center; }
+    header nav a { color: #111; text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    header nav a:hover { color: #cc2200; }
+    header nav a.report { border: 2px solid #111; padding: 0.3rem 0.7rem; border-radius: 3px; }
+    header nav a.report:hover { border-color: #cc2200; color: #cc2200; }
+    .search-bar { background: #fff; padding: 1rem 2rem; border-bottom: 1px solid #ddd; }
+    .search-bar form { max-width: 800px; margin: 0 auto; display: flex; gap: 0.5rem; }
+    .search-bar input { flex: 1; padding: 0.5rem 1rem; background: #fafafa; border: 2px solid #ddd; border-radius: 3px; color: #111; font-size: 0.95rem; }
+    .search-bar input:focus { outline: none; border-color: #f5c518; }
+    .search-bar button { padding: 0.5rem 1.2rem; background: #cc2200; border: none; border-radius: 3px; color: #fff; cursor: pointer; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .search-bar button:hover { background: #aa1a00; }
+    footer { text-align: center; padding: 2rem; color: #888; font-size: 0.85rem; border-top: 3px solid #f5c518; margin-top: 3rem; background: #fff; }
+    footer a { color: #888; }
+    footer a:hover { color: #cc2200; }
+
+        main { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        .filters { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; color: #555; font-size: 0.9rem; }
+        .filters label { display: flex; align-items: center; gap: 0.4rem; cursor: pointer; }
+        .filters input { accent-color: #cc2200; }
+        #results h3 { color: #cc2200; margin-bottom: 1rem; font-weight: 900; text-transform: uppercase; }
+        #results ul { list-style: none; }
+        #results li { padding: 0.8rem 0; border-bottom: 1px solid #eee; }
+        #results a { color: #111; text-decoration: none; font-size: 1rem; }
+        #results a:hover { color: #cc2200; }
+        #results .meta { color: #999; font-size: 0.8rem; margin-bottom: 0.3rem; }
+        #results .snippet { color: #666; font-size: 0.85rem; margin-top: 0.3rem; line-height: 1.5; }
+        mark { background: #f5c518; color: #111; padding: 0 2px; border-radius: 2px; }
+        .no-results { color: #888; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="brand">DUMBGEONS & DRAGONS</a>
+        <nav>
+            <a href="index.html">Episodes</a>
+        </nav>
+    </header>
+    <div class="search-bar">
+        <form onsubmit="doSearch(event)">
+            <input type="text" id="search-input" placeholder="Search transcripts...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <main>
+        <div class="filters">
+            <strong style="color:#111;">Filter:</strong>
+            <label><input type="checkbox" class="season-filter" value="3" checked> Season 3</label>
+<label><input type="checkbox" class="season-filter" value="4" checked> Season 4</label>
+
+        </div>
+        <div id="results"></div>
+    </main>
+    <footer>
+        Dumbgeons &amp; Dragons &copy; Dumbgeons &amp; Dragons Podcast. Transcripts generated for accessibility.<br>
+        <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new" target="_blank">Report a transcript error</a>
+    </footer>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        let searchIndex = null;
+        let episodeData = null;
+
+        fetch('search-index.json')
+            .then(r => r.json())
+            .then(data => {
+                episodeData = data;
+                searchIndex = lunr(function() {
+                    this.ref('id');
+                    this.field('title', { boost: 10 });
+                    this.field('transcript');
+                    data.forEach(ep => this.add(ep));
+                });
+                const params = new URLSearchParams(window.location.search);
+                const q = params.get('q');
+                if (q) {
+                    document.getElementById('search-input').value = q;
+                    runSearch(q);
+                }
+            });
+
+        function doSearch(e) {
+            e.preventDefault();
+            const q = document.getElementById('search-input').value.trim();
+            if (q) runSearch(q);
+        }
+
+        function getSelectedSeasons() {
+            return Array.from(document.querySelectorAll('.season-filter:checked')).map(el => el.value);
+        }
+
+        function runSearch(q) {
+            if (!searchIndex) return;
+            const selectedSeasons = getSelectedSeasons();
+            const results = searchIndex.search(q);
+            const container = document.getElementById('results');
+
+            const filtered = results.filter(r => {
+                const ep = episodeData.find(e => e.id === r.ref);
+                return ep && selectedSeasons.includes(String(ep.season));
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p class="no-results">No results found for "<strong>' + q + '</strong>".</p>';
+                return;
+            }
+
+            let html = '<h3>' + filtered.length + ' result' + (filtered.length > 1 ? 's' : '') + ' for "' + q + '"</h3><ul>';
+            filtered.slice(0, 100).forEach(r => {
+                const ep = episodeData.find(e => e.id === r.ref);
+                if (!ep) return;
+                const snippetText = ep.transcript;
+                const idx = snippetText.toLowerCase().indexOf(q.toLowerCase());
+                const start = Math.max(0, idx - 80);
+                const end = Math.min(snippetText.length, idx + q.length + 120);
+                const snippet = (start > 0 ? '...' : '') + snippetText.slice(start, end).replace(new RegExp(q, 'gi'), '<mark>$&</mark>') + (end < snippetText.length ? '...' : '');
+                html += '<li>';
+                html += '<div class="meta">Season ' + ep.season + ' &bull; ' + ep.date + '</div>';
+                html += '<a href="' + ep.url + '">' + ep.title + '</a>';
+                html += '<div class="snippet">' + snippet + '</div>';
+                html += '</li>';
+            });
+            html += '</ul>';
+            container.innerHTML = html;
+        }
+
+        document.querySelectorAll('.season-filter').forEach(cb => {
+            cb.addEventListener('change', () => {
+                const q = document.getElementById('search-input').value.trim();
+                if (q) runSearch(q);
+            });
+        });
+    </script>
+</body>
+</html>
