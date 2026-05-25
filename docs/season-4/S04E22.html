@@ -90,7 +90,7 @@
         .episode-header { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
         .episode-header h1 { font-size: 1.6rem; color: var(--accent); margin-bottom: 0.3rem; font-weight: 900; text-transform: uppercase; }
         .episode-header .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
-        .player { margin-bottom: 1rem; }
+        .player { margin-bottom: 1rem; position: sticky; top: 0; z-index: 100; background: var(--bg); padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
         .player audio { border-radius: 4px; }
         .nav-links { display: flex; justify-content: space-between; margin-bottom: 2rem; }
         .nav-btn { color: var(--accent); text-decoration: none; font-size: 0.9rem; padding: 0.4rem 0.8rem; border: 2px solid var(--accent); border-radius: 3px; font-weight: 700; }
@@ -508,6 +508,17 @@
     <script>
         const audio = document.getElementById('episode-audio');
         const lines = document.querySelectorAll('.ts-line');
+        let userScrolling = false;
+        let scrollTimeout = null;
+
+        // Detect manual scrolling — pause auto-scroll for 3 seconds
+        window.addEventListener('scroll', () => {
+            userScrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                userScrolling = false;
+            }, 3000);
+        }, { passive: true });
 
         // Click to seek and play
         lines.forEach(line => {
@@ -515,6 +526,8 @@
                 const start = parseFloat(line.getAttribute('data-start'));
                 audio.currentTime = start;
                 audio.play();
+                // Resume auto-scroll when user clicks a line
+                userScrolling = false;
             });
         });
 
@@ -533,11 +546,13 @@
             lines.forEach(line => line.classList.remove('active'));
             if (active) {
                 active.classList.add('active');
-                // Auto-scroll to keep active line visible
-                const rect = active.getBoundingClientRect();
-                const inView = rect.top >= 0 && rect.bottom <= window.innerHeight;
-                if (!inView) {
-                    active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Only auto-scroll if user isn't manually scrolling
+                if (!userScrolling) {
+                    const rect = active.getBoundingClientRect();
+                    const inView = rect.top >= 120 && rect.bottom <= window.innerHeight - 50;
+                    if (!inView) {
+                        active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
                 }
             }
         });
