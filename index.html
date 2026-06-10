@@ -494,37 +494,46 @@
     <script>
         let searchIndex = null;
         let episodeData = null;
+        let indexLoaded = false;
+        let indexLoading = false;
 
-        fetch('search-index.json')
-            .then(r => r.json())
-            .then(data => {
-                episodeData = data;
-                searchIndex = lunr(function() {
-                    this.ref('id');
-                    this.field('title', { boost: 10 });
-                    this.field('transcript');
-                    data.forEach(ep => this.add(ep));
+        function loadIndex(callback) {
+            if (indexLoaded) { callback(); return; }
+            if (indexLoading) { setTimeout(() => loadIndex(callback), 100); return; }
+            indexLoading = true;
+            fetch('search-index.json')
+                .then(r => r.json())
+                .then(data => {
+                    episodeData = data;
+                    searchIndex = lunr(function() {
+                        this.ref('id');
+                        this.field('title', { boost: 10 });
+                        this.field('transcript');
+                        data.forEach(ep => this.add(ep));
+                    });
+                    indexLoaded = true;
+                    indexLoading = false;
+                    callback();
                 });
-                // Check for search query in URL
-                const params = new URLSearchParams(window.location.search);
-                const q = params.get('q');
-                if (q) {
-                    document.getElementById('search-input').value = q;
-                    runSearch(q);
-                }
-            });
+        }
+
+        // Only load index when user starts typing
+        document.getElementById('search-input').addEventListener('focus', () => {
+            loadIndex(() => {});
+        });
 
         function doSearch(e) {
             e.preventDefault();
             const q = document.getElementById('search-input').value.trim();
-            if (q) runSearch(q);
+            if (!q) return;
+            loadIndex(() => runSearch(q));
         }
 
         function runSearch(q) {
             if (!searchIndex) return;
             const results = searchIndex.search(q);
             const container = document.getElementById('search-results');
-            const seasonList = document.querySelector('main > .season');
+            const seasonList = document.querySelector('.season');
 
             if (results.length === 0) {
                 container.style.display = 'block';
@@ -542,6 +551,14 @@
             html += '</ul>';
             container.innerHTML = html;
             container.style.display = 'block';
+        }
+
+        // Check for search query in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlQ = urlParams.get('q');
+        if (urlQ) {
+            document.getElementById('search-input').value = urlQ;
+            loadIndex(() => runSearch(urlQ));
         }
     </script>
     

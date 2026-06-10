@@ -141,29 +141,39 @@
     <script>
         let searchIndex = null;
         let episodeData = null;
+        let indexLoaded = false;
+        let indexLoading = false;
 
-        fetch('search-index.json')
-            .then(r => r.json())
-            .then(data => {
-                episodeData = data;
-                searchIndex = lunr(function() {
-                    this.ref('id');
-                    this.field('title', { boost: 10 });
-                    this.field('transcript');
-                    data.forEach(ep => this.add(ep));
+        function loadIndex(callback) {
+            if (indexLoaded) { callback(); return; }
+            if (indexLoading) { setTimeout(() => loadIndex(callback), 100); return; }
+            indexLoading = true;
+            document.getElementById('results').innerHTML = '<p style="color:var(--text-muted)">Loading search index...</p>';
+            fetch('search-index.json')
+                .then(r => r.json())
+                .then(data => {
+                    episodeData = data;
+                    searchIndex = lunr(function() {
+                        this.ref('id');
+                        this.field('title', { boost: 10 });
+                        this.field('transcript');
+                        data.forEach(ep => this.add(ep));
+                    });
+                    indexLoaded = true;
+                    indexLoading = false;
+                    document.getElementById('results').innerHTML = '';
+                    callback();
                 });
-                const params = new URLSearchParams(window.location.search);
-                const q = params.get('q');
-                if (q) {
-                    document.getElementById('search-input').value = q;
-                    runSearch(q);
-                }
-            });
+        }
+
+        document.getElementById('search-input').addEventListener('focus', () => {
+            loadIndex(() => {});
+        });
 
         function doSearch(e) {
             e.preventDefault();
             const q = document.getElementById('search-input').value.trim();
-            if (q) runSearch(q);
+            if (q) loadIndex(() => runSearch(q));
         }
 
         function getSelectedSeasons() {
@@ -211,6 +221,14 @@
                 if (q) runSearch(q);
             });
         });
+
+        // Check for query in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlQ = urlParams.get('q');
+        if (urlQ) {
+            document.getElementById('search-input').value = urlQ;
+            loadIndex(() => runSearch(urlQ));
+        }
     </script>
     
     <script>
