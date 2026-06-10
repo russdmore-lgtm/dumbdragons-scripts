@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E67 - s01e67 - Where Do We Stand? — Dumbgeons & Dragons Transcripts</title>
+    
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved) document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
+
+    <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Light mode variables (default) */
+    :root {
+        --bg: #fafafa;
+        --bg-secondary: #ffffff;
+        --text: #111111;
+        --text-muted: #888888;
+        --border: #dddddd;
+        --border-light: #eeeeee;
+        --accent: #cc2200;
+        --accent-hover: #aa1a00;
+        --yellow: #f5c518;
+        --input-bg: #fafafa;
+        --mark-bg: #f5c518;
+        --mark-text: #111111;
+    }
+
+    /* Dark mode variables */
+    [data-theme="dark"] {
+        --bg: #1a1a2e;
+        --bg-secondary: #16213e;
+        --text: #eeeeee;
+        --text-muted: #888888;
+        --border: #333333;
+        --border-light: #222222;
+        --accent: #e94560;
+        --accent-hover: #c73652;
+        --yellow: #f5c518;
+        --input-bg: #0f0f1a;
+        --mark-bg: #e94560;
+        --mark-text: #ffffff;
+    }
+
+    /* Auto dark mode if user hasn't manually chosen */
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+            --bg: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text: #eeeeee;
+            --text-muted: #888888;
+            --border: #333333;
+            --border-light: #222222;
+            --accent: #e94560;
+            --accent-hover: #c73652;
+            --yellow: #f5c518;
+            --input-bg: #0f0f1a;
+            --mark-bg: #e94560;
+            --mark-text: #ffffff;
+        }
+    }
+
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; transition: background 0.2s, color 0.2s; }
+    header .brand { color: #cc2200; text-decoration: none; font-size: 1.1rem; letter-spacing: 1px; font-weight: 900; text-transform: uppercase; }
+    header .brand:hover { text-decoration: underline; }
+    header nav { display: flex; gap: 1rem; align-items: center; }
+    header nav a { color: #111; text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    header nav a:hover { color: #cc2200; }
+    header nav a.report { border: 2px solid #111; padding: 0.3rem 0.7rem; border-radius: 3px; }
+    header nav a.report:hover { border-color: #cc2200; color: #cc2200; }
+    .dark-toggle { background: none; border: 2px solid #111; border-radius: 3px; padding: 0.3rem 0.6rem; cursor: pointer; font-size: 1rem; line-height: 1; color: #111; }
+    .dark-toggle:hover { border-color: #cc2200; }
+    .search-bar { background: var(--bg-secondary); padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+    .search-bar form { max-width: 800px; margin: 0 auto; display: flex; gap: 0.5rem; }
+    .search-bar input { flex: 1; padding: 0.5rem 1rem; background: var(--input-bg); border: 2px solid var(--border); border-radius: 3px; color: var(--text); font-size: 0.95rem; }
+    .search-bar input:focus { outline: none; border-color: var(--yellow); }
+    .search-bar button { padding: 0.5rem 1.2rem; background: var(--accent); border: none; border-radius: 3px; color: #fff; cursor: pointer; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .search-bar button:hover { background: var(--accent-hover); }
+    footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 3px solid var(--yellow); margin-top: 3rem; background: var(--bg-secondary); }
+    footer a { color: var(--text-muted); }
+    footer a:hover { color: var(--accent); }
+    .footer-links { margin-bottom: 0.75rem; }
+    .disclaimer { font-size: 0.78rem; color: var(--text-muted); max-width: 700px; margin: 0.75rem auto 0; line-height: 1.6; opacity: 0.8; }
+
+        .episode-header { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        .episode-header h1 { font-size: 1.6rem; color: var(--accent); margin-bottom: 0.3rem; font-weight: 900; text-transform: uppercase; }
+        .episode-header .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .player { position: sticky; top: 0; z-index: 100; background: var(--bg); padding: 0.75rem 0; border-bottom: 2px solid var(--yellow); margin-bottom: 0; width: 100%; }
+        .player audio { border-radius: 4px; }
+        .nav-links { display: flex; justify-content: space-between; margin-bottom: 2rem; }
+        .nav-btn { color: var(--accent); text-decoration: none; font-size: 0.9rem; padding: 0.4rem 0.8rem; border: 2px solid var(--accent); border-radius: 3px; font-weight: 700; }
+        .nav-btn:hover { background: var(--accent); color: #fff; }
+        .nav-btn.disabled { color: var(--border); border-color: var(--border); cursor: default; }
+        .transcript { max-width: 800px; margin: 0 auto 2rem; padding: 0 1rem; }
+        .transcript h2 { color: var(--accent); margin-bottom: 0.5rem; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 900; border-bottom: 3px solid var(--yellow); padding-bottom: 0.5rem; }
+        .transcript-hint { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1.5rem; font-style: italic; }
+        .transcript p { margin-bottom: 0.75rem; color: var(--text); padding: 0.3rem 0.5rem; border-left: 3px solid transparent; border-radius: 2px; transition: border-color 0.15s, background 0.15s; }
+        .transcript p.ts-line { cursor: pointer; }
+        .transcript p.ts-line:hover { border-left-color: var(--border); background: var(--bg-secondary); }
+        .transcript p.active { border-left-color: var(--accent); background: var(--bg-secondary); }
+        .report-footer { max-width: 800px; margin: 0 auto 2rem; padding: 0 1rem; }
+        .report-footer a { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; }
+        .report-footer a:hover { color: var(--accent); }
+        .downloads { display: flex; gap: 0.75rem; margin-bottom: 2rem; }
+        .download-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border: 2px solid var(--accent); border-radius: 3px; color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .download-btn:hover { background: var(--accent); color: #fff; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../../index.html" class="brand">DUMBGEONS & DRAGONS</a>
+        <nav>
+            <a href="../../search.html">Search</a>
+            <a href="../../index.html">Episodes</a>
+            <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new?title=Transcript+Error%3A+E67+-+s01e67+-+Where+Do+We+Stand%3F&body=%2A%2AEpisode%3A%2A%2A+E67+-+s01e67+-+Where+Do+We+Stand%3F%0A%0A%2A%2ATimestamp+%2F+location+in+transcript%3A%2A%2A%0A%0A%2A%2AIncorrect+text%3A%2A%2A%0A%0A%2A%2ACorrect+text%3A%2A%2A%0A" class="report" target="_blank">Report an error</a>
+            <button class="dark-toggle" id="dark-toggle" title="Toggle dark mode">🌙</button>
+        </nav>
+    </header>
+    <div class="search-bar">
+        <form action="../../search.html" method="get">
+            <input type="text" name="q" placeholder="Search transcripts...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="episode-header">
+        <p class="meta">Season 1 &bull; December 19, 2018</p>
+        <h1>E67 - s01e67 - Where Do We Stand?</h1>
+        <div class="downloads">
+            <a href="S01E67 - Where Do We Stand.txt" download class="download-btn">↓ Download TXT</a>
+            <a href="S01E67 - Where Do We Stand.srt" download class="download-btn">↓ Download SRT</a>
+        </div>
+        <div class="nav-links">
+            <a href="S01E66 - Anyone Know The Property Bros.html" class="nav-btn">← Previous</a>
+            <a href="S01E68 - Ho Boy.html" class="nav-btn">Next →</a>
+        </div>
+    </div>
+    <div class="player">
+        <div style="max-width:800px; margin:0 auto; padding:0 1rem;">
+            <audio id="episode-audio" controls style="width:100%; border-radius:4px;">
+                <source src="https://swap.fm/track/WgbGgxzM3MFRwjmX5fnx/op3.dev/e/pscrb.fm/rss/p/rss.art19.com/episodes/user/rAHpDXXd23RFF9j4G_DZoiPlDRPl1rWM/30101017-cd64-4e64-9e31-dcd8fea40a04.mp3?access_token=vi4Xv2OizVDreEuwLo-ZbOIwlIDxr89k&rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+    <div class="transcript">
+        <h2>Transcript</h2>
+        <p class="transcript-hint">Click any line to jump to that moment in the audio.</p>
+        <p class="ts-line" data-start="0.0" title="Click to play from here">Previously on Dumbgeons and Dragons.</p>
+<p class="ts-line" data-start="2.2" title="Click to play from here">You've arrived back in Waterdeep.</p>
+<p class="ts-line" data-start="4.2" title="Click to play from here">Ladies and gentlemen, new Lara Moonbrook, FlintFirebeard, Thea Amastasia, and Nye Ilmich</p>
+<p class="ts-line" data-start="9.8" title="Click to play from here">have returned from Thay to discuss plans of our final move on the Cult of the Dragon.</p>
+<p class="ts-line" data-start="15.8" title="Click to play from here">What can you tell us of your travels to Xanthal's Tower?</p>
+<p class="ts-line" data-start="19.8" title="Click to play from here">We got through that maze. We made it in the tower.</p>
+<p class="ts-line" data-start="23.1" title="Click to play from here">We got the quote unquote dragon mask, but it was a fake.</p>
+<p class="ts-line" data-start="27.3" title="Click to play from here">The same man who you know as Sir István.</p>
+<p class="ts-line" data-start="30.5" title="Click to play from here">What you have is ownership of Xanthal's Tower.</p>
+<p class="ts-line" data-start="35.2" title="Click to play from here">I climb up onto the big boardroom table.</p>
+<p class="ts-line" data-start="38.4" title="Click to play from here">We are not looking to sell the tower to the highest bidder for the fate of Thay Room.</p>
+<p class="ts-line" data-start="45.8" title="Click to play from here">And I kind of bang my axe on the ground like, yeah!</p>
+<p class="ts-line" data-start="50.1" title="Click to play from here">Pound my hand on the table.</p>
+<p class="ts-line" data-start="51.5" title="Click to play from here">I've got one hand in my pocket and one hand is holding a...</p>
+<p class="ts-line" data-start="55.4" title="Click to play from here">Human finger bone.</p>
+<p class="ts-line" data-start="56.8" title="Click to play from here">Oh boy!</p>
+<p class="ts-line" data-start="58.5" title="Click to play from here">You catch the eye of Nye Ilmich.</p>
+<p class="ts-line" data-start="61.2" title="Click to play from here">It will act, when activated, as a scroll of protection from undead.</p>
+<p class="ts-line" data-start="68.2" title="Click to play from here">Everybody comes back to the table.</p>
+<p class="ts-line" data-start="70.9" title="Click to play from here">So where do we stand?</p>
+<p class="ts-line" data-start="74.8" title="Click to play from here">Welcome to Dumbgeons and Dragons.</p>
+<p class="ts-line" data-start="76.7" title="Click to play from here">We're a D&amp;D 5th edition actual play podcast.</p>
+<p class="ts-line" data-start="79.7" title="Click to play from here">And I'm your dungeon master, Russ More.</p>
+<p class="ts-line" data-start="81.4" title="Click to play from here">And with me today is Carla Johnson.</p>
+<p class="ts-line" data-start="84.2" title="Click to play from here">Hey, ooh, number one.</p>
+<p class="ts-line" data-start="86.5" title="Click to play from here">I play new Laura Moonbrook.</p>
+<p class="ts-line" data-start="88.2" title="Click to play from here">And Amy More.</p>
+<p class="ts-line" data-start="90.1" title="Click to play from here">Apparently Russ doesn't love me as much as he used to.</p>
+<p class="ts-line" data-start="92.4" title="Click to play from here">Oh, come on, you've made that joke already.</p>
+<p class="ts-line" data-start="95.4" title="Click to play from here">I have?</p>
+<p class="ts-line" data-start="96.2" title="Click to play from here">Yep.</p>
+<p class="ts-line" data-start="96.4" title="Click to play from here">Tom's always third, so don't say that because then it's kind of sad</p>
+<p class="ts-line" data-start="99.4" title="Click to play from here">as if Russ doesn't love Tom and he does.</p>
+<p class="ts-line" data-start="102.2" title="Click to play from here">I do.</p>
+<p class="ts-line" data-start="103.4" title="Click to play from here">You should do Tom right now.</p>
+<p class="ts-line" data-start="107.4" title="Click to play from here">Show him you love him, Russ.</p>
+<p class="ts-line" data-start="108.9" title="Click to play from here">Yeah, just taking it completely out of context.</p>
+<p class="ts-line" data-start="110.2" title="Click to play from here">How much do you love him, Russ?</p>
+<p class="ts-line" data-start="111.8" title="Click to play from here">Oh god, I'm Tom Laird.</p>
+<p class="ts-line" data-start="115.1" title="Click to play from here">Hey, that's me.</p>
+<p class="ts-line" data-start="115.8" title="Click to play from here">I just meant he should take my spot.</p>
+<p class="ts-line" data-start="120.0" title="Click to play from here">Not in the marriage.</p>
+<p class="ts-line" data-start="122.3" title="Click to play from here">Just in game.</p>
+<p class="ts-line" data-start="122.9" title="Click to play from here">I'm a pretty good baker, so.</p>
+<p class="ts-line" data-start="126.4" title="Click to play from here">Oh, boy.</p>
+<p class="ts-line" data-start="127.3" title="Click to play from here">Master baker.</p>
+<p class="ts-line" data-start="128.4" title="Click to play from here">Oh, no.</p>
+<p class="ts-line" data-start="129.2" title="Click to play from here">Oh, boy.</p>
+<p class="ts-line" data-start="133.1" title="Click to play from here">Wow, we're 30 seconds in and there's already been a masturbation joke</p>
+<p class="ts-line" data-start="137.3" title="Click to play from here">and a Russ and Tom love on each other joke.</p>
+<p class="ts-line" data-start="143.7" title="Click to play from here">What more do you need?</p>
+<p class="ts-line" data-start="145.8" title="Click to play from here">Really, it's a downward slope from here.</p>
+<p class="ts-line" data-start="147.6" title="Click to play from here">Just drag that podcast over the trash can and get rid of it.</p>
+<p class="ts-line" data-start="150.2" title="Click to play from here">Isn't it usually, though?</p>
+<p class="ts-line" data-start="152.0" title="Click to play from here">If two dudes can't platonically love each other, what can they do?</p>
+<p class="ts-line" data-start="155.9" title="Click to play from here">Of course you can platonically love each other.</p>
+<p class="ts-line" data-start="158.3" title="Click to play from here">The one sentence sounded very sexual.</p>
+<p class="ts-line" data-start="159.3" title="Click to play from here">Yeah, it can also not be platonic.</p>
+<p class="ts-line" data-start="161.8" title="Click to play from here">It did.</p>
+<p class="ts-line" data-start="162.5" title="Click to play from here">You should do Tom next.</p>
+<p class="ts-line" data-start="164.1" title="Click to play from here">Yeah, I should rephrase.</p>
+<p class="ts-line" data-start="165.6" title="Click to play from here">I need to have a mental filter.</p>
+<p class="ts-line" data-start="169.4" title="Click to play from here">Yeah, I mean, that would probably help a lot of situations.</p>
+<p class="ts-line" data-start="173.1" title="Click to play from here">I mean, if you're just realizing that now, I don't think it's ever going to happen, Amy.</p>
+<p class="ts-line" data-start="177.1" title="Click to play from here">To be 31 years to realize of dirty pirate mouth.</p>
+<p class="ts-line" data-start="181.8" title="Click to play from here">Who knew?</p>
+<p class="ts-line" data-start="183.0" title="Click to play from here">Where you can hear more of Amy's dirty pirate mouth is over on Patreon,</p>
+<p class="ts-line" data-start="187.4" title="Click to play from here">Patreon.com slash dumb dragon cast,</p>
+<p class="ts-line" data-start="189.4" title="Click to play from here">where you can join the lovely community we have going over there,</p>
+<p class="ts-line" data-start="191.9" title="Click to play from here">which is very fantastic and we love all of you.</p>
+<p class="ts-line" data-start="195.8" title="Click to play from here">Oh, and we also love you if you're not a member of Patreon.</p>
+<p class="ts-line" data-start="198.9" title="Click to play from here">Also, yeah, that's true.</p>
+<p class="ts-line" data-start="200.3" title="Click to play from here">That's very true.</p>
+<p class="ts-line" data-start="201.7" title="Click to play from here">Also love, if you're a frequent listener, if you're a sometimes listener, if you-</p>
+<p class="ts-line" data-start="208.0" title="Click to play from here">If this is your first episode, welcome aboard.</p>
+<p class="ts-line" data-start="210.2" title="Click to play from here">We love you.</p>
+<p class="ts-line" data-start="211.3" title="Click to play from here">Welcome aboard.</p>
+<p class="ts-line" data-start="212.5" title="Click to play from here">You're our favorite.</p>
+<p class="ts-line" data-start="213.7" title="Click to play from here">But also when you're on Patreon, you get an episode dedicated to you.</p>
+<p class="ts-line" data-start="216.9" title="Click to play from here">So that's where I was getting to.</p>
+<p class="ts-line" data-start="219.6" title="Click to play from here">And today's episode is dedicated to Jonathan.</p>
+<p class="ts-line" data-start="224.2" title="Click to play from here">Jonathan Nguyen.</p>
+<p class="ts-line" data-start="225.8" title="Click to play from here">Thanks, Jonathan.</p>
+<p class="ts-line" data-start="227.6" title="Click to play from here">We love that guy.</p>
+<p class="ts-line" data-start="229.4" title="Click to play from here">You too, Bob.</p>
+<p class="ts-line" data-start="229.8" title="Click to play from here">Love that guy.</p>
+<p class="ts-line" data-start="231.2" title="Click to play from here">You know, I haven't DMed in a while when Russ doesn't get a message from Jonathan going,</p>
+<p class="ts-line" data-start="235.3" title="Click to play from here">um, Tom screwed something up.</p>
+<p class="ts-line" data-start="238.2" title="Click to play from here">He is so helpful.</p>
+<p class="ts-line" data-start="239.4" title="Click to play from here">He knows how to play D&amp;D so much better than I don't want to say we do because y'all are great.</p>
+<p class="ts-line" data-start="246.0" title="Click to play from here">I'm not.</p>
+<p class="ts-line" data-start="246.8" title="Click to play from here">And I appreciate him continuing to listen to our podcast,</p>
+<p class="ts-line" data-start="250.6" title="Click to play from here">even though it's probably very frustrating for him.</p>
+<p class="ts-line" data-start="253.4" title="Click to play from here">I'm always up for tips because I'm not great at it.</p>
+<p class="ts-line" data-start="257.8" title="Click to play from here">And it's very helpful when someone's like, oh, hey, you could have done this.</p>
+<p class="ts-line" data-start="260.5" title="Click to play from here">And I'm like, oh my God, I didn't even think of that.</p>
+<p class="ts-line" data-start="262.4" title="Click to play from here">This is amazing.</p>
+<p class="ts-line" data-start="263.4" title="Click to play from here">I can't even drink out of a cup.</p>
+<p class="ts-line" data-start="265.2" title="Click to play from here">I just spilled water everywhere.</p>
+<p class="ts-line" data-start="267.6" title="Click to play from here">So Jonathan, if you have any tips about how I could drink out of a cup,</p>
+<p class="ts-line" data-start="272.2" title="Click to play from here">I would take those as well.</p>
+<p class="ts-line" data-start="273.6" title="Click to play from here">Jonathan, I'm wondering what I should do with my stock portfolio.</p>
+<p class="ts-line" data-start="277.0" title="Click to play from here">And do you have any tips about that?</p>
+<p class="ts-line" data-start="278.3" title="Click to play from here">Diversify, Amy.</p>
+<p class="ts-line" data-start="279.5" title="Click to play from here">We've been over this.</p>
+<p class="ts-line" data-start="281.8" title="Click to play from here">It sounds like we're joking, Jonathan, but we really do appreciate it.</p>
+<p class="ts-line" data-start="284.8" title="Click to play from here">Of course we do.</p>
+<p class="ts-line" data-start="285.8" title="Click to play from here">And all the support you give.</p>
+<p class="ts-line" data-start="287.1" title="Click to play from here">That's what we do.</p>
+<p class="ts-line" data-start="288.1" title="Click to play from here">Fuck it.</p>
+<p class="ts-line" data-start="288.4" title="Click to play from here">Let's play D&amp;D.</p>
+<p class="ts-line" data-start="290.6" title="Click to play from here">All right.</p>
+<p class="ts-line" data-start="292.4" title="Click to play from here">Last time you guys got some finger bones.</p>
+<p class="ts-line" data-start="294.7" title="Click to play from here">Yeah, we did.</p>
+<p class="ts-line" data-start="296.0" title="Click to play from here">Beg your what?</p>
+<p class="ts-line" data-start="298.5" title="Click to play from here">Beg your excuse me.</p>
+<p class="ts-line" data-start="300.8" title="Click to play from here">We got some secret finger bones.</p>
+<p class="ts-line" data-start="304.4" title="Click to play from here">We didn't want to tell anybody about it.</p>
+<p class="ts-line" data-start="307.7" title="Click to play from here">Are we ashamed of our finger bones?</p>
+<p class="ts-line" data-start="309.8" title="Click to play from here">When Carla said it.</p>
+<p class="ts-line" data-start="314.7" title="Click to play from here">This is where this episode is going.</p>
+<p class="ts-line" data-start="317.4" title="Click to play from here">And you are about to find out if there's any take backsies on any on any people.</p>
+<p class="ts-line" data-start="325.0" title="Click to play from here">I wish we had thought at the beginning of this whole council thing,</p>
+<p class="ts-line" data-start="328.0" title="Click to play from here">like, you know, months ago to say, hey, no take backsies.</p>
+<p class="ts-line" data-start="334.1" title="Click to play from here">Oh, that would solve so many problems.</p>
+<p class="ts-line" data-start="336.1" title="Click to play from here">So hopefully nobody does it.</p>
+<p class="ts-line" data-start="337.6" title="Click to play from here">But I mean, we didn't say it.</p>
+<p class="ts-line" data-start="340.6" title="Click to play from here">So I guess legally they're allowed to take see backsie.</p>
+<p class="ts-line" data-start="344.0" title="Click to play from here">That is the law.</p>
+<p class="ts-line" data-start="344.8" title="Click to play from here">So we come back to the council chamber and Lady Laryl Silverhand has just said,</p>
+<p class="ts-line" data-start="352.0" title="Click to play from here">so who's in and who's out?</p>
+<p class="ts-line" data-start="353.1" title="Click to play from here">I can't remember what she said exactly.</p>
+<p class="ts-line" data-start="354.5" title="Click to play from here">So where do we stand?</p>
+<p class="ts-line" data-start="356.0" title="Click to play from here">Yeah.</p>
+<p class="ts-line" data-start="356.6" title="Click to play from here">So where are we at, my bitches?</p>
+<p class="ts-line" data-start="359.0" title="Click to play from here">She's taking a very casual approach to this.</p>
+<p class="ts-line" data-start="362.7" title="Click to play from here">She got real stressed and went and just took a few from the bar,</p>
+<p class="ts-line" data-start="366.5" title="Click to play from here">is what she did.</p>
+<p class="ts-line" data-start="367.6" title="Click to play from here">He looks around and was like, there's a fucking bar here.</p>
+<p class="ts-line" data-start="370.0" title="Click to play from here">Oh, my God.</p>
+<p class="ts-line" data-start="370.9" title="Click to play from here">We need to spend more time in council.</p>
+<p class="ts-line" data-start="372.8" title="Click to play from here">I'd enjoy these more if I was drunk.</p>
+<p class="ts-line" data-start="376.2" title="Click to play from here">Everybody has taken their seats and there's a calm hush over the chamber,</p>
+<p class="ts-line" data-start="380.6" title="Click to play from here">except for you guys talking about the bar.</p>
+<p class="ts-line" data-start="384.2" title="Click to play from here">And she looks around the room and she says,</p>
+<p class="ts-line" data-start="388.1" title="Click to play from here">The Harpers, where do you stand?</p>
+<p class="ts-line" data-start="392.6" title="Click to play from here">And Remilia Haven Tree, who you met in the very first council meeting,</p>
+<p class="ts-line" data-start="399.0" title="Click to play from here">who told you about the Drakorn and where to find Makkoth stands up.</p>
+<p class="ts-line" data-start="405.0" title="Click to play from here">And she says,</p>
+<p class="ts-line" data-start="406.4" title="Click to play from here">The Harpers will pledge the mages and the scouts.</p>
+<p class="ts-line" data-start="412.1" title="Click to play from here">And she sits back down.</p>
+<p class="ts-line" data-start="415.1" title="Click to play from here">Lady Laryl Silverhand asks,</p>
+<p class="ts-line" data-start="418.2" title="Click to play from here">The Order of the Gauntlet.</p>
+<p class="ts-line" data-start="420.7" title="Click to play from here">Onnthar Froome stands up and he says,</p>
+<p class="ts-line" data-start="425.2" title="Click to play from here">Aye, we pledge the pAlydins of the Order of the Gauntlet</p>
+<p class="ts-line" data-start="429.4" title="Click to play from here">and healing clerics to support the fight against Tiamat's forces.</p>
+<p class="ts-line" data-start="434.3" title="Click to play from here">He looks to you and gives a wink.</p>
+<p class="ts-line" data-start="437.1" title="Click to play from here">I like blow him a kiss.</p>
+<p class="ts-line" data-start="439.9" title="Click to play from here">That's nice.</p>
+<p class="ts-line" data-start="441.5" title="Click to play from here">You shoot him a big thumbs up.</p>
+<p class="ts-line" data-start="443.5" title="Click to play from here">Oh, I do love shooting people a big thumbs up.</p>
+<p class="ts-line" data-start="446.3" title="Click to play from here">Flimps into it.</p>
+<p class="ts-line" data-start="448.3" title="Click to play from here">The Emerald Enclave.</p>
+<p class="ts-line" data-start="450.9" title="Click to play from here">Lady Silverhand says,</p>
+<p class="ts-line" data-start="452.1" title="Click to play from here">And Delayne Winterhound stands up.</p>
+<p class="ts-line" data-start="456.0" title="Click to play from here">And he says,</p>
+<p class="ts-line" data-start="456.9" title="Click to play from here">The Emerald Enclave is in the fight</p>
+<p class="ts-line" data-start="460.2" title="Click to play from here">and pledges the druids, treants, and lycanthropes.</p>
+<p class="ts-line" data-start="465.7" title="Click to play from here">And he sits back down.</p>
+<p class="ts-line" data-start="466.9" title="Click to play from here">I blow him a kiss.</p>
+<p class="ts-line" data-start="468.7" title="Click to play from here">Haven't seen Delayne in a while.</p>
+<p class="ts-line" data-start="470.7" title="Click to play from here">And he is looking fly.</p>
+<p class="ts-line" data-start="472.6" title="Click to play from here">Is he looking fine?</p>
+<p class="ts-line" data-start="473.5" title="Click to play from here">He always does.</p>
+<p class="ts-line" data-start="474.8" title="Click to play from here">He looks a little cleaned up for this one.</p>
+<p class="ts-line" data-start="477.5" title="Click to play from here">Less like he's been out in the forest for a thousand days.</p>
+<p class="ts-line" data-start="483.6" title="Click to play from here">I don't know if that's what you were looking for.</p>
+<p class="ts-line" data-start="485.0" title="Click to play from here">Maybe you were looking for the dirty...</p>
+<p class="ts-line" data-start="486.2" title="Click to play from here">I'd like to be a little more rugged, but it's okay.</p>
+<p class="ts-line" data-start="489.0" title="Click to play from here">That's fair.</p>
+<p class="ts-line" data-start="490.2" title="Click to play from here">Lady Leryl says,</p>
+<p class="ts-line" data-start="492.7" title="Click to play from here">For the Lord's Alliance, I will speak to Waterdeep.</p>
+<p class="ts-line" data-start="497.2" title="Click to play from here">And we will pledge the resources of Waterdeep's army and conscript troops.</p>
+<p class="ts-line" data-start="503.1" title="Click to play from here">Lord Dagult Neverember stands up and he says,</p>
+<p class="ts-line" data-start="505.8" title="Click to play from here">Neverwinter is here to fight.</p>
+<p class="ts-line" data-start="508.5" title="Click to play from here">And we will provide conscript troops and mercenaries from around the world.</p>
+<p class="ts-line" data-start="515.0" title="Click to play from here">Ambassador Conrad Braunenville,</p>
+<p class="ts-line" data-start="517.6" title="Click to play from here">the male dwarf from Mithril Hall, stands up and he says,</p>
+<p class="ts-line" data-start="521.8" title="Click to play from here">Mithril Hall will pledge resources of dwarven fighters,</p>
+<p class="ts-line" data-start="526.6" title="Click to play from here">dwarf-forged armaments, and siege weapons to aid in this battle.</p>
+<p class="ts-line" data-start="531.8" title="Click to play from here">Marshal Alder Ravengaard from Baldur's Gate.</p>
+<p class="ts-line" data-start="536.1" title="Click to play from here">stands up and he says,</p>
+<p class="ts-line" data-start="538.0" title="Click to play from here">For the Lord's Alliance, we will pledge flaming-fist warriors</p>
+<p class="ts-line" data-start="542.5" title="Click to play from here">and expert advisors to train your conscript troops.</p>
+<p class="ts-line" data-start="547.4" title="Click to play from here">More like Baldur's Gate, am I right?</p>
+<p class="ts-line" data-start="550.0" title="Click to play from here">Right?</p>
+<p class="ts-line" data-start="552.0" title="Click to play from here">He looks and gives you a nod.</p>
+<p class="ts-line" data-start="556.8" title="Click to play from here">King Melandrich stands up and says,</p>
+<p class="ts-line" data-start="559.4" title="Click to play from here">The elven eldritch knights will join forces.</p>
+<p class="ts-line" data-start="564.6" title="Click to play from here">Terran Thunderspell's hornblade of silvery moon stands up and he says,</p>
+<p class="ts-line" data-start="569.1" title="Click to play from here">The army of silvery moon, the knights in silver,</p>
+<p class="ts-line" data-start="573.4" title="Click to play from here">and the silvery moon conscripts will join the battle against the cult of the dragon.</p>
+<p class="ts-line" data-start="580.4" title="Click to play from here">Sir Istvall is the last of the Lord's Alliance to stand up.</p>
+<p class="ts-line" data-start="584.2" title="Click to play from here">And he looks around the room and looks to Anthar Frum and he says,</p>
+<p class="ts-line" data-start="591.5" title="Click to play from here">We will pledge the might of Cormyr, including our purple dragon knights and war wizards.</p>
+<p class="ts-line" data-start="602.5" title="Click to play from here">And he sits down and Anthar looks a bit</p>
+<p class="ts-line" data-start="607.8" title="Click to play from here">surprised by the fact that Sir Istvall has pledged his resources.</p>
+<p class="ts-line" data-start="614.6" title="Click to play from here">He's like, that's not what we talked about, bro.</p>
+<p class="ts-line" data-start="616.6" title="Click to play from here">Also, was purple dragon knight a class option? Cause I'm interested.</p>
+<p class="ts-line" data-start="620.6" title="Click to play from here">Yeah, it sounds super cool.</p>
+<p class="ts-line" data-start="622.3" title="Click to play from here">We'll talk about it.</p>
+<p class="ts-line" data-start="624.2" title="Click to play from here">Ryan Nightshade of the Zhentarim stands up.</p>
+<p class="ts-line" data-start="628.7" title="Click to play from here">And she looks to your group and Lady Silverhand says,</p>
+<p class="ts-line" data-start="632.2" title="Click to play from here">Where does the Zhentarim stand?</p>
+<p class="ts-line" data-start="635.1" title="Click to play from here">Ryan Nightshade takes one last look at your group and says,</p>
+<p class="ts-line" data-start="637.9" title="Click to play from here">We will pledge the assassins and the mercenaries that the Zhentarim has to offer.</p>
+<p class="ts-line" data-start="646.2" title="Click to play from here">And she sits back down.</p>
+<p class="ts-line" data-start="647.6" title="Click to play from here">And Lady Silverhand looks around the room and says,</p>
+<p class="ts-line" data-start="653.8" title="Click to play from here">Well, that's everyone here, all following the actions that you have set forth.</p>
+<p class="ts-line" data-start="663.4" title="Click to play from here">And she looks to your group.</p>
+<p class="ts-line" data-start="665.6" title="Click to play from here">We know that we have the support of the metallic dragons.</p>
+<p class="ts-line" data-start="670.7" title="Click to play from here">They will be at our side.</p>
+<p class="ts-line" data-start="674.5" title="Click to play from here">The airships are readied and awaiting deployment.</p>
+<p class="ts-line" data-start="678.5" title="Click to play from here">We shall leave for the Well of the Dragons in but two days.</p>
+<p class="ts-line" data-start="684.2" title="Click to play from here">It is now up to everyone here to ready their troops.</p>
+<p class="ts-line" data-start="688.8" title="Click to play from here">It will be a long journey,</p>
+<p class="ts-line" data-start="692.6" title="Click to play from here">as the might of our force far exceeds the ability to transport them by air.</p>
+<p class="ts-line" data-start="700.0" title="Click to play from here">You all are to make final arrangements because this battle</p>
+<p class="ts-line" data-start="708.8" title="Click to play from here">is not a battle that everyone will come home from.</p>
+<p class="ts-line" data-start="714.7" title="Click to play from here">Thank you for your support.</p>
+<p class="ts-line" data-start="719.2" title="Click to play from here">We will do our best to stop the Cult of the Dragon as a combined force.</p>
+<p class="ts-line" data-start="725.9" title="Click to play from here">And hopefully, a stronger force.</p>
+<p class="ts-line" data-start="732.2" title="Click to play from here">There's a round of applause that begins to go through the chamber.</p>
+<p class="ts-line" data-start="737.6" title="Click to play from here">The mood begins to lighten a little bit.</p>
+<p class="ts-line" data-start="739.4" title="Click to play from here">There seems to be a little hope now that everybody knows that everyone else is in the fight for good.</p>
+<p class="ts-line" data-start="747.5" title="Click to play from here">So go, ready your forces, spend time with those you care about.</p>
+<p class="ts-line" data-start="754.6" title="Click to play from here">Sleep tonight and hope for the best, but prepare for the worst.</p>
+<p class="ts-line" data-start="764.3" title="Click to play from here">And everybody stands up and begins to leave the room.</p>
+<p class="ts-line" data-start="771.3" title="Click to play from here">Ah, well, you guys want to go get drunk?</p>
+<p class="ts-line" data-start="775.4" title="Click to play from here">I mean, yeah, yeah, probably.</p>
+<p class="ts-line" data-start="779.2" title="Click to play from here">Yeah, probably.</p>
+<p class="ts-line" data-start="780.8" title="Click to play from here">We should do it now because then we, like,</p>
+<p class="ts-line" data-start="783.4" title="Click to play from here">cannot drink tomorrow.</p>
+<p class="ts-line" data-start="784.6" title="Click to play from here">We'll be fresh and ready to go when it's time to leave.</p>
+<p class="ts-line" data-start="787.4" title="Click to play from here">Yeah, that's a good call.</p>
+<p class="ts-line" data-start="788.7" title="Click to play from here">You're such a planner.</p>
+<p class="ts-line" data-start="789.8" title="Click to play from here">I love it.</p>
+<p class="ts-line" data-start="791.4" title="Click to play from here">Gotta plan those hangovers.</p>
+<p class="ts-line" data-start="793.5" title="Click to play from here">Uh, hey, Leo-san, what you up to?</p>
+<p class="ts-line" data-start="796.8" title="Click to play from here">Um, well, there's lots of paperwork now that needs to be done.</p>
+<p class="ts-line" data-start="802.2" title="Click to play from here">What are you up to?</p>
+<p class="ts-line" data-start="803.8" title="Click to play from here">Uh, we were going to head to the local tavern</p>
+<p class="ts-line" data-start="807.4" title="Click to play from here">and, you know, thought maybe you might want to come with.</p>
+<p class="ts-line" data-start="810.3" title="Click to play from here">Yawning Portal, join us for a drink.</p>
+<p class="ts-line" data-start="813.3" title="Click to play from here">Eh?</p>
+<p class="ts-line" data-start="814.2" title="Click to play from here">And I'm elbowing him a little bit.</p>
+<p class="ts-line" data-start="816.4" title="Click to play from here">I know I've turned you down in the past, but I think-</p>
+<p class="ts-line" data-start="819.5" title="Click to play from here">Yeah, like every time.</p>
+<p class="ts-line" data-start="821.0" title="Click to play from here">I think today is probably a good day to join you.</p>
+<p class="ts-line" data-start="824.6" title="Click to play from here">Fuck yeah, the world might be ending.</p>
+<p class="ts-line" data-start="826.2" title="Click to play from here">Let's go get a drink.</p>
+<p class="ts-line" data-start="829.0" title="Click to play from here">Fuck yeah.</p>
+<p class="ts-line" data-start="832.6" title="Click to play from here">I clap him on the shoulder, lead him out of the room.</p>
+<p class="ts-line" data-start="837.6" title="Click to play from here">You guys head to the Yawning Portal.</p>
+<p class="ts-line" data-start="839.7" title="Click to play from here">As we're walking there, I kind of like sidle up to him and I'm like,</p>
+<p class="ts-line" data-start="845.7" title="Click to play from here">um, hey, have you ever seen one of these?</p>
+<p class="ts-line" data-start="848.6" title="Click to play from here">And I pull out the finger bone.</p>
+<p class="ts-line" data-start="853.4" title="Click to play from here">That's a human finger bone.</p>
+<p class="ts-line" data-start="858.0" title="Click to play from here">You guys keep weird things.</p>
+<p class="ts-line" data-start="859.5" title="Click to play from here">Yeah, um, it was actually secretly, sneakily given to us</p>
+<p class="ts-line" data-start="865.4" title="Click to play from here">by Tharchin Asseldra.</p>
+<p class="ts-line" data-start="866.8" title="Click to play from here">Yes.</p>
+<p class="ts-line" data-start="868.5" title="Click to play from here">You know, not that I don't trust that bitch.</p>
+<p class="ts-line" data-start="871.6" title="Click to play from here">Cause no, I don't.</p>
+<p class="ts-line" data-start="873.7" title="Click to play from here">I don't trust that bitch.</p>
+<p class="ts-line" data-start="875.3" title="Click to play from here">So I just, you know, wanted a second opinion on it.</p>
+<p class="ts-line" data-start="879.0" title="Click to play from here">Niall Mitch assures us that it is for protection from the undead armies</p>
+<p class="ts-line" data-start="885.8" title="Click to play from here">that the defected or the exile Red Wizards could conjure.</p>
+<p class="ts-line" data-start="892.2" title="Click to play from here">But I just, she made it seem like we should keep it secret and I don't like that.</p>
+<p class="ts-line" data-start="899.1" title="Click to play from here">Well, they've pledged their allegiance and their forces.</p>
+<p class="ts-line" data-start="903.0" title="Click to play from here">Yes.</p>
+<p class="ts-line" data-start="903.4" title="Click to play from here">So what good would it be to harm those they've pledged to assist?</p>
+<p class="ts-line" data-start="910.6" title="Click to play from here">Well, I don't know.</p>
+<p class="ts-line" data-start="911.4" title="Click to play from here">I just don't know why all the secrets.</p>
+<p class="ts-line" data-start="914.0" title="Click to play from here">So I just needed, I just didn't feel good about Ilios</p>
+<p class="ts-line" data-start="916.6" title="Click to play from here">and I just had to get it off my chest.</p>
+<p class="ts-line" data-start="918.2" title="Click to play from here">I mean, we could take it down to Arvid</p>
+<p class="ts-line" data-start="920.8" title="Click to play from here">and he could take a look at it.</p>
+<p class="ts-line" data-start="923.0" title="Click to play from here">Oh man, we should talk to Arvid before we leave.</p>
+<p class="ts-line" data-start="926.4" title="Click to play from here">But first a drink.</p>
+<p class="ts-line" data-start="928.7" title="Click to play from here">Okay. Cause we're walking by his office right here.</p>
+<p class="ts-line" data-start="931.0" title="Click to play from here">He could probably-</p>
+<p class="ts-line" data-start="931.8" title="Click to play from here">Guys, is it okay if we pop into Arvid's or?</p>
+<p class="ts-line" data-start="934.2" title="Click to play from here">Yeah, by all means.</p>
+<p class="ts-line" data-start="937.7" title="Click to play from here">You enter the armory and potions plus for the castle.</p>
+<p class="ts-line" data-start="941.9" title="Click to play from here">Very mercantile name.</p>
+<p class="ts-line" data-start="944.0" title="Click to play from here">Well, he's super creepy.</p>
+<p class="ts-line" data-start="945.5" title="Click to play from here">Everything seems like it would be like really stark and sterile.</p>
+<p class="ts-line" data-start="949.8" title="Click to play from here">You enter and he's writing on a ledger.</p>
+<p class="ts-line" data-start="953.7" title="Click to play from here">He looks up and he says, oh, hello.</p>
+<p class="ts-line" data-start="963.6" title="Click to play from here">Have you ever seen one of these and I show him my finger bone?</p>
+<p class="ts-line" data-start="969.6" title="Click to play from here">Yes. That is a human finger.</p>
+<p class="ts-line" data-start="975.0" title="Click to play from here">And what about the spell that accompanies it?</p>
+<p class="ts-line" data-start="979.4" title="Click to play from here">Well, you know, it's a spell.</p>
+<p class="ts-line" data-start="982.2" title="Click to play from here">You know, it's school.</p>
+<p class="ts-line" data-start="984.6" title="Click to play from here">Abjuration.</p>
+<p class="ts-line" data-start="986.1" title="Click to play from here">Well, it seems you don't need me.</p>
+<p class="ts-line" data-start="988.4" title="Click to play from here">Oh my God.</p>
+<p class="ts-line" data-start="990.6" title="Click to play from here">So you don't have any other information about this?</p>
+<p class="ts-line" data-start="994.7" title="Click to play from here">I jest.</p>
+<p class="ts-line" data-start="995.7" title="Click to play from here">Oh, it's-</p>
+<p class="ts-line" data-start="996.4" title="Click to play from here">You jest what?</p>
+<p class="ts-line" data-start="997.6" title="Click to play from here">He's just goofing, guys.</p>
+<p class="ts-line" data-start="1000.9" title="Click to play from here">We should have guessed you're such a jokester.</p>
+<p class="ts-line" data-start="1003.5" title="Click to play from here">Somebody finger bone us and we just need to make sure that it's legit.</p>
+<p class="ts-line" data-start="1010.2" title="Click to play from here">Push past it.</p>
+<p class="ts-line" data-start="1015.7" title="Click to play from here">Get it together, Arvis.</p>
+<p class="ts-line" data-start="1019.4" title="Click to play from here">It's Arvid.</p>
+<p class="ts-line" data-start="1021.3" title="Click to play from here">Wow. I don't know why that was my reaction.</p>
+<p class="ts-line" data-start="1024.4" title="Click to play from here">Sorry. You're right. Names are important.</p>
+<p class="ts-line" data-start="1028.1" title="Click to play from here">Yes, of course. Give me the finger.</p>
+<p class="ts-line" data-start="1032.2" title="Click to play from here">Are you telling me you want me to finger you?</p>
+<p class="ts-line" data-start="1037.0" title="Click to play from here">I'm sorry. I'm drinking vodka.</p>
+<p class="ts-line" data-start="1040.1" title="Click to play from here">It's supposed to be rum. Sean says it has to be rum.</p>
+<p class="ts-line" data-start="1043.0" title="Click to play from here">I didn't have rum.</p>
+<p class="ts-line" data-start="1044.4" title="Click to play from here">Well, the vodka was already in the fridge and cold.</p>
+<p class="ts-line" data-start="1046.9" title="Click to play from here">It's in the box. He's already packed it.</p>
+<p class="ts-line" data-start="1048.6" title="Click to play from here">Oh, the box is open. I didn't seal that one up.</p>
+<p class="ts-line" data-start="1052.9" title="Click to play from here">Okay. Well, this was cold. Anyway, I hand him the finger bone.</p>
+<p class="ts-line" data-start="1058.2" title="Click to play from here">He looks it over, takes it behind- up a step behind a half wall.</p>
+<p class="ts-line" data-start="1065.4" title="Click to play from here">I follow him.</p>
+<p class="ts-line" data-start="1066.6" title="Click to play from here">You can't. There's a counter.</p>
+<p class="ts-line" data-start="1070.2" title="Click to play from here">How does he get up there?</p>
+<p class="ts-line" data-start="1071.5" title="Click to play from here">He's behind the counter.</p>
+<p class="ts-line" data-start="1072.4" title="Click to play from here">Well, he's behind the counter.</p>
+<p class="ts-line" data-start="1074.4" title="Click to play from here">Does the counter not lift up?</p>
+<p class="ts-line" data-start="1075.7" title="Click to play from here">Think a pharmacy.</p>
+<p class="ts-line" data-start="1076.9" title="Click to play from here">Yes. Does the counter not lift up?</p>
+<p class="ts-line" data-start="1079.2" title="Click to play from here">He sees you begin to lift it up. He says, please don't.</p>
+<p class="ts-line" data-start="1082.6" title="Click to play from here">Respect the counter.</p>
+<p class="ts-line" data-start="1084.5" title="Click to play from here">Okay. But can you say this in sight?</p>
+<p class="ts-line" data-start="1086.2" title="Click to play from here">I will respect your counter.</p>
+<p class="ts-line" data-start="1087.5" title="Click to play from here">Can you not see me?</p>
+<p class="ts-line" data-start="1089.1" title="Click to play from here">I don't know. Can I? You said he walked behind a half wall.</p>
+<p class="ts-line" data-start="1092.6" title="Click to play from here">Yeah. He went up step like in a pharmacy.</p>
+<p class="ts-line" data-start="1095.7" title="Click to play from here">Follow my narrative.</p>
+<p class="ts-line" data-start="1097.4" title="Click to play from here">I know. Sorry. I just freaked out a little bit.</p>
+<p class="ts-line" data-start="1099.4" title="Click to play from here">I'm like, oh my God, what if he's evil?</p>
+<p class="ts-line" data-start="1101.4" title="Click to play from here">What if he takes my fucking finger bone and it was a protection spell?</p>
+<p class="ts-line" data-start="1105.3" title="Click to play from here">And I gave it to him and he made it not workable.</p>
+<p class="ts-line" data-start="1110.3" title="Click to play from here">I mean, I think since he works here,</p>
+<p class="ts-line" data-start="1111.8" title="Click to play from here">you're probably over reading the situation.</p>
+<p class="ts-line" data-start="1114.1" title="Click to play from here">Yeah. That's the vodka.</p>
+<p class="ts-line" data-start="1116.5" title="Click to play from here">Okay. Sorry, Arvid. Go ahead.</p>
+<p class="ts-line" data-start="1119.8" title="Click to play from here">He begins working with some beakers and vials.</p>
+<p class="ts-line" data-start="1124.2" title="Click to play from here">Is there a Bunsen burner?</p>
+<p class="ts-line" data-start="1126.1" title="Click to play from here">Well, there's a magical Bunsen burner. It's just a flame in the air.</p>
+<p class="ts-line" data-start="1131.9" title="Click to play from here">Is there some titration that's happening?</p>
+<p class="ts-line" data-start="1133.4" title="Click to play from here">Yeah. Oh yeah. There's definite titration liquids bubbling in the background.</p>
+<p class="ts-line" data-start="1138.2" title="Click to play from here">And he dips the finger into some liquid and it turns a bright purple.</p>
+<p class="ts-line" data-start="1146.0" title="Click to play from here">Is purple good? I like purple.</p>
+<p class="ts-line" data-start="1148.5" title="Click to play from here">Well, if protection from the undead is what you are hoping for,</p>
+<p class="ts-line" data-start="1154.2" title="Click to play from here">then yes, purple is very good.</p>
+<p class="ts-line" data-start="1157.4" title="Click to play from here">I really do like the color purple. Purple for protection. Thanks, Arvid.</p>
+<p class="ts-line" data-start="1161.0" title="Click to play from here">He walks slowly back down the step and extends the finger towards you.</p>
+<p class="ts-line" data-start="1167.4" title="Click to play from here">It gives you the finger.</p>
+<p class="ts-line" data-start="1170.2" title="Click to play from here">Make a dexterity check.</p>
+<p class="ts-line" data-start="1173.9" title="Click to play from here">I'm trying to make sure I don't touch him.</p>
+<p class="ts-line" data-start="1178.8" title="Click to play from here">That is six plus two, one.</p>
+<p class="ts-line" data-start="1184.7" title="Click to play from here">Now, is this just to avoid touching him?</p>
+<p class="ts-line" data-start="1186.6" title="Click to play from here">Seven.</p>
+<p class="ts-line" data-start="1187.7" title="Click to play from here">Or to take the finger from him.</p>
+<p class="ts-line" data-start="1191.2" title="Click to play from here">He pulls the finger back and smiles a little bit.</p>
+<p class="ts-line" data-start="1194.6" title="Click to play from here">Oh, God. Is this a pretty woman moment where he's like snaps it on me and I go...</p>
+<p class="ts-line" data-start="1202.1" title="Click to play from here">Yep. That's exactly what happened.</p>
+<p class="ts-line" data-start="1204.1" title="Click to play from here">It's off-lane.</p>
+<p class="ts-line" data-start="1205.0" title="Click to play from here">If you could cue Roy Orbison's pretty woman right here.</p>
+<p class="ts-line" data-start="1210.1" title="Click to play from here">Are you charmed by him now? Do you like him now?</p>
+<p class="ts-line" data-start="1214.4" title="Click to play from here">I hate it when people do stuff like this to me.</p>
+<p class="ts-line" data-start="1216.3" title="Click to play from here">He hands it back to you and says, just joking.</p>
+<p class="ts-line" data-start="1219.8" title="Click to play from here">Oh, you're such a trickster and I take it from him.</p>
+<p class="ts-line" data-start="1223.1" title="Click to play from here">And I turn around like my smile immediately and I turn around and I'm like, oh, my God.</p>
+<p class="ts-line" data-start="1228.6" title="Click to play from here">Is my finger permanently purple or was it just the liquid that turned purple?</p>
+<p class="ts-line" data-start="1232.2" title="Click to play from here">It was just the liquid that turned purple.</p>
+<p class="ts-line" data-start="1233.4" title="Click to play from here">Okay, cool. I'm walking out.</p>
+<p class="ts-line" data-start="1236.6" title="Click to play from here">I had done like that and turned around and I'm like, oh, my God, that guy.</p>
+<p class="ts-line" data-start="1242.2" title="Click to play from here">He says, before you leave next, come back and see me.</p>
+<p class="ts-line" data-start="1249.1" title="Click to play from here">I have something helpful.</p>
+<p class="ts-line" data-start="1253.4" title="Click to play from here">Well, can we get it now?</p>
+<p class="ts-line" data-start="1254.7" title="Click to play from here">We're here now. Can we have it now?</p>
+<p class="ts-line" data-start="1257.2" title="Click to play from here">I'm working on it.</p>
+<p class="ts-line" data-start="1260.2" title="Click to play from here">Okay. I mean, we're leaving really soon.</p>
+<p class="ts-line" data-start="1263.6" title="Click to play from here">I will have it ready before you leave.</p>
+<p class="ts-line" data-start="1267.6" title="Click to play from here">Okay.</p>
+<p class="ts-line" data-start="1268.6" title="Click to play from here">Come see me.</p>
+<p class="ts-line" data-start="1270.4" title="Click to play from here">All right.</p>
+<p class="ts-line" data-start="1271.1" title="Click to play from here">Any any hint as to what it is?</p>
+<p class="ts-line" data-start="1273.6" title="Click to play from here">Something good or is it?</p>
+<p class="ts-line" data-start="1275.4" title="Click to play from here">Yes.</p>
+<p class="ts-line" data-start="1275.8" title="Click to play from here">Is it going to be something?</p>
+<p class="ts-line" data-start="1277.0" title="Click to play from here">Yes, it will be good.</p>
+<p class="ts-line" data-start="1280.3" title="Click to play from here">Okay, she'll believe it when she sees it.</p>
+<p class="ts-line" data-start="1282.1" title="Click to play from here">I've been brewing up some new potions.</p>
+<p class="ts-line" data-start="1287.0" title="Click to play from here">It's not going to turn me yellow, is it?</p>
+<p class="ts-line" data-start="1288.3" title="Click to play from here">Okay.</p>
+<p class="ts-line" data-start="1288.8" title="Click to play from here">Why would it turn you yellow?</p>
+<p class="ts-line" data-start="1290.5" title="Click to play from here">I'm already on board.</p>
+<p class="ts-line" data-start="1291.4" title="Click to play from here">You had me at not going to turn me yellow.</p>
+<p class="ts-line" data-start="1296.0" title="Click to play from here">I am here.</p>
+<p class="ts-line" data-start="1297.4" title="Click to play from here">I'm here to assist not to play mean pranks like some sort of five-year-old.</p>
+<p class="ts-line" data-start="1304.3" title="Click to play from here">Ozark, am I right?</p>
+<p class="ts-line" data-start="1308.7" title="Click to play from here">Ozark.</p>
+<p class="ts-line" data-start="1310.8" title="Click to play from here">You know, from Ozark's Bazaar.</p>
+<p class="ts-line" data-start="1312.9" title="Click to play from here">You heard of him?</p>
+<p class="ts-line" data-start="1313.8" title="Click to play from here">No.</p>
+<p class="ts-line" data-start="1315.2" title="Click to play from here">All right.</p>
+<p class="ts-line" data-start="1315.8" title="Click to play from here">Bye.</p>
+<p class="ts-line" data-start="1318.8" title="Click to play from here">Okay, bye.</p>
+<p class="ts-line" data-start="1319.8" title="Click to play from here">Okay, bye.</p>
+<p class="ts-line" data-start="1321.0" title="Click to play from here">I'm not about to explain Ozark and his Bazaar to him.</p>
+<p class="ts-line" data-start="1324.4" title="Click to play from here">Oh, that's part of the guilt.</p>
+<p class="ts-line" data-start="1325.8" title="Click to play from here">You're not supposed to tell anybody about that.</p>
+<p class="ts-line" data-start="1328.7" title="Click to play from here">It's like a whole other level, man.</p>
+<p class="ts-line" data-start="1332.6" title="Click to play from here">I didn't know.</p>
+<p class="ts-line" data-start="1335.8" title="Click to play from here">You know what?</p>
+<p class="ts-line" data-start="1336.2" title="Click to play from here">I sort of forgot he was like-</p>
+<p class="ts-line" data-start="1337.6" title="Click to play from here">Lab secrets all over the place or whatever.</p>
+<p class="ts-line" data-start="1339.3" title="Click to play from here">Part of secret organization ruling the multiverse.</p>
+<p class="ts-line" data-start="1342.2" title="Click to play from here">Yeah, it's fine.</p>
+<p class="ts-line" data-start="1346.0" title="Click to play from here">Anyways, so you leave.</p>
+<p class="ts-line" data-start="1348.6" title="Click to play from here">You head to the yawning portal.</p>
+<p class="ts-line" data-start="1353.3" title="Click to play from here">You open the door and it is bustling.</p>
+<p class="ts-line" data-start="1357.8" title="Click to play from here">There is a mix of people who look very concerned</p>
+<p class="ts-line" data-start="1363.1" title="Click to play from here">and people who look like they're celebrating.</p>
+<p class="ts-line" data-start="1367.4" title="Click to play from here">Now Russ, would you say that every day it's bustling?</p>
+<p class="ts-line" data-start="1373.1" title="Click to play from here">Add it.</p>
+<p class="ts-line" data-start="1373.7" title="Click to play from here">Add it to Spotify.</p>
+<p class="ts-line" data-start="1375.0" title="Click to play from here">Yep.</p>
+<p class="ts-line" data-start="1376.0" title="Click to play from here">I would.</p>
+<p class="ts-line" data-start="1377.9" title="Click to play from here">Every day.</p>
+<p class="ts-line" data-start="1378.3" title="Click to play from here">Perfect.</p>
+<p class="ts-line" data-start="1378.8" title="Click to play from here">Every day it's bustling.</p>
+<p class="ts-line" data-start="1381.3" title="Click to play from here">That's doing the rest.</p>
+<p class="ts-line" data-start="1384.8" title="Click to play from here">No.</p>
+<p class="ts-line" data-start="1385.1" title="Click to play from here">I will not.</p>
+<p class="ts-line" data-start="1385.9" title="Click to play from here">I will not get sued by Party Rock.</p>
+<p class="ts-line" data-start="1389.9" title="Click to play from here">What are you doing?</p>
+<p class="ts-line" data-start="1391.2" title="Click to play from here">Do we see anyone we know?</p>
+<p class="ts-line" data-start="1393.8" title="Click to play from here">I mean, you came in with Leosin.</p>
+<p class="ts-line" data-start="1397.1" title="Click to play from here">No, we're looking for someone with a table, Russ.</p>
+<p class="ts-line" data-start="1399.9" title="Click to play from here">Leosin doesn't have a table.</p>
+<p class="ts-line" data-start="1401.7" title="Click to play from here">There are a couple tables.</p>
+<p class="ts-line" data-start="1404.0" title="Click to play from here">It's bustling, but it's not full.</p>
+<p class="ts-line" data-start="1405.9" title="Click to play from here">So there are a few tables.</p>
+<p class="ts-line" data-start="1407.0" title="Click to play from here">You see Dernan, he's at the bar serving.</p>
+<p class="ts-line" data-start="1411.5" title="Click to play from here">He sees you walk in and he lifts a glass,</p>
+<p class="ts-line" data-start="1415.2" title="Click to play from here">giving you the signal that he'll be over with some drinks in a moment.</p>
+<p class="ts-line" data-start="1419.9" title="Click to play from here">Nobody of great note that you really recognize, no.</p>
+<p class="ts-line" data-start="1424.9" title="Click to play from here">Okay.</p>
+<p class="ts-line" data-start="1426.6" title="Click to play from here">Well, let's go sit at our table and like, you know, have a debrief.</p>
+<p class="ts-line" data-start="1433.6" title="Click to play from here">Totally.</p>
+<p class="ts-line" data-start="1434.4" title="Click to play from here">Wait, we're getting naked?</p>
+<p class="ts-line" data-start="1437.2" title="Click to play from here">Please, as if you were briefs anyway.</p>
+<p class="ts-line" data-start="1440.4" title="Click to play from here">Guilty as charged.</p>
+<p class="ts-line" data-start="1441.9" title="Click to play from here">Yeah.</p>
+<p class="ts-line" data-start="1442.4" title="Click to play from here">Um.</p>
+<p class="ts-line" data-start="1443.2" title="Click to play from here">Tom, roll a d20.</p>
+<p class="ts-line" data-start="1444.9" title="Click to play from here">Whoa.</p>
+<p class="ts-line" data-start="1448.0" title="Click to play from here">Speaking of.</p>
+<p class="ts-line" data-start="1448.8" title="Click to play from here">Say 14.</p>
+<p class="ts-line" data-start="1449.9" title="Click to play from here">You're flipped.</p>
+<p class="ts-line" data-start="1450.5" title="Click to play from here">You're good.</p>
+<p class="ts-line" data-start="1451.5" title="Click to play from here">Okay.</p>
+<p class="ts-line" data-start="1453.2" title="Click to play from here">Is there any music playing or anything?</p>
+<p class="ts-line" data-start="1455.2" title="Click to play from here">Yeah, there's a bard playing in the corner.</p>
+<p class="ts-line" data-start="1457.6" title="Click to play from here">Nice.</p>
+<p class="ts-line" data-start="1458.3" title="Click to play from here">Thea gets up and starts to dance.</p>
+<p class="ts-line" data-start="1461.0" title="Click to play from here">Like a new Lara's like, you want a debrief?</p>
+<p class="ts-line" data-start="1463.0" title="Click to play from here">And Thea just starts dancing.</p>
+<p class="ts-line" data-start="1465.1" title="Click to play from here">And Thea says, yeah.</p>
+<p class="ts-line" data-start="1467.0" title="Click to play from here">Yeah, but first this is my song.</p>
+<p class="ts-line" data-start="1470.6" title="Click to play from here">All right.</p>
+<p class="ts-line" data-start="1470.9" title="Click to play from here">Like I'm just feeling the music at the moment.</p>
+<p class="ts-line" data-start="1473.9" title="Click to play from here">Describe to me how Thea.</p>
+<p class="ts-line" data-start="1476.6" title="Click to play from here">It is very much for all the friends fans in the crowd.</p>
+<p class="ts-line" data-start="1481.5" title="Click to play from here">It is very much a Phoebe Buffet style of dancing.</p>
+<p class="ts-line" data-start="1486.2" title="Click to play from here">Like a lot of like swishy arm movements,</p>
+<p class="ts-line" data-start="1489.1" title="Click to play from here">like when she's trying to seduce Chandler.</p>
+<p class="ts-line" data-start="1491.4" title="Click to play from here">And like, like weird, like claw hand movements and stuff like that.</p>
+<p class="ts-line" data-start="1495.8" title="Click to play from here">It's not very elegant.</p>
+<p class="ts-line" data-start="1497.5" title="Click to play from here">Thea didn't get to go to any sort of like,</p>
+<p class="ts-line" data-start="1500.8" title="Click to play from here">like, you know, dances and stuff like that when she was younger.</p>
+<p class="ts-line" data-start="1504.0" title="Click to play from here">So.</p>
+<p class="ts-line" data-start="1504.4" title="Click to play from here">No Julliard equivalent.</p>
+<p class="ts-line" data-start="1506.0" title="Click to play from here">You were taking scribe lessons.</p>
+<p class="ts-line" data-start="1507.8" title="Click to play from here">You weren't taking dance lessons.</p>
+<p class="ts-line" data-start="1509.4" title="Click to play from here">There were no sock hops for Thea.</p>
+<p class="ts-line" data-start="1511.2" title="Click to play from here">So.</p>
+<p class="ts-line" data-start="1512.3" title="Click to play from here">So, so while this amazing dancing is happening,</p>
+<p class="ts-line" data-start="1515.8" title="Click to play from here">what like I'm picturing the music to be like,</p>
+<p class="ts-line" data-start="1519.3" title="Click to play from here">you know, barred kind of music.</p>
+<p class="ts-line" data-start="1523.1" title="Click to play from here">Like it doesn't fit the dance at all.</p>
+<p class="ts-line" data-start="1525.0" title="Click to play from here">Yeah, it's like minstrel type music.</p>
+<p class="ts-line" data-start="1526.7" title="Click to play from here">Yeah.</p>
+<p class="ts-line" data-start="1527.1" title="Click to play from here">Yeah, yeah.</p>
+<p class="ts-line" data-start="1528.3" title="Click to play from here">Yeah, exactly.</p>
+<p class="ts-line" data-start="1529.5" title="Click to play from here">It doesn't really maybe go exactly with the dancing</p>
+<p class="ts-line" data-start="1533.5" title="Click to play from here">in addition to the dancing being very nice.</p>
+<p class="ts-line" data-start="1537.0" title="Click to play from here">It's more of like a stress reliever.</p>
+<p class="ts-line" data-start="1539.3" title="Click to play from here">Yeah, that's fair.</p>
+<p class="ts-line" data-start="1539.9" title="Click to play from here">Yeah, just while we're waiting for our drink.</p>
+<p class="ts-line" data-start="1542.4" title="Click to play from here">I like it.</p>
+<p class="ts-line" data-start="1542.9" title="Click to play from here">I know you haven't even had a single drink yet</p>
+<p class="ts-line" data-start="1544.7" title="Click to play from here">and you're already dancing.</p>
+<p class="ts-line" data-start="1545.7" title="Click to play from here">Well, that's what you think.</p>
+<p class="ts-line" data-start="1546.6" title="Click to play from here">I'm pretty sure Thea has a flask on her somewhere.</p>
+<p class="ts-line" data-start="1548.8" title="Click to play from here">So as I see the scene playing out,</p>
+<p class="ts-line" data-start="1551.6" title="Click to play from here">Flint, Thea, Nulara, and Leosin and Donnie</p>
+<p class="ts-line" data-start="1553.9" title="Click to play from here">were heading over to a table to go debrief.</p>
+<p class="ts-line" data-start="1556.8" title="Click to play from here">How do they respond to Thea's impromptu claws?</p>
+<p class="ts-line" data-start="1561.9" title="Click to play from here">Flint is sitting there and he kind of nudges Nulara.</p>
+<p class="ts-line" data-start="1564.8" title="Click to play from here">He says, oh, she going to do the tiger claw</p>
+<p class="ts-line" data-start="1568.1" title="Click to play from here">right if she does the tiger claw?</p>
+<p class="ts-line" data-start="1569.9" title="Click to play from here">Of course.</p>
+<p class="ts-line" data-start="1571.5" title="Click to play from here">Yeah, I think like, I mean, this is we've been together</p>
+<p class="ts-line" data-start="1574.3" title="Click to play from here">a long time.</p>
+<p class="ts-line" data-start="1574.8" title="Click to play from here">This is not the first time we are seeing these moves.</p>
+<p class="ts-line" data-start="1578.2" title="Click to play from here">So I think we just are like, or I shouldn't say we.</p>
+<p class="ts-line" data-start="1582.8" title="Click to play from here">Nulara is just like indulgently smiling.</p>
+<p class="ts-line" data-start="1586.5" title="Click to play from here">Like, oh, yes.</p>
+<p class="ts-line" data-start="1588.1" title="Click to play from here">You guys have had sleepovers, I get it.</p>
+<p class="ts-line" data-start="1590.2" title="Click to play from here">You have fun.</p>
+<p class="ts-line" data-start="1591.6" title="Click to play from here">You're having a good time up there and I'm glad you're glad.</p>
+<p class="ts-line" data-start="1594.4" title="Click to play from here">Oh, and I do the thing where I try to get you to come dance with me</p>
+<p class="ts-line" data-start="1597.2" title="Click to play from here">and you're like, no, actually, no, Thea, no.</p>
+<p class="ts-line" data-start="1599.4" title="Click to play from here">No, definitely no.</p>
+<p class="ts-line" data-start="1601.5" title="Click to play from here">Maybe Donnie dances with you.</p>
+<p class="ts-line" data-start="1603.5" title="Click to play from here">I motion for Donnie to come dance.</p>
+<p class="ts-line" data-start="1605.2" title="Click to play from here">Oh, Donnie, Donnie comes and dances.</p>
+<p class="ts-line" data-start="1608.5" title="Click to play from here">As I think we mentioned last episode,</p>
+<p class="ts-line" data-start="1610.3" title="Click to play from here">he is still like pretty new in his in his larger body.</p>
+<p class="ts-line" data-start="1614.0" title="Click to play from here">So, you know, when he's fighting and stuff,</p>
+<p class="ts-line" data-start="1615.9" title="Click to play from here">he is like, you know, kind of hyper aware and good.</p>
+<p class="ts-line" data-start="1619.6" title="Click to play from here">Give me a dexterity saving throw for Donnie.</p>
+<p class="ts-line" data-start="1621.9" title="Click to play from here">Oh, gosh.</p>
+<p class="ts-line" data-start="1622.5" title="Click to play from here">Okay. Oh, gosh.</p>
+<p class="ts-line" data-start="1623.5" title="Click to play from here">I already, I mean, it's not great already.</p>
+<p class="ts-line" data-start="1628.7" title="Click to play from here">I can't remember what it is.</p>
+<p class="ts-line" data-start="1630.1" title="Click to play from here">Donnie Rowland.</p>
+<p class="ts-line" data-start="1630.8" title="Click to play from here">Yeah, no, it's a six.</p>
+<p class="ts-line" data-start="1632.7" title="Click to play from here">It's a six he got.</p>
+<p class="ts-line" data-start="1634.1" title="Click to play from here">So Donnie bumps into a lot of people.</p>
+<p class="ts-line" data-start="1636.9" title="Click to play from here">Um, and a couple of them get quite upset at this.</p>
+<p class="ts-line" data-start="1641.8" title="Click to play from here">And they stand up and then they look at a dragon dancing</p>
+<p class="ts-line" data-start="1645.2" title="Click to play from here">and then they get quite scared.</p>
+<p class="ts-line" data-start="1647.4" title="Click to play from here">Yeah, I noticed this interaction and dancing like beside</p>
+<p class="ts-line" data-start="1651.9" title="Click to play from here">and every time he bumps into someone,</p>
+<p class="ts-line" data-start="1653.4" title="Click to play from here">I'm always kind of like right.</p>
+<p class="ts-line" data-start="1654.4" title="Click to play from here">And I'm like, oh, it's okay, buddy.</p>
+<p class="ts-line" data-start="1656.3" title="Click to play from here">Um, and I'm trying to smooth things over with people</p>
+<p class="ts-line" data-start="1659.1" title="Click to play from here">be like, listen, could be, could be our last night to dance.</p>
+<p class="ts-line" data-start="1661.7" title="Click to play from here">Just they nod and sit back down and keep an eye on you.</p>
+<p class="ts-line" data-start="1667.3" title="Click to play from here">So Donnie, why don't we, why don't we go sit down?</p>
+<p class="ts-line" data-start="1669.5" title="Click to play from here">Cause he's actually starting to injure people now</p>
+<p class="ts-line" data-start="1671.7" title="Click to play from here">and cause, um, like destruction of property</p>
+<p class="ts-line" data-start="1676.3" title="Click to play from here">and things like that.</p>
+<p class="ts-line" data-start="1677.5" title="Click to play from here">And we love Dernan.</p>
+<p class="ts-line" data-start="1680.1" title="Click to play from here">Yeah, we like Dernan.</p>
+<p class="ts-line" data-start="1681.6" title="Click to play from here">So we don't want to wreck this place.</p>
+<p class="ts-line" data-start="1683.2" title="Click to play from here">No, we're putting the trash as far.</p>
+<p class="ts-line" data-start="1685.1" title="Click to play from here">I mean, Dernan's no beefy stew, but he's pretty cool.</p>
+<p class="ts-line" data-start="1688.2" title="Click to play from here">Exactly. He's pretty cool.</p>
+<p class="ts-line" data-start="1690.7" title="Click to play from here">Dernan, in fact, brings, uh, uh, some, some</p>
+<p class="ts-line" data-start="1693.9" title="Click to play from here">Stein's over and lays, puts them down on the table.</p>
+<p class="ts-line" data-start="1697.9" title="Click to play from here">Um, this is, uh, so, uh, been, been up to anything,</p>
+<p class="ts-line" data-start="1701.3" title="Click to play from here">anything fun?</p>
+<p class="ts-line" data-start="1703.0" title="Click to play from here">We own Zalvo's tower now.</p>
+<p class="ts-line" data-start="1705.9" title="Click to play from here">Congratulations.</p>
+<p class="ts-line" data-start="1707.5" title="Click to play from here">Yeah, I guess so. I don't know.</p>
+<p class="ts-line" data-start="1709.1" title="Click to play from here">Yeah, it's all new to us.</p>
+<p class="ts-line" data-start="1710.3" title="Click to play from here">We don't really know how to feel about it yet.</p>
+<p class="ts-line" data-start="1712.6" title="Click to play from here">Ever, ever owned a piece of real estate before?</p>
+<p class="ts-line" data-start="1715.7" title="Click to play from here">No, kind of been more wanderers.</p>
+<p class="ts-line" data-start="1718.0" title="Click to play from here">Travelers, adventurers, you know.</p>
+<p class="ts-line" data-start="1719.7" title="Click to play from here">Well, you know, buy low, sell high.</p>
+<p class="ts-line" data-start="1721.3" title="Click to play from here">That's what my, uh, my grandpappy used to tell me.</p>
+<p class="ts-line" data-start="1724.2" title="Click to play from here">We didn't have to buy at all.</p>
+<p class="ts-line" data-start="1726.2" title="Click to play from here">Hey, you bought as low as you can.</p>
+<p class="ts-line" data-start="1728.4" title="Click to play from here">As low as possible.</p>
+<p class="ts-line" data-start="1729.6" title="Click to play from here">Get the highest price you can.</p>
+<p class="ts-line" data-start="1731.1" title="Click to play from here">Nothing but up from here.</p>
+<p class="ts-line" data-start="1732.7" title="Click to play from here">I guess so.</p>
+<p class="ts-line" data-start="1734.8" title="Click to play from here">Good advice. Good advice. Thanks, Dernan.</p>
+<p class="ts-line" data-start="1737.4" title="Click to play from here">Yeah. Yeah, no problem. Anytime.</p>
+<p class="ts-line" data-start="1739.7" title="Click to play from here">How about you? You been up to anything?</p>
+<p class="ts-line" data-start="1741.4" title="Click to play from here">Uh, just, you know, tendon, tendon, tendon bar.</p>
+<p class="ts-line" data-start="1743.8" title="Click to play from here">Seeing, uh, there's lots of, lots of people,</p>
+<p class="ts-line" data-start="1745.8" title="Click to play from here">lots of people through here.</p>
+<p class="ts-line" data-start="1746.9" title="Click to play from here">Have you seen Grog recently?</p>
+<p class="ts-line" data-start="1747.9" title="Click to play from here">Our?</p>
+<p class="ts-line" data-start="1748.7" title="Click to play from here">Uh, who's Grog?</p>
+<p class="ts-line" data-start="1750.2" title="Click to play from here">Grog. Sorry, Grog.</p>
+<p class="ts-line" data-start="1751.5" title="Click to play from here">Uh, oh, Grog. Yeah, yeah.</p>
+<p class="ts-line" data-start="1754.0" title="Click to play from here">You know, like, alcohol, damn it.</p>
+<p class="ts-line" data-start="1755.5" title="Click to play from here">You know, higher wine.</p>
+<p class="ts-line" data-start="1757.9" title="Click to play from here">I mean, I just thought maybe you knew something.</p>
+<p class="ts-line" data-start="1760.3" title="Click to play from here">I didn't. Yeah.</p>
+<p class="ts-line" data-start="1761.1" title="Click to play from here">Uh, yeah, Grog hasn't been through, uh,</p>
+<p class="ts-line" data-start="1763.2" title="Click to play from here">in the last, uh, couple days.</p>
+<p class="ts-line" data-start="1764.5" title="Click to play from here">He was here through, uh, for the festival there</p>
+<p class="ts-line" data-start="1767.1" title="Click to play from here">and then, uh, he's kind of just gone his own way.</p>
+<p class="ts-line" data-start="1769.5" title="Click to play from here">You know him, he kind of comes and goes as he pleases.</p>
+<p class="ts-line" data-start="1772.6" title="Click to play from here">He sure does.</p>
+<p class="ts-line" data-start="1774.5" title="Click to play from here">How are, how are people doing?</p>
+<p class="ts-line" data-start="1777.1" title="Click to play from here">I know it's real crowded here and everyone's,</p>
+<p class="ts-line" data-start="1779.9" title="Click to play from here">you know, things aren't great right now,</p>
+<p class="ts-line" data-start="1782.2" title="Click to play from here">but we're gonna make things are coming.</p>
+<p class="ts-line" data-start="1787.1" title="Click to play from here">Everybody's, uh, rightfully concerned.</p>
+<p class="ts-line" data-start="1793.5" title="Click to play from here">Everybody's displaced from, from wherever they came from.</p>
+<p class="ts-line" data-start="1798.6" title="Click to play from here">They want to get back,</p>
+<p class="ts-line" data-start="1799.6" title="Click to play from here">but they don't know if they can go back.</p>
+<p class="ts-line" data-start="1802.7" title="Click to play from here">Well, you know what?</p>
+<p class="ts-line" data-start="1803.3" title="Click to play from here">What you're doing here is super important.</p>
+<p class="ts-line" data-start="1806.2" title="Click to play from here">Just a safe place to go with community,</p>
+<p class="ts-line" data-start="1808.9" title="Click to play from here">friends, laughter, and drinks,</p>
+<p class="ts-line" data-start="1811.7" title="Click to play from here">and just pretend like everything's okay for a few hours.</p>
+<p class="ts-line" data-start="1816.4" title="Click to play from here">Good on you, Dernan.</p>
+<p class="ts-line" data-start="1818.1" title="Click to play from here">Thank you. Thank you.</p>
+<p class="ts-line" data-start="1819.9" title="Click to play from here">What you, what you guys are doing,</p>
+<p class="ts-line" data-start="1821.4" title="Click to play from here">uh, really is, uh, is bringing up the spirits of everybody</p>
+<p class="ts-line" data-start="1826.3" title="Click to play from here">and he points to a banner that's hanging over the,</p>
+<p class="ts-line" data-start="1832.8" title="Click to play from here">uh, over the pit in the middle of the yawning portal</p>
+<p class="ts-line" data-start="1835.9" title="Click to play from here">and it is the symbol of the decimator of dragons,</p>
+<p class="ts-line" data-start="1840.3" title="Click to play from here">decimators of dragons.</p>
+<p class="ts-line" data-start="1842.6" title="Click to play from here">He says, what you, what you four are doing is, uh, is noble.</p>
+<p class="ts-line" data-start="1850.1" title="Click to play from here">Not a lot of people or adventurers or anybody,</p>
+<p class="ts-line" data-start="1853.5" title="Click to play from here">for that matter, might do what you guys have done.</p>
+<p class="ts-line" data-start="1857.9" title="Click to play from here">Well, thank you.</p>
+<p class="ts-line" data-start="1860.2" title="Click to play from here">He nods and, uh, he gets called over from across the bar.</p>
+<p class="ts-line" data-start="1863.9" title="Click to play from here">He says, I'll be around.</p>
+<p class="ts-line" data-start="1865.8" title="Click to play from here">If you need anything, just let me know.</p>
+<p class="ts-line" data-start="1867.8" title="Click to play from here">And he walks off.</p>
+<p class="ts-line" data-start="1870.3" title="Click to play from here">I drink my drink.</p>
+<p class="ts-line" data-start="1873.4" title="Click to play from here">So guys, how do we, how do we feel?</p>
+<p class="ts-line" data-start="1877.2" title="Click to play from here">Nobody backed out.</p>
+<p class="ts-line" data-start="1879.2" title="Click to play from here">I am really surprised, especially Ryan.</p>
+<p class="ts-line" data-start="1882.3" title="Click to play from here">I was pretty impressed.</p>
+<p class="ts-line" data-start="1883.2" title="Click to play from here">Man, I thought Ryan for sure.</p>
+<p class="ts-line" data-start="1884.7" title="Click to play from here">Ryan seemed shady.</p>
+<p class="ts-line" data-start="1886.2" title="Click to play from here">So I'm extra glad that we made our stance about the tower known</p>
+<p class="ts-line" data-start="1890.9" title="Click to play from here">because, you know, could have got tricked into something there.</p>
+<p class="ts-line" data-start="1895.7" title="Click to play from here">Yeah, and could have, could have had a lot of guilt attached to</p>
+<p class="ts-line" data-start="1899.5" title="Click to play from here">if she had pulled out and not offered support.</p>
+<p class="ts-line" data-start="1904.1" title="Click to play from here">But you know what?</p>
+<p class="ts-line" data-start="1904.7" title="Click to play from here">That's all in the past.</p>
+<p class="ts-line" data-start="1905.5" title="Click to play from here">Let's celebrate this, this really big win.</p>
+<p class="ts-line" data-start="1908.7" title="Click to play from here">We have a great team.</p>
+<p class="ts-line" data-start="1911.5" title="Click to play from here">There ever was one to defeat the rise of a horrible dragon goddess.</p>
+<p class="ts-line" data-start="1917.7" title="Click to play from here">Cheers.</p>
+<p class="ts-line" data-start="1918.3" title="Click to play from here">Yeah, I mean, cheers to that.</p>
+<p class="ts-line" data-start="1920.0" title="Click to play from here">Leosin, who was a small man, tries to lift the stein of a beer.</p>
+<p class="ts-line" data-start="1924.8" title="Click to play from here">And he lifts it with two hands and he goes to cheers you as well.</p>
+<p class="ts-line" data-start="1929.1" title="Click to play from here">He says, you, you guys have no idea how close it was at some points</p>
+<p class="ts-line" data-start="1934.5" title="Click to play from here">to many, many, many factions running, running for the hills.</p>
+<p class="ts-line" data-start="1938.9" title="Click to play from here">Oh man.</p>
+<p class="ts-line" data-start="1939.4" title="Click to play from here">He's going to drink and get loose-lipped.</p>
+<p class="ts-line" data-start="1941.2" title="Click to play from here">I know.</p>
+<p class="ts-line" data-start="1941.8" title="Click to play from here">Tell us more, tell us more.</p>
+<p class="ts-line" data-start="1944.3" title="Click to play from here">He sips.</p>
+<p class="ts-line" data-start="1945.1" title="Click to play from here">It must have been very stressful for you.</p>
+<p class="ts-line" data-start="1947.4" title="Click to play from here">I have filled out so much paperwork.</p>
+<p class="ts-line" data-start="1950.3" title="Click to play from here">You have no idea.</p>
+<p class="ts-line" data-start="1952.8" title="Click to play from here">You were the only place that you're the only reason that place is running.</p>
+<p class="ts-line" data-start="1956.3" title="Click to play from here">You're telling me you're telling me and he takes a big swig.</p>
+<p class="ts-line" data-start="1960.1" title="Click to play from here">You get good compensation.</p>
+<p class="ts-line" data-start="1962.7" title="Click to play from here">I mean, as good as can be expected.</p>
+<p class="ts-line" data-start="1964.7" title="Click to play from here">I mean, they treating you well.</p>
+<p class="ts-line" data-start="1966.3" title="Click to play from here">Yeah, yeah, yeah.</p>
+<p class="ts-line" data-start="1967.3" title="Click to play from here">Just making sure you're a real awesome guy.</p>
+<p class="ts-line" data-start="1969.0" title="Click to play from here">Management has changed a few times since I've been,</p>
+<p class="ts-line" data-start="1972.2" title="Click to play from here">since I've been here, but yeah, Lady, Lady Silverhand, she's, she's good.</p>
+<p class="ts-line" data-start="1977.1" title="Click to play from here">She's good to me.</p>
+<p class="ts-line" data-start="1978.6" title="Click to play from here">So Leosin, who, who seem like they might not be on board?</p>
+<p class="ts-line" data-start="1984.3" title="Click to play from here">Cause it's, I mean, what we're doing is it's so obvious that</p>
+<p class="ts-line" data-start="1986.8" title="Click to play from here">it's the right thing to stop the rise of Tiamat.</p>
+<p class="ts-line" data-start="1989.9" title="Click to play from here">Um, yeah, um, well, the Zhentarim, it's always a question whether,</p>
+<p class="ts-line" data-start="1997.2" title="Click to play from here">I mean, even now that they've said their support,</p>
+<p class="ts-line" data-start="1999.3" title="Click to play from here">whether they actually show up.</p>
+<p class="ts-line" data-start="2000.7" title="Click to play from here">That's always a big question.</p>
+<p class="ts-line" data-start="2003.4" title="Click to play from here">Um.</p>
+<p class="ts-line" data-start="2004.0" title="Click to play from here">Shady people.</p>
+<p class="ts-line" data-start="2005.5" title="Click to play from here">Sir Istval, he's seen a lot of battle and his stance has been that</p>
+<p class="ts-line" data-start="2011.4" title="Click to play from here">he wouldn't put him in his forces behind something he didn't believe in.</p>
+<p class="ts-line" data-start="2016.2" title="Click to play from here">And he wasn't sure about, as he put it, you three yahoos.</p>
+<p class="ts-line" data-start="2022.1" title="Click to play from here">I mean, it's pretty fair.</p>
+<p class="ts-line" data-start="2023.4" title="Click to play from here">That's fair.</p>
+<p class="ts-line" data-start="2024.7" title="Click to play from here">We've been called worse.</p>
+<p class="ts-line" data-start="2026.2" title="Click to play from here">Oh, much worse.</p>
+<p class="ts-line" data-start="2029.1" title="Click to play from here">He was a, he was a big question.</p>
+<p class="ts-line" data-start="2030.8" title="Click to play from here">King Melandritch, uh, he's, he's a bit of a hothead</p>
+<p class="ts-line" data-start="2036.0" title="Click to play from here">and, uh, disappeared a little bit after he found out about Nerenvain.</p>
+<p class="ts-line" data-start="2040.5" title="Click to play from here">Yeah. I mean, that, that couldn't have been easy for him to hear.</p>
+<p class="ts-line" data-start="2043.4" title="Click to play from here">No, we weren't sure about him and the Elven, Elvendritch knights.</p>
+<p class="ts-line" data-start="2047.7" title="Click to play from here">So, um, there were a couple others, but, uh, they have all come around</p>
+<p class="ts-line" data-start="2053.3" title="Click to play from here">and it appears that we have full forces going into what, what is to come.</p>
+<p class="ts-line" data-start="2058.7" title="Click to play from here">How are you three feeling about what is to come?</p>
+<p class="ts-line" data-start="2063.9" title="Click to play from here">Is there anything that we can do for you in order to help you prepare?</p>
+<p class="ts-line" data-start="2074.2" title="Click to play from here">Is there anyone who can enhance my abilities a little bit?</p>
+<p class="ts-line" data-start="2079.1" title="Click to play from here">Uh, how, how do you mean?</p>
+<p class="ts-line" data-start="2081.1" title="Click to play from here">My spell casting abilities.</p>
+<p class="ts-line" data-start="2084.4" title="Click to play from here">Um, you want like a magic tutor?</p>
+<p class="ts-line" data-start="2087.4" title="Click to play from here">Yeah, well, you know, maybe someone to teach me a few new tricks, you know, like.</p>
+<p class="ts-line" data-start="2091.5" title="Click to play from here">Um, well, I mean, you three are some of the most powerful adventurers.</p>
+<p class="ts-line" data-start="2099.9" title="Click to play from here">Are you trying to scare us?</p>
+<p class="ts-line" data-start="2103.3" title="Click to play from here">Are you trying to terrify us?</p>
+<p class="ts-line" data-start="2104.7" title="Click to play from here">But if you look, if you look what you can do and what you have done.</p>
+<p class="ts-line" data-start="2110.5" title="Click to play from here">This is pretty awesome.</p>
+<p class="ts-line" data-start="2112.4" title="Click to play from here">Your powers and abilities are, are.</p>
+<p class="ts-line" data-start="2116.3" title="Click to play from here">Okay, fine.</p>
+<p class="ts-line" data-start="2116.7" title="Click to play from here">How about some healing potions?</p>
+<p class="ts-line" data-start="2118.4" title="Click to play from here">I dare say it godlike.</p>
+<p class="ts-line" data-start="2122.0" title="Click to play from here">Well, that's going to go to Thea's head.</p>
+<p class="ts-line" data-start="2127.3" title="Click to play from here">We like to stay humble, so.</p>
+<p class="ts-line" data-start="2131.0" title="Click to play from here">I know.</p>
+<p class="ts-line" data-start="2131.6" title="Click to play from here">I just, I don't want you to underestimate the powers that you have going into this</p>
+<p class="ts-line" data-start="2137.0" title="Click to play from here">battle that you have.</p>
+<p class="ts-line" data-start="2139.7" title="Click to play from here">You have them, just make sure you use them.</p>
+<p class="ts-line" data-start="2144.3" title="Click to play from here">I.e. don't forget shit.</p>
+<p class="ts-line" data-start="2146.7" title="Click to play from here">Always get advice.</p>
+<p class="ts-line" data-start="2148.7" title="Click to play from here">More what I was talking about is final, final arrangements.</p>
+<p class="ts-line" data-start="2153.4" title="Click to play from here">Where, where do you come from?</p>
+<p class="ts-line" data-start="2155.8" title="Click to play from here">Where is your families?</p>
+<p class="ts-line" data-start="2156.8" title="Click to play from here">Where do you wish to have your worldly possessions sent back to if the worst happens?</p>
+<p class="ts-line" data-start="2167.1" title="Click to play from here">The worst happens, you can send my knapsack back to my parents in silvery moon.</p>
+<p class="ts-line" data-start="2173.2" title="Click to play from here">Oh, Leo-san, it's so like you to be talking to us about like legal paperwork here at</p>
+<p class="ts-line" data-start="2179.9" title="Click to play from here">the bar as we're chatting.</p>
+<p class="ts-line" data-start="2181.6" title="Click to play from here">And I, you know what?</p>
+<p class="ts-line" data-start="2183.4" title="Click to play from here">We appreciate you for being you.</p>
+<p class="ts-line" data-start="2185.9" title="Click to play from here">I'm just trying to look out for you.</p>
+<p class="ts-line" data-start="2188.8" title="Click to play from here">What I'm saying is, is if there is somewhere you wish to go, we can make that happen.</p>
+<p class="ts-line" data-start="2196.6" title="Click to play from here">I should go see my folks.</p>
+<p class="ts-line" data-start="2199.0" title="Click to play from here">Well, it's been a while since you've been back there.</p>
+<p class="ts-line" data-start="2201.8" title="Click to play from here">Yeah, but I guess if not now, when?</p>
+<p class="ts-line" data-start="2204.9" title="Click to play from here">I mean, how could they be disappointed in me now?</p>
+<p class="ts-line" data-start="2207.5" title="Click to play from here">I'm about to help save the world.</p>
+<p class="ts-line" data-start="2209.3" title="Click to play from here">You're a decimator of dragons.</p>
+<p class="ts-line" data-start="2210.9" title="Click to play from here">Right.</p>
+<p class="ts-line" data-start="2211.2" title="Click to play from here">And you're pretty much godlike.</p>
+<p class="ts-line" data-start="2213.1" title="Click to play from here">Exactly.</p>
+<p class="ts-line" data-start="2215.6" title="Click to play from here">They're going to be happy to see you.</p>
+<p class="ts-line" data-start="2217.8" title="Click to play from here">What do you think, Leo-san?</p>
+<p class="ts-line" data-start="2219.0" title="Click to play from here">Get me a ship up there tomorrow?</p>
+<p class="ts-line" data-start="2222.8" title="Click to play from here">I will do one better than a ship.</p>
+<p class="ts-line" data-start="2225.5" title="Click to play from here">Don't worry.</p>
+<p class="ts-line" data-start="2226.7" title="Click to play from here">A super ship.</p>
+<p class="ts-line" data-start="2229.0" title="Click to play from here">A mega ship.</p>
+<p class="ts-line" data-start="2230.9" title="Click to play from here">We have two days.</p>
+<p class="ts-line" data-start="2232.7" title="Click to play from here">Half ship, half dinosaur.</p>
+<p class="ts-line" data-start="2236.5" title="Click to play from here">Wow.</p>
+<p class="ts-line" data-start="2237.3" title="Click to play from here">Well, shouldn't, shouldn't Nularaa ride that then?</p>
+<p class="ts-line" data-start="2240.2" title="Click to play from here">Yes, yeah.</p>
+<p class="ts-line" data-start="2241.1" title="Click to play from here">Nularaa, take me up the silvery moon on your half ship, half dinosaur.</p>
+<p class="ts-line" data-start="2249.1" title="Click to play from here">Leo-san, I would love to go see my family too.</p>
+<p class="ts-line" data-start="2251.9" title="Click to play from here">I haven't been, been home to High Forest in years and I'd love to see my brothers.</p>
+<p class="ts-line" data-start="2257.1" title="Click to play from here">And they probably, gosh, you know,</p>
+<p class="ts-line" data-start="2259.7" title="Click to play from here">I bet I have like a million nieces and nephews now.</p>
+<p class="ts-line" data-start="2263.4" title="Click to play from here">That can be arranged, absolutely.</p>
+<p class="ts-line" data-start="2267.9" title="Click to play from here">And you, Flint?</p>
+<p class="ts-line" data-start="2270.2" title="Click to play from here">Yeah, it's been a long time since I've been back to Mithril Hall, so</p>
+<p class="ts-line" data-start="2274.6" title="Click to play from here">I guess, in Thea's words, if not now, then when?</p>
+<p class="ts-line" data-start="2278.5" title="Click to play from here">In the morning it shall be done.</p>
+<p class="ts-line" data-start="2280.9" title="Click to play from here">I will send you to Mithril Hall, High Forest, and Silvery Moon</p>
+<p class="ts-line" data-start="2284.6" title="Click to play from here">and arrange, as I have done for everybody, final papers as to direct your possessions,</p>
+<p class="ts-line" data-start="2295.1" title="Click to play from here">your earnings, your whatever you have left for you.</p>
+<p class="ts-line" data-start="2300.8" title="Click to play from here">Well, how are you going to get a tower delivered there?</p>
+<p class="ts-line" data-start="2306.4" title="Click to play from here">Yes, the question of Xanthal's Tower.</p>
+<p class="ts-line" data-start="2310.2" title="Click to play from here">Where do you guys stand on Xanthal's Tower?</p>
+<p class="ts-line" data-start="2311.9" title="Click to play from here">Like, what do you want to do with that?</p>
+<p class="ts-line" data-start="2314.6" title="Click to play from here">Oh my gosh, you know what, if we die, we should leave it to Greg.</p>
+<p class="ts-line" data-start="2317.5" title="Click to play from here">Or, uh, or, uh, Flamikins.</p>
+<p class="ts-line" data-start="2320.3" title="Click to play from here">I mean, you guys, I don't necessarily think she's the most responsible person to have the tower,</p>
+<p class="ts-line" data-start="2326.2" title="Click to play from here">but she is kind of technically the one that kind of got us into the tower, sort of.</p>
+<p class="ts-line" data-start="2330.7" title="Click to play from here">Okay, what about her and Thaddeus?</p>
+<p class="ts-line" data-start="2336.4" title="Click to play from here">Yes.</p>
+<p class="ts-line" data-start="2336.7" title="Click to play from here">Okay, the yin to the yang.</p>
+<p class="ts-line" data-start="2338.8" title="Click to play from here">The joint custody.</p>
+<p class="ts-line" data-start="2340.3" title="Click to play from here">If it is, if it passes, you know, by those who have entered it.</p>
+<p class="ts-line" data-start="2345.4" title="Click to play from here">I mean, they're partial owners.</p>
+<p class="ts-line" data-start="2347.1" title="Click to play from here">That's true.</p>
+<p class="ts-line" data-start="2348.3" title="Click to play from here">So that seems right to me.</p>
+<p class="ts-line" data-start="2350.5" title="Click to play from here">Okay, can you make that happen?</p>
+<p class="ts-line" data-start="2352.9" title="Click to play from here">I will absolutely make that happen.</p>
+<p class="ts-line" data-start="2355.3" title="Click to play from here">Awesome.</p>
+<p class="ts-line" data-start="2357.9" title="Click to play from here">I drink more.</p>
+<p class="ts-line" data-start="2359.4" title="Click to play from here">He too drinks more.</p>
+<p class="ts-line" data-start="2360.8" title="Click to play from here">Oh yeah, since I'm drinking this whole time.</p>
+<p class="ts-line" data-start="2361.9" title="Click to play from here">We've been drinking the whole time.</p>
+<p class="ts-line" data-start="2363.5" title="Click to play from here">Everybody make a constitution saving throw.</p>
+<p class="ts-line" data-start="2365.4" title="Click to play from here">Uh oh.</p>
+<p class="ts-line" data-start="2366.7" title="Click to play from here">Thea got a four plus.</p>
+<p class="ts-line" data-start="2372.4" title="Click to play from here">Yeah, you can't be poisoned.</p>
+<p class="ts-line" data-start="2373.5" title="Click to play from here">You're fine.</p>
+<p class="ts-line" data-start="2375.7" title="Click to play from here">Alcohol is a poison.</p>
+<p class="ts-line" data-start="2378.8" title="Click to play from here">We were like, oh, yeah.</p>
+<p class="ts-line" data-start="2381.9" title="Click to play from here">Dernan.</p>
+<p class="ts-line" data-start="2384.1" title="Click to play from here">Dernan's been a sleeper agent this whole time.</p>
+<p class="ts-line" data-start="2386.2" title="Click to play from here">This whole time.</p>
+<p class="ts-line" data-start="2387.2" title="Click to play from here">What a surprise.</p>
+<p class="ts-line" data-start="2388.1" title="Click to play from here">Uh, Flint, you make it with resistance.</p>
+<p class="ts-line" data-start="2392.0" title="Click to play from here">I only rolled a seven, so I'm one drunk as fuck.</p>
+<p class="ts-line" data-start="2394.3" title="Click to play from here">You're drunk as fuck.</p>
+<p class="ts-line" data-start="2395.5" title="Click to play from here">I'm drunk as fuck.</p>
+<p class="ts-line" data-start="2395.8" title="Click to play from here">It was some strong stuff.</p>
+<p class="ts-line" data-start="2398.5" title="Click to play from here">Nularaia, you and Leosin are drunk as all get out.</p>
+<p class="ts-line" data-start="2402.6" title="Click to play from here">What did Flint roll?</p>
+<p class="ts-line" data-start="2404.4" title="Click to play from here">I have resistant to poison.</p>
+<p class="ts-line" data-start="2406.7" title="Click to play from here">I think my 11 is probably good enough.</p>
+<p class="ts-line" data-start="2409.1" title="Click to play from here">Yeah, you're fine.</p>
+<p class="ts-line" data-start="2411.4" title="Click to play from here">So Leosin's like, you know what, you guys, since I met you</p>
+<p class="ts-line" data-start="2417.6" title="Click to play from here">at that cave with the people who made me work so hard,</p>
+<p class="ts-line" data-start="2422.4" title="Click to play from here">they were not good owners, bosses.</p>
+<p class="ts-line" data-start="2425.9" title="Click to play from here">The cult of the dragon.</p>
+<p class="ts-line" data-start="2427.2" title="Click to play from here">They were bad.</p>
+<p class="ts-line" data-start="2428.0" title="Click to play from here">They're bad people.</p>
+<p class="ts-line" data-start="2429.0" title="Click to play from here">I'm glad we're stopping them.</p>
+<p class="ts-line" data-start="2431.2" title="Click to play from here">Yeah.</p>
+<p class="ts-line" data-start="2431.9" title="Click to play from here">Oh, I hate the cult of the dragon, you guys.</p>
+<p class="ts-line" data-start="2434.5" title="Click to play from here">They're the worst.</p>
+<p class="ts-line" data-start="2436.2" title="Click to play from here">So bad.</p>
+<p class="ts-line" data-start="2437.6" title="Click to play from here">We're totally gonna, we're gonna stop them, right?</p>
+<p class="ts-line" data-start="2440.0" title="Click to play from here">If Tiamat was here right now, tell me, what would you do?</p>
+<p class="ts-line" data-start="2444.0" title="Click to play from here">I would punch her in the, what do dragons have?</p>
+<p class="ts-line" data-start="2449.0" title="Click to play from here">Well, she's got a lot of different heads.</p>
+<p class="ts-line" data-start="2451.4" title="Click to play from here">Like so many heads.</p>
+<p class="ts-line" data-start="2452.9" title="Click to play from here">Punch her in the head, the least bitey head.</p>
+<p class="ts-line" data-start="2457.6" title="Click to play from here">I'd punch her in the most bitey head.</p>
+<p class="ts-line" data-start="2459.3" title="Click to play from here">Don't let that go right after that.</p>
+<p class="ts-line" data-start="2461.0" title="Click to play from here">There's white, there's black, there's blue, there's green.</p>
+<p class="ts-line" data-start="2464.0" title="Click to play from here">What color says punch me?</p>
+<p class="ts-line" data-start="2464.7" title="Click to play from here">When you're done with her, they're all gonna be black and blue.</p>
+<p class="ts-line" data-start="2466.9" title="Click to play from here">Black and blue.</p>
+<p class="ts-line" data-start="2474.2" title="Click to play from here">I'd punch her in all her faces.</p>
+<p class="ts-line" data-start="2478.0" title="Click to play from here">I'm very fast.</p>
+<p class="ts-line" data-start="2479.6" title="Click to play from here">Are you?</p>
+<p class="ts-line" data-start="2480.3" title="Click to play from here">He punches and he's very fast.</p>
+<p class="ts-line" data-start="2482.9" title="Click to play from here">Well, he's a monk.</p>
+<p class="ts-line" data-start="2483.6" title="Click to play from here">I steady all the glasses on the table.</p>
+<p class="ts-line" data-start="2488.0" title="Click to play from here">Wow.</p>
+<p class="ts-line" data-start="2488.7" title="Click to play from here">Okay, okay.</p>
+<p class="ts-line" data-start="2489.7" title="Click to play from here">If you could bone anyone in this, in this tavern.</p>
+<p class="ts-line" data-start="2494.4" title="Click to play from here">What about her?</p>
+<p class="ts-line" data-start="2495.1" title="Click to play from here">I point over, I point over to a...</p>
+<p class="ts-line" data-start="2499.8" title="Click to play from here">I know the man of the faith.</p>
+<p class="ts-line" data-start="2502.1" title="Click to play from here">I can't do that.</p>
+<p class="ts-line" data-start="2503.2" title="Click to play from here">Not at all?</p>
+<p class="ts-line" data-start="2504.1" title="Click to play from here">No.</p>
+<p class="ts-line" data-start="2505.8" title="Click to play from here">What about kissing?</p>
+<p class="ts-line" data-start="2507.2" title="Click to play from here">No.</p>
+<p class="ts-line" data-start="2507.9" title="Click to play from here">Some smooching?</p>
+<p class="ts-line" data-start="2509.0" title="Click to play from here">Some hugging?</p>
+<p class="ts-line" data-start="2509.5" title="Click to play from here">Smoochies?</p>
+<p class="ts-line" data-start="2510.1" title="Click to play from here">No.</p>
+<p class="ts-line" data-start="2510.5" title="Click to play from here">Can you hold hands?</p>
+<p class="ts-line" data-start="2511.5" title="Click to play from here">No.</p>
+<p class="ts-line" data-start="2512.7" title="Click to play from here">Could you rub up against each other?</p>
+<p class="ts-line" data-start="2514.8" title="Click to play from here">Close on.</p>
+<p class="ts-line" data-start="2516.0" title="Click to play from here">No.</p>
+<p class="ts-line" data-start="2517.4" title="Click to play from here">Yeah.</p>
+<p class="ts-line" data-start="2519.0" title="Click to play from here">I don't like where this conversation is going.</p>
+<p class="ts-line" data-start="2521.0" title="Click to play from here">This base system, the system of bases in Silvery Moon is fascinating.</p>
+<p class="ts-line" data-start="2527.2" title="Click to play from here">There are many bases.</p>
+<p class="ts-line" data-start="2528.0" title="Click to play from here">First base, rubbing up against each other.</p>
+<p class="ts-line" data-start="2530.8" title="Click to play from here">Baseball's a very long sport.</p>
+<p class="ts-line" data-start="2533.2" title="Click to play from here">Second base, holding hands.</p>
+<p class="ts-line" data-start="2535.2" title="Click to play from here">Who says in Silvery Moon, you run to first base first?</p>
+<p class="ts-line" data-start="2542.4" title="Click to play from here">You're right.</p>
+<p class="ts-line" data-start="2542.9" title="Click to play from here">You know our baseball system.</p>
+<p class="ts-line" data-start="2545.8" title="Click to play from here">Amy creates whole new baseball system.</p>
+<p class="ts-line" data-start="2549.6" title="Click to play from here">Elves are freaky, y'all.</p>
+<p class="ts-line" data-start="2551.1" title="Click to play from here">This is how it's played in Silvery Moon.</p>
+<p class="ts-line" data-start="2554.0" title="Click to play from here">Tom Rollers, E20.</p>
+<p class="ts-line" data-start="2559.0" title="Click to play from here">It's a nine.</p>
+<p class="ts-line" data-start="2560.4" title="Click to play from here">You're bored.</p>
+<p class="ts-line" data-start="2562.3" title="Click to play from here">I'm not wearing any underwear.</p>
+<p class="ts-line" data-start="2564.8" title="Click to play from here">He knows what's up.</p>
+<p class="ts-line" data-start="2566.0" title="Click to play from here">You've played baseball in Silvery Moon.</p>
+<p class="ts-line" data-start="2567.2" title="Click to play from here">Why do you always tell us about your underwear, Flint?</p>
+<p class="ts-line" data-start="2569.4" title="Click to play from here">So weird.</p>
+<p class="ts-line" data-start="2570.8" title="Click to play from here">She wants me to rub up against people and he doesn't wear any underwear.</p>
+<p class="ts-line" data-start="2574.8" title="Click to play from here">I didn't say you had to rub up against people.</p>
+<p class="ts-line" data-start="2577.7" title="Click to play from here">I was just wondering.</p>
+<p class="ts-line" data-start="2578.7" title="Click to play from here">I am not of the faith of any faith.</p>
+<p class="ts-line" data-start="2580.8" title="Click to play from here">I barely have faith in myself.</p>
+<p class="ts-line" data-start="2583.8" title="Click to play from here">You know what?</p>
+<p class="ts-line" data-start="2584.3" title="Click to play from here">Let me tell you a secret.</p>
+<p class="ts-line" data-start="2585.8" title="Click to play from here">I've never rubbed up against anybody.</p>
+<p class="ts-line" data-start="2588.8" title="Click to play from here">All right, Theo.</p>
+<p class="ts-line" data-start="2589.5" title="Click to play from here">I'll turn it back on you.</p>
+<p class="ts-line" data-start="2590.5" title="Click to play from here">If there was someone in this bar to rub up against, who would it be?</p>
+<p class="ts-line" data-start="2594.0" title="Click to play from here">Oh, Theo gets really quiet.</p>
+<p class="ts-line" data-start="2600.9" title="Click to play from here">I'll go get the next round.</p>
+<p class="ts-line" data-start="2602.0" title="Click to play from here">And she gets up and she walks up.</p>
+<p class="ts-line" data-start="2610.1" title="Click to play from here">Theo does not answer that question.</p>
+<p class="ts-line" data-start="2613.2" title="Click to play from here">She's an H Corps virgin.</p>
+<p class="ts-line" data-start="2614.7" title="Click to play from here">Flint, you're very quiet.</p>
+<p class="ts-line" data-start="2617.4" title="Click to play from here">What do you think about the end of the world?</p>
+<p class="ts-line" data-start="2619.4" title="Click to play from here">Well, I think we're kind of fucked either way.</p>
+<p class="ts-line" data-start="2621.1" title="Click to play from here">So let's dive in head first.</p>
+<p class="ts-line" data-start="2623.6" title="Click to play from here">What's the end of the world?</p>
+<p class="ts-line" data-start="2624.7" title="Click to play from here">And he knows it and he feels fine.</p>
+<p class="ts-line" data-start="2627.3" title="Click to play from here">Spotify.</p>
+<p class="ts-line" data-start="2628.1" title="Click to play from here">That's a Great Big C reference that Carla's not going to get.</p>
+<p class="ts-line" data-start="2630.9" title="Click to play from here">No, that's R.A.M.</p>
+<p class="ts-line" data-start="2632.4" title="Click to play from here">Yeah.</p>
+<p class="ts-line" data-start="2633.0" title="Click to play from here">Great Big C was a cover.</p>
+<p class="ts-line" data-start="2634.4" title="Click to play from here">It was a cover.</p>
+<p class="ts-line" data-start="2636.2" title="Click to play from here">There was a better version.</p>
+<p class="ts-line" data-start="2638.4" title="Click to play from here">Whoa.</p>
+<p class="ts-line" data-start="2642.0" title="Click to play from here">Sacrilege, R.A.M.</p>
+<p class="ts-line" data-start="2643.5" title="Click to play from here">They're both very similar.</p>
+<p class="ts-line" data-start="2648.0" title="Click to play from here">That's true.</p>
+<p class="ts-line" data-start="2649.0" title="Click to play from here">That's true.</p>
+<p class="ts-line" data-start="2651.2" title="Click to play from here">You're very open right now.</p>
+<p class="ts-line" data-start="2652.8" title="Click to play from here">I mean, this drink, it makes you feel bad.</p>
+<p class="ts-line" data-start="2659.4" title="Click to play from here">I come back with more drinks.</p>
+<p class="ts-line" data-start="2661.4" title="Click to play from here">Oh, good.</p>
+<p class="ts-line" data-start="2661.9" title="Click to play from here">More bad feelings.</p>
+<p class="ts-line" data-start="2664.3" title="Click to play from here">Are the drinks making you feel bad?</p>
+<p class="ts-line" data-start="2666.0" title="Click to play from here">No, it's the end of the world.</p>
+<p class="ts-line" data-start="2668.5" title="Click to play from here">No, it might be it's not.</p>
+<p class="ts-line" data-start="2670.8" title="Click to play from here">Come on, we're going to work so hard.</p>
+<p class="ts-line" data-start="2672.2" title="Click to play from here">We're going to punch the dragon in the face so many times.</p>
+<p class="ts-line" data-start="2675.3" title="Click to play from here">We're going to totally stop her.</p>
+<p class="ts-line" data-start="2676.9" title="Click to play from here">Don't worry about it.</p>
+<p class="ts-line" data-start="2677.6" title="Click to play from here">I've filled out all the paperwork for both the end of the world</p>
+<p class="ts-line" data-start="2680.5" title="Click to play from here">and not the end of the world.</p>
+<p class="ts-line" data-start="2682.0" title="Click to play from here">And there's more paperwork for the end of the world,</p>
+<p class="ts-line" data-start="2685.0" title="Click to play from here">which means it's probably what's going to happen</p>
+<p class="ts-line" data-start="2687.2" title="Click to play from here">because there's more work that went into that.</p>
+<p class="ts-line" data-start="2689.0" title="Click to play from here">So what you're saying is, you're done your job.</p>
+<p class="ts-line" data-start="2693.2" title="Click to play from here">You already did both directions.</p>
+<p class="ts-line" data-start="2695.8" title="Click to play from here">Hey, that sounds like we should drink to that.</p>
+<p class="ts-line" data-start="2698.0" title="Click to play from here">So you're off now.</p>
+<p class="ts-line" data-start="2699.3" title="Click to play from here">Here, here.</p>
+<p class="ts-line" data-start="2701.2" title="Click to play from here">And he drinks heavily and he passes out.</p>
+<p class="ts-line" data-start="2707.2" title="Click to play from here">So it wasn't a gentle pass out.</p>
+<p class="ts-line" data-start="2709.5" title="Click to play from here">I took him in a little bit.</p>
+<p class="ts-line" data-start="2711.9" title="Click to play from here">Poor guy.</p>
+<p class="ts-line" data-start="2713.6" title="Click to play from here">You carry on partying throughout the night,</p>
+<p class="ts-line" data-start="2716.0" title="Click to play from here">carrying Leosan around with you wherever you go.</p>
+<p class="ts-line" data-start="2720.5" title="Click to play from here">We're so excited that he came out with us.</p>
+<p class="ts-line" data-start="2722.9" title="Click to play from here">We don't want to let it go.</p>
+<p class="ts-line" data-start="2724.3" title="Click to play from here">Because we don't want to just leave him somewhere to wake up.</p>
+<p class="ts-line" data-start="2726.4" title="Click to play from here">Yeah, I know.</p>
+<p class="ts-line" data-start="2726.8" title="Click to play from here">That would be very unsettling.</p>
+<p class="ts-line" data-start="2728.0" title="Click to play from here">Oh, yeah.</p>
+<p class="ts-line" data-start="2728.4" title="Click to play from here">We bar hopped.</p>
+<p class="ts-line" data-start="2729.3" title="Click to play from here">We went to three other different taverns</p>
+<p class="ts-line" data-start="2732.3" title="Click to play from here">and we just left you at the yawning portal.</p>
+<p class="ts-line" data-start="2740.2" title="Click to play from here">Well, hello there.</p>
+<p class="ts-line" data-start="2741.2" title="Click to play from here">I'm your Dungeon Master Russ More.</p>
+<p class="ts-line" data-start="2742.9" title="Click to play from here">Thanks for joining us for episode 67 of Dumbgeons and Dragons.</p>
+<p class="ts-line" data-start="2746.9" title="Click to play from here">Where do we stand?</p>
+<p class="ts-line" data-start="2748.8" title="Click to play from here">I think we're standing in a pretty good place</p>
+<p class="ts-line" data-start="2750.5" title="Click to play from here">as far as the adventures go.</p>
+<p class="ts-line" data-start="2752.5" title="Click to play from here">And in real life, it's nearly the end of the year.</p>
+<p class="ts-line" data-start="2755.3" title="Click to play from here">It's gone by super fast.</p>
+<p class="ts-line" data-start="2757.5" title="Click to play from here">Super fast.</p>
+<p class="ts-line" data-start="2758.4" title="Click to play from here">Can't believe it.</p>
+<p class="ts-line" data-start="2759.7" title="Click to play from here">The next couple of weeks, we will be releasing</p>
+<p class="ts-line" data-start="2762.3" title="Click to play from here">a couple different and fun episodes</p>
+<p class="ts-line" data-start="2764.1" title="Click to play from here">to carry us through the holiday season.</p>
+<p class="ts-line" data-start="2766.1" title="Click to play from here">But just because they're different</p>
+<p class="ts-line" data-start="2767.7" title="Click to play from here">doesn't mean I haven't woven them into the story.</p>
+<p class="ts-line" data-start="2770.1" title="Click to play from here">I mean, everything is connected now, right?</p>
+<p class="ts-line" data-start="2773.2" title="Click to play from here">We hope you enjoy them.</p>
+<p class="ts-line" data-start="2775.2" title="Click to play from here">Being the holiday season, we are celebrating</p>
+<p class="ts-line" data-start="2777.0" title="Click to play from here">by hanging out with our patrons</p>
+<p class="ts-line" data-start="2778.4" title="Click to play from here">during our monthly Goog Hang.</p>
+<p class="ts-line" data-start="2779.6" title="Click to play from here">And this month we've moved it</p>
+<p class="ts-line" data-start="2780.9" title="Click to play from here">because our normal time would have been on Christmas Day.</p>
+<p class="ts-line" data-start="2784.0" title="Click to play from here">And I mean, we love everybody all that much,</p>
+<p class="ts-line" data-start="2787.5" title="Click to play from here">but they don't want to hang.</p>
+<p class="ts-line" data-start="2789.1" title="Click to play from here">You don't want to hang out with us on Christmas Day.</p>
+<p class="ts-line" data-start="2790.8" title="Click to play from here">You got family and friends to do that with.</p>
+<p class="ts-line" data-start="2793.6" title="Click to play from here">So this month, we're doing a morning Goog Hang</p>
+<p class="ts-line" data-start="2797.6" title="Click to play from here">on Saturday, December 22nd.</p>
+<p class="ts-line" data-start="2799.5" title="Click to play from here">And if you've been thinking about joining</p>
+<p class="ts-line" data-start="2800.8" title="Click to play from here">our Patreon community, we hope you consider</p>
+<p class="ts-line" data-start="2803.2" title="Click to play from here">jumping on this month.</p>
+<p class="ts-line" data-start="2804.3" title="Click to play from here">Because of the $2 plus levels,</p>
+<p class="ts-line" data-start="2806.1" title="Click to play from here">you'll be able to come hang out</p>
+<p class="ts-line" data-start="2807.6" title="Click to play from here">and share in the festivities.</p>
+<p class="ts-line" data-start="2809.1" title="Click to play from here">We'll talk about the episodes coming up,</p>
+<p class="ts-line" data-start="2810.9" title="Click to play from here">what everyone is doing for the holidays,</p>
+<p class="ts-line" data-start="2812.8" title="Click to play from here">and what we are all looking forward to in 2019.</p>
+<p class="ts-line" data-start="2816.8" title="Click to play from here">So Patreon.com slash dumb dragon cast</p>
+<p class="ts-line" data-start="2819.2" title="Click to play from here">is the place to visit</p>
+<p class="ts-line" data-start="2820.1" title="Click to play from here">and we hope to see you over there.</p>
+<p class="ts-line" data-start="2821.9" title="Click to play from here">That said, there are so many ways to support the show.</p>
+<p class="ts-line" data-start="2824.5" title="Click to play from here">If you listen to us and love the show,</p>
+<p class="ts-line" data-start="2826.4" title="Click to play from here">we're creating a review or share of an episode</p>
+<p class="ts-line" data-start="2829.6" title="Click to play from here">to a friend or family member goes a long way.</p>
+<p class="ts-line" data-start="2832.8" title="Click to play from here">And if you leave us a review,</p>
+<p class="ts-line" data-start="2833.9" title="Click to play from here">we'll gladly read it right here</p>
+<p class="ts-line" data-start="2835.9" title="Click to play from here">just to say how awesome you are.</p>
+<p class="ts-line" data-start="2838.1" title="Click to play from here">We collect reviews from iTunes</p>
+<p class="ts-line" data-start="2840.5" title="Click to play from here">and Stitcher specifically.</p>
+<p class="ts-line" data-start="2842.2" title="Click to play from here">So if you leave us a review somewhere else,</p>
+<p class="ts-line" data-start="2844.2" title="Click to play from here">just send us a little snapshot of that</p>
+<p class="ts-line" data-start="2846.5" title="Click to play from here">to either anywhere on social media</p>
+<p class="ts-line" data-start="2848.8" title="Click to play from here">or to our email and we will find it</p>
+<p class="ts-line" data-start="2851.0" title="Click to play from here">and thank you there.</p>
+<p class="ts-line" data-start="2852.8" title="Click to play from here">You can find all of our social media links</p>
+<p class="ts-line" data-start="2854.6" title="Click to play from here">and where to get ahold of us</p>
+<p class="ts-line" data-start="2855.5" title="Click to play from here">through our website dumbdragons.com</p>
+<p class="ts-line" data-start="2858.1" title="Click to play from here">and thanks to Sirenscape today</p>
+<p class="ts-line" data-start="2859.8" title="Click to play from here">for some of the amazing atmosphere,</p>
+<p class="ts-line" data-start="2861.6" title="Click to play from here">tons of the amazing atmosphere actually.</p>
+<p class="ts-line" data-start="2863.2" title="Click to play from here">This whole episode is filled with it.</p>
+<p class="ts-line" data-start="2864.9" title="Click to play from here">Just make sure you check them out at sirenscape.com</p>
+<p class="ts-line" data-start="2867.2" title="Click to play from here">and bring your games to life.</p>
+<p class="ts-line" data-start="2869.1" title="Click to play from here">Links for everything mentioned today</p>
+<p class="ts-line" data-start="2870.4" title="Click to play from here">can be found in the description.</p>
+<p class="ts-line" data-start="2872.4" title="Click to play from here">The next episode will be out Wednesday, December 26th.</p>
+<p class="ts-line" data-start="2876.3" title="Click to play from here">Let's see how the night ended for our adventurers</p>
+<p class="ts-line" data-start="2878.7" title="Click to play from here">and who still has their pants on.</p>
+<p class="ts-line" data-start="2880.5" title="Click to play from here">Spoiler alert, probably not Flint.</p>
+<p class="ts-line" data-start="2882.8" title="Click to play from here">Have a very Merry Christmas</p>
+<p class="ts-line" data-start="2884.1" title="Click to play from here">if that's what you celebrate.</p>
+<p class="ts-line" data-start="2885.3" title="Click to play from here">A wonderful winter solstice if it's not</p>
+<p class="ts-line" data-start="2888.3" title="Click to play from here">and we'll talk very soon.</p>
+<p class="ts-line" data-start="2895.8" title="Click to play from here">Where does everybody wake up in the morning?</p>
+<p class="ts-line" data-start="2898.4" title="Click to play from here">I wake up in my bed.</p>
+<p class="ts-line" data-start="2899.5" title="Click to play from here">I don't know.</p>
+<p class="ts-line" data-start="2901.2" title="Click to play from here">It doesn't get drunk drunk.</p>
+<p class="ts-line" data-start="2903.2" title="Click to play from here">I mean, I was real drunk.</p>
+<p class="ts-line" data-start="2904.6" title="Click to play from here">So like probably on the floor beside my bed.</p>
+<p class="ts-line" data-start="2907.8" title="Click to play from here">Probably the parking lot of a Denny's</p>
+<p class="ts-line" data-start="2909.4" title="Click to play from here">without your clothes on.</p>
+<p class="ts-line" data-start="2910.4" title="Click to play from here">That kind of drunk, is that what you were?</p>
+<p class="ts-line" data-start="2913.4" title="Click to play from here">I mean, you just said we carried Leosin around.</p>
+<p class="ts-line" data-start="2915.8" title="Click to play from here">So I can't imagine now you guys left me</p>
+<p class="ts-line" data-start="2917.9" title="Click to play from here">outside of Denny's, I hope.</p>
+<p class="ts-line" data-start="2921.1" title="Click to play from here">We're like, we got to make sure he gets home okay.</p>
+<p class="ts-line" data-start="2923.2" title="Click to play from here">You're on your own.</p>
+<p class="ts-line" data-start="2925.1" title="Click to play from here">You survive in the wilderness.</p>
+<p class="ts-line" data-start="2926.6" title="Click to play from here">He's soft.</p>
+<p class="ts-line" data-start="2927.5" title="Click to play from here">You're the godlike adventurer, he says.</p>
+<p class="ts-line" data-start="2930.0" title="Click to play from here">He's been pushing papers for a very long time.</p>
+<p class="ts-line" data-start="2932.1" title="Click to play from here">He may be able to punch fast, but he's not conscious.</p>
+<p class="ts-line" data-start="2937.6" title="Click to play from here">Okay, you guys wake up.</p>
+<p class="ts-line" data-start="2940.0" title="Click to play from here">And Flint, roll a d20.</p>
+<p class="ts-line" data-start="2943.9" title="Click to play from here">It's a 17.</p>
+<p class="ts-line" data-start="2945.5" title="Click to play from here">Okay, you're back to Flint.</p>
+<p class="ts-line" data-start="2947.6" title="Click to play from here">When you wake up.</p>
+<p class="ts-line" data-start="2949.9" title="Click to play from here">And you all head to Leosin's office and he looks pretty hard off.</p>
+<p class="ts-line" data-start="2957.5" title="Click to play from here">But he says, okay, so we're gonna go to the teleportation chamber.</p>
+<p class="ts-line" data-start="2964.0" title="Click to play from here">And I'm gonna send you guys to the places we talked about.</p>
+<p class="ts-line" data-start="2968.3" title="Click to play from here">Silvery Moon, and he points to Flint.</p>
+<p class="ts-line" data-start="2970.8" title="Click to play from here">High Forest, he points to Thea.</p>
+<p class="ts-line" data-start="2973.2" title="Click to play from here">And Mithril Hall, and he points to Nulara.</p>
+<p class="ts-line" data-start="2978.1" title="Click to play from here">Right?</p>
+<p class="ts-line" data-start="2978.4" title="Click to play from here">Can we all just move to the points that he was pointing at?</p>
+<p class="ts-line" data-start="2983.8" title="Click to play from here">Just to help him out.</p>
+<p class="ts-line" data-start="2985.2" title="Click to play from here">Got it.</p>
+<p class="ts-line" data-start="2986.0" title="Click to play from here">Good.</p>
+<p class="ts-line" data-start="2986.6" title="Click to play from here">Okay, let's go.</p>
+<p class="ts-line" data-start="2990.2" title="Click to play from here">You doing okay?</p>
+<p class="ts-line" data-start="2991.4" title="Click to play from here">Yeah, I'm good.</p>
+<p class="ts-line" data-start="2992.2" title="Click to play from here">Don't worry about it.</p>
+<p class="ts-line" data-start="2992.9" title="Click to play from here">Don't worry.</p>
+<p class="ts-line" data-start="2993.3" title="Click to play from here">I don't run the teleportation part of it.</p>
+<p class="ts-line" data-start="2995.2" title="Click to play from here">You go to Vom?</p>
+<p class="ts-line" data-start="2996.8" title="Click to play from here">Later.</p>
+<p class="ts-line" data-start="2997.8" title="Click to play from here">If you're gonna spew, spew into this, I'll put it onto the tel-</p>
+<p class="ts-line" data-start="3003.2" title="Click to play from here">And then it'll vanish it somewhere and somebody's gonna have a real bad day.</p>
+<p class="ts-line" data-start="3008.5" title="Click to play from here">Imagine some poor, like, I don't know, some halflings walking through the forest</p>
+<p class="ts-line" data-start="3013.3" title="Click to play from here">and out of nowhere just get hit by a stream of vomit.</p>
+<p class="ts-line" data-start="3020.0" title="Click to play from here">Don't do that to someone, Leosin, that'd be just terrible.</p>
+<p class="ts-line" data-start="3023.2" title="Click to play from here">All right, whoever's going, and then you get to the teleportation chamber</p>
+<p class="ts-line" data-start="3026.6" title="Click to play from here">and there are a couple wizards standing, waiting.</p>
+<p class="ts-line" data-start="3032.6" title="Click to play from here">And he says, all right, who's going first?</p>
+<p class="ts-line" data-start="3036.3" title="Click to play from here">I will.</p>
+<p class="ts-line" data-start="3038.1" title="Click to play from here">You step into the teleportation chamber, into the ruins,</p>
+<p class="ts-line" data-start="3043.1" title="Click to play from here">and the wizards begin reading their incantations.</p>
+<p class="ts-line" data-start="3047.7" title="Click to play from here">And the ruins begin to glow, and the haze begins to fill your vision,</p>
+<p class="ts-line" data-start="3052.2" title="Click to play from here">and your friends disappear from sight.</p>
+<p class="ts-line" data-start="3054.4" title="Click to play from here">I wave.</p>
+<p class="ts-line" data-start="3057.7" title="Click to play from here">And your vision begins to come back to you.</p>
+<p class="ts-line" data-start="3060.3" title="Click to play from here">Where are you?</p>
+<p class="ts-line" data-start="3061.6" title="Click to play from here">I am at the, at the, like, outskirts, the entrance, I guess, of Silvery Moon.</p>
+<p class="ts-line" data-start="3076.8" title="Click to play from here">Two guards are standing at the gate to Silvery Moon.</p>
+<p class="ts-line" data-start="3080.5" title="Click to play from here">The doors are barred, and they see you</p>
+<p class="ts-line" data-start="3087.4" title="Click to play from here">apparate in front of them, see the ruins,</p>
+<p class="ts-line" data-start="3090.7" title="Click to play from here">and they look like they're on guard when you become visible.</p>
+<p class="ts-line" data-start="3096.6" title="Click to play from here">But once the haze clears, they see you, and they lower their weapons, and they say,</p>
+<p class="ts-line" data-start="3102.0" title="Click to play from here">Ms. Amastasia, it's been a long, long time since you've been back.</p>
+<p class="ts-line" data-start="3109.0" title="Click to play from here">Quick, yes, come in.</p>
+<p class="ts-line" data-start="3110.6" title="Click to play from here">And they open the gates for you, and you head into Silvery Moon.</p>
+<p class="ts-line" data-start="3117.2" title="Click to play from here">I give them the curt nod.</p>
+<p class="ts-line" data-start="3121.9" title="Click to play from here">Back in Waterdeep.</p>
+<p class="ts-line" data-start="3123.2" title="Click to play from here">All right, who's next?</p>
+<p class="ts-line" data-start="3125.8" title="Click to play from here">Okay, I'll go.</p>
+<p class="ts-line" data-start="3126.5" title="Click to play from here">You step into the circle, and the runes begin to glow and move around you, swirling.</p>
+<p class="ts-line" data-start="3136.9" title="Click to play from here">Your vision of the room disappears.</p>
+<p class="ts-line" data-start="3139.6" title="Click to play from here">The haze begins to clear.</p>
+<p class="ts-line" data-start="3142.3" title="Click to play from here">Where are you, and what do you see?</p>
+<p class="ts-line" data-start="3146.1" title="Click to play from here">So I am in High Forest, which is where I grew up.</p>
+<p class="ts-line" data-start="3149.1" title="Click to play from here">So I am literally in the forest right now.</p>
+<p class="ts-line" data-start="3151.5" title="Click to play from here">And I think since it was, you know, fairly recently harvest time, it is autumn.</p>
+<p class="ts-line" data-start="3156.2" title="Click to play from here">So it's like really beautiful and colorful sort of deciduous trees everywhere as they're</p>
+<p class="ts-line" data-start="3162.8" title="Click to play from here">about to shed their fall leaves.</p>
+<p class="ts-line" data-start="3165.7" title="Click to play from here">And I'm going to head to, like, essentially my family's property.</p>
+<p class="ts-line" data-start="3173.4" title="Click to play from here">Like, you know, six brothers, but they all, you know, are in their own homes</p>
+<p class="ts-line" data-start="3177.6" title="Click to play from here">with their own families now, probably, but on the same property.</p>
+<p class="ts-line" data-start="3183.4" title="Click to play from here">You make your way to the outskirts of where you know the property to be, and you see</p>
+<p class="ts-line" data-start="3192.6" title="Click to play from here">a man tending, just kind of clearing a field of where a harvest had just taken place.</p>
+<p class="ts-line" data-start="3201.2" title="Click to play from here">Which of your brothers do you see?</p>
+<p class="ts-line" data-start="3203.9" title="Click to play from here">I see Verez.</p>
+<p class="ts-line" data-start="3207.6" title="Click to play from here">As you step closer, you</p>
+<p class="ts-line" data-start="3210.6" title="Click to play from here">make a mistake, snap a twig or something, something to catch his attention.</p>
+<p class="ts-line" data-start="3215.8" title="Click to play from here">I do not snap a twig.</p>
+<p class="ts-line" data-start="3217.7" title="Click to play from here">Thank you very much.</p>
+<p class="ts-line" data-start="3220.4" title="Click to play from here">My goodness.</p>
+<p class="ts-line" data-start="3221.6" title="Click to play from here">As you step forward, Donnie snaps a twig.</p>
+<p class="ts-line" data-start="3229.6" title="Click to play from here">And Verez turns around and sees you and Donnie walking up.</p>
+<p class="ts-line" data-start="3237.0" title="Click to play from here">First a little shock at seeing a gold dragon worming, but then seeing you,</p>
+<p class="ts-line" data-start="3241.6" title="Click to play from here">he drops everything in his hand and with a gasp says,</p>
+<p class="ts-line" data-start="3250.4" title="Click to play from here">New Lara.</p>
+<p class="ts-line" data-start="3254.3" title="Click to play from here">It's me.</p>
+<p class="ts-line" data-start="3254.9" title="Click to play from here">I'm home.</p>
+<p class="ts-line" data-start="3255.5" title="Click to play from here">How are you?</p>
+<p class="ts-line" data-start="3256.4" title="Click to play from here">And I kind of, like, speed up.</p>
+<p class="ts-line" data-start="3260.1" title="Click to play from here">You know, it's my brother.</p>
+<p class="ts-line" data-start="3261.1" title="Click to play from here">I'm not going to, like, run open-armed across a field, but, you know,</p>
+<p class="ts-line" data-start="3265.0" title="Click to play from here">I'm walking bristly.</p>
+<p class="ts-line" data-start="3266.2" title="Click to play from here">I'm very excited.</p>
+<p class="ts-line" data-start="3267.5" title="Click to play from here">He runs towards you and calls out, New Lara's back.</p>
+<p class="ts-line" data-start="3270.7" title="Click to play from here">New Lara's back.</p>
+<p class="ts-line" data-start="3272.8" title="Click to play from here">And you look around and you see people come out of the buildings that are built there.</p>
+<p class="ts-line" data-start="3280.9" title="Click to play from here">The literal woodwork.</p>
+<p class="ts-line" data-start="3282.4" title="Click to play from here">The literal woodwork.</p>
+<p class="ts-line" data-start="3283.9" title="Click to play from here">And you see all of your brothers and their,</p>
+<p class="ts-line" data-start="3287.5" title="Click to play from here">and their, what you can presume to be some of their children running out towards you.</p>
+<p class="ts-line" data-start="3294.3" title="Click to play from here">Back in Waterdeep.</p>
+<p class="ts-line" data-start="3300.1" title="Click to play from here">Well, like, you're last there, bud.</p>
+<p class="ts-line" data-start="3303.6" title="Click to play from here">You ready?</p>
+<p class="ts-line" data-start="3305.2" title="Click to play from here">Yeah, yeah, let's do this.</p>
+<p class="ts-line" data-start="3308.4" title="Click to play from here">You step into the circle and the same process that you've seen before,</p>
+<p class="ts-line" data-start="3312.4" title="Click to play from here">the wizards begin their incantation and the haze begins to fill your vision.</p>
+<p class="ts-line" data-start="3319.6" title="Click to play from here">And you, your vision comes back and</p>
+<p class="ts-line" data-start="3323.1" title="Click to play from here">where are you and what do you see?</p>
+<p class="ts-line" data-start="3326.3" title="Click to play from here">I'm in a spot I know very, very well.</p>
+<p class="ts-line" data-start="3328.8" title="Click to play from here">I'm at the hidden passage entrance to Mithril Hall.</p>
+<p class="ts-line" data-start="3332.8" title="Click to play from here">It looks just like a plain wall to the untrained eye,</p>
+<p class="ts-line" data-start="3336.9" title="Click to play from here">but if you know where to look, you know exactly where the door is.</p>
+<p class="ts-line" data-start="3341.2" title="Click to play from here">I do the sequence of movements needed to do with the loose stones on the door.</p>
+<p class="ts-line" data-start="3347.9" title="Click to play from here">And I unlocked the puzzle.</p>
+<p class="ts-line" data-start="3350.0" title="Click to play from here">I thought you were, like,</p>
+<p class="ts-line" data-start="3352.0" title="Click to play from here">Vogue-ing?</p>
+<p class="ts-line" data-start="3352.3" title="Click to play from here">Just Vogue.</p>
+<p class="ts-line" data-start="3354.4" title="Click to play from here">That would be amazing if I was.</p>
+<p class="ts-line" data-start="3358.4" title="Click to play from here">The door begins to grind open slowly.</p>
+<p class="ts-line" data-start="3362.5" title="Click to play from here">Inside you hear the workings of the inside of Mithril Hall,</p>
+<p class="ts-line" data-start="3369.2" title="Click to play from here">which are very familiar to you.</p>
+<p class="ts-line" data-start="3371.7" title="Click to play from here">And you step in and descend down into the heart of the mountain.</p>
+<p class="ts-line" data-start="3376.5" title="Click to play from here">And you see the entire city of Mithril Hall, which you haven't seen in a long, long time.</p>
+<p class="ts-line" data-start="3391.6" title="Click to play from here">We cut to somewhere else.</p>
+<p class="ts-line" data-start="3395.2" title="Click to play from here">It's black.</p>
+<p class="ts-line" data-start="3398.4" title="Click to play from here">You hear footsteps, kind of scuffling about, trying to find a place to go.</p>
+<p class="ts-line" data-start="3407.5" title="Click to play from here">You hear a voice, and it says,</p>
+<p class="ts-line" data-start="3410.4" title="Click to play from here">Um, hey, uh, hey, Victor?</p>
+<p class="ts-line" data-start="3415.7" title="Click to play from here">Victor, where'd you go?</p>
+<p class="ts-line" data-start="3418.8" title="Click to play from here">You hear footsteps walking closer to your position.</p>
+<p class="ts-line" data-start="3423.6" title="Click to play from here">Hey, it's not funny, man.</p>
+<p class="ts-line" data-start="3424.6" title="Click to play from here">Like, it's very dark in here.</p>
+<p class="ts-line" data-start="3429.4" title="Click to play from here">You see a sliver of white light begin to crack within the darkness.</p>
+<p class="ts-line" data-start="3437.3" title="Click to play from here">Hey, what are you, what are you doing over there?</p>
+<p class="ts-line" data-start="3441.7" title="Click to play from here">And it begins to tear open into the darkness.</p>
+<p class="ts-line" data-start="3445.8" title="Click to play from here">That's not, that's not good.</p>
+<p class="ts-line" data-start="3449.1" title="Click to play from here">And hands begin to reach out and begin prying apart the white light.</p>
+<p class="ts-line" data-start="3455.8" title="Click to play from here">And faces begin to be seen, ghostly, demonic faces.</p>
+<p class="ts-line" data-start="3461.7" title="Click to play from here">And the camera pans back, and you see the face of a ghostly Grancis.</p>
+<p class="ts-line" data-start="3472.5" title="Click to play from here">Oh boy, we're in trouble now.</p>
+<p class="ts-line" data-start="3492.5" title="Click to play from here">Some of the music in today's episode is by Kavin McLeod of Incompetech.Filmmusic.io</p>
+<p class="ts-line" data-start="3497.1" title="Click to play from here">and Scott Buckley at ScottBuckley.com.au.</p>
+<p class="ts-line" data-start="3500.9" title="Click to play from here">I'm just going to say, based on the decisions and the events unfolded by you and your team</p>
+<p class="ts-line" data-start="3508.0" title="Click to play from here">here, everybody, we'll decide who is in and who is out.</p>
+<p class="ts-line" data-start="3514.0" title="Click to play from here">Are actions in the past or in this meeting currently occurring?</p>
+<p class="ts-line" data-start="3518.4" title="Click to play from here">In the past or in this meeting currently occurring?</p>
+<p class="ts-line" data-start="3522.1" title="Click to play from here">Because I've already yelled at everybody, stood on a table, sat backwards on a chair.</p>
+<p class="ts-line" data-start="3526.8" title="Click to play from here">This here I'm showing on Skype is a scorecard based on all the decisions made.</p>
+<p class="ts-line" data-start="3534.4" title="Click to play from here">Why was there so many F's on it?</p>
+<p class="ts-line" data-start="3536.9" title="Click to play from here">Russ, this is fascinating.</p>
+<p class="ts-line" data-start="3538.3" title="Click to play from here">And what kind of math were you doing that there's a whole bunch of F's on it?</p>
+<p class="ts-line" data-start="3541.9" title="Click to play from here">Those are letters.</p>
+<p class="ts-line" data-start="3542.8" title="Click to play from here">Yeah, when did you start this sheet?</p>
+<p class="ts-line" data-start="3546.4" title="Click to play from here">Since the beginning of Rise of Tiamat.</p>
+<p class="ts-line" data-start="3549.3" title="Click to play from here">Oh my god, are you for real?</p>
+<p class="ts-line" data-start="3552.3" title="Click to play from here">Yeah.</p>
+<p class="ts-line" data-start="3552.9" title="Click to play from here">Russ, oh my god, that's amazing.</p>
+<p class="ts-line" data-start="3556.8" title="Click to play from here">Listeners, you should see his face right now.</p>
+<p class="ts-line" data-start="3558.6" title="Click to play from here">He looks like, I don't know, like a kid with like-</p>
+<p class="ts-line" data-start="3562.4" title="Click to play from here">He should be.</p>
+<p class="ts-line" data-start="3563.0" title="Click to play from here">This is all up to you.</p>
+<p class="ts-line" data-start="3566.4" title="Click to play from here">I mean, I hate it.</p>
+<p class="ts-line" data-start="3567.6" title="Click to play from here">I hate that you're saying that.</p>
+<p class="ts-line" data-start="3568.7" title="Click to play from here">We did our best, you guys.</p>
+<p class="ts-line" data-start="3569.6" title="Click to play from here">We did our best.</p>
+<p class="ts-line" data-start="3570.8" title="Click to play from here">It's kind of better because it means it's already decided, right?</p>
+<p class="ts-line" data-start="3575.1" title="Click to play from here">A long time coming.</p>
+<p class="ts-line" data-start="3576.0" title="Click to play from here">Yeah, it's not just spur of the moment.</p>
+<p class="ts-line" data-start="3578.4" title="Click to play from here">What if we're throwing those people in that river that one time?</p>
+<p class="ts-line" data-start="3586.4" title="Click to play from here">Nobody knows about that.</p>
+<p class="ts-line" data-start="3587.6" title="Click to play from here">That was before we recorded.</p>
+<p class="ts-line" data-start="3590.1" title="Click to play from here">That never happened.</p>
+<p class="ts-line" data-start="3590.8" title="Click to play from here">We never used to say Tiamat up in the river all the time.</p>
+<p class="ts-line" data-start="3594.2" title="Click to play from here">Amy didn't have that suggestion for us.</p>
+<p class="ts-line" data-start="3596.2" title="Click to play from here">You guys do with the prisoner ones.</p>
+<p class="ts-line" data-start="3597.2" title="Click to play from here">She said they and then you threw me right under the bus and into the river, Tom.</p>
+<p class="ts-line" data-start="3602.7" title="Click to play from here">After tying you up.</p>
+<p class="ts-line" data-start="3605.3" title="Click to play from here">They, I've been told that they find the chewing crunching of Paisley endearing.</p>
+<p class="ts-line" data-start="3611.6" title="Click to play from here">I don't know if that's what they meant.</p>
+<p class="ts-line" data-start="3615.1" title="Click to play from here">Look at it.</p>
+<p class="ts-line" data-start="3618.0" title="Click to play from here">Is quite loud.</p>
+<p class="ts-line" data-start="3618.8" title="Click to play from here">Go somewhere else.</p>
+<p class="ts-line" data-start="3622.5" title="Click to play from here">Oh my god, she got up.</p>
+<p class="ts-line" data-start="3624.4" title="Click to play from here">She left.</p>
+<p class="ts-line" data-start="3625.3" title="Click to play from here">Good girl.</p>
+<p class="ts-line" data-start="3626.5" title="Click to play from here">Oh my goodness.</p>
+<p class="ts-line" data-start="3627.1" title="Click to play from here">Good girl.</p>
+<p class="ts-line" data-start="3628.0" title="Click to play from here">Go for that positive reinforcement, Paisley.</p>
+<p class="ts-line" data-start="3629.9" title="Click to play from here">Jesus.</p>
+<p class="ts-line" data-start="3632.7" title="Click to play from here">Why is he looking at us?</p>
+<p class="ts-line" data-start="3635.7" title="Click to play from here">She's looking around the room.</p>
+<p class="ts-line" data-start="3638.0" title="Click to play from here">Not at anyone.</p>
+<p class="ts-line" data-start="3638.6" title="Click to play from here">No, I meant why is Russ looking at us?</p>
+<p class="ts-line" data-start="3642.4" title="Click to play from here">That not all of us.</p>
+<p class="ts-line" data-start="3644.2" title="Click to play from here">Well, I can't look at somebody.</p>
+<p class="ts-line" data-start="3650.7" title="Click to play from here">She goes, but not you, Donnie.</p>
+<p class="ts-line" data-start="3652.0" title="Click to play from here">You'll be fine.</p>
+<p class="ts-line" data-start="3652.8" title="Click to play from here">Donnie, you'll be good.</p>
+<p class="ts-line" data-start="3653.5" title="Click to play from here">Donnie will live on.</p>
+<p class="ts-line" data-start="3655.6" title="Click to play from here">Dog is audibly farting under the table.</p>
+<p class="ts-line" data-start="3657.9" title="Click to play from here">Oh, no.</p>
+<p class="ts-line" data-start="3659.8" title="Click to play from here">I like how Carla said, I know.</p>
+<p class="ts-line" data-start="3661.2" title="Click to play from here">And it's like, no, I said, oh, no.</p>
+<p class="ts-line" data-start="3663.5" title="Click to play from here">I said, oh, no.</p>
+<p class="ts-line" data-start="3665.4" title="Click to play from here">I know.</p>
+<p class="ts-line" data-start="3665.8" title="Click to play from here">I can hear the farts.</p>
+<p class="ts-line" data-start="3667.5" title="Click to play from here">I couldn't hear it.</p>
+<p class="ts-line" data-start="3668.4" title="Click to play from here">I can just hear the bone chewing.</p>
+<p class="ts-line" data-start="3669.9" title="Click to play from here">She's like, oh, god, I swear it's not me.</p>
+<p class="ts-line" data-start="3673.6" title="Click to play from here">Why are you looking at Austin Powers?</p>
+<p class="ts-line" data-start="3675.1" title="Click to play from here">Shit.</p>
+<p class="ts-line" data-start="3676.9" title="Click to play from here">Because of our other podcast.</p>
+<p class="ts-line" data-start="3678.5" title="Click to play from here">Russ, how many times do we need to tell you about this?</p>
+<p class="ts-line" data-start="3681.2" title="Click to play from here">I was also looking at you.</p>
+<p class="ts-line" data-start="3683.4" title="Click to play from here">So this is just something.</p>
+<p class="ts-line" data-start="3685.5" title="Click to play from here">Wait, was he dressed up as Austin Powers?</p>
+<p class="ts-line" data-start="3689.7" title="Click to play from here">You put your right foot in.</p>
+<p class="ts-line" data-start="3692.1" title="Click to play from here">You put your right foot.</p>
+<p class="ts-line" data-start="3693.8" title="Click to play from here">That's her incantations.</p>
+<p class="ts-line" data-start="3696.6" title="Click to play from here">It's the hokey pokey.</p>
+<p class="ts-line" data-start="3700.0" title="Click to play from here">I'm sorry.</p>
+<p class="ts-line" data-start="3701.1" title="Click to play from here">Keep going.</p>
+<p class="ts-line" data-start="3701.7" title="Click to play from here">You're doing great.</p>
+<p class="ts-line" data-start="3703.6" title="Click to play from here">Flint and Leosan wizards.</p>
+<p class="ts-line" data-start="3704.5" title="Click to play from here">No, you're just blind now.</p>
+<p class="ts-line" data-start="3706.0" title="Click to play from here">Exactly.</p>
+<p class="ts-line" data-start="3706.4" title="Click to play from here">Your vision disappeared.</p>
+<p class="ts-line" data-start="3707.4" title="Click to play from here">Sorry.</p>
+<p class="ts-line" data-start="3708.0" title="Click to play from here">They rolled poor on that one.</p>
+<p class="ts-line" data-start="3709.7" title="Click to play from here">You can't be hung over when you teleport.</p>
+<p class="ts-line" data-start="3711.6" title="Click to play from here">Did we not mention that?</p>
+<p class="ts-line" data-start="3713.2" title="Click to play from here">It does cause blindness.</p>
+<p class="ts-line" data-start="3713.8" title="Click to play from here">And then Leosan and Flint just go up to you and be like,</p>
+<p class="ts-line" data-start="3716.0" title="Click to play from here">hey, we're your brothers.</p>
+<p class="ts-line" data-start="3719.6" title="Click to play from here">Hey, welcome back.</p>
+<p class="ts-line" data-start="3720.7" title="Click to play from here">This is Dumbgeons and Dragons is a Dumb Dragons production.</p>
+
+    </div>
+    <div class="report-footer">
+        <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new?title=Transcript+Error%3A+E67+-+s01e67+-+Where+Do+We+Stand%3F&body=%2A%2AEpisode%3A%2A%2A+E67+-+s01e67+-+Where+Do+We+Stand%3F%0A%0A%2A%2ATimestamp+%2F+location+in+transcript%3A%2A%2A%0A%0A%2A%2AIncorrect+text%3A%2A%2A%0A%0A%2A%2ACorrect+text%3A%2A%2A%0A" target="_blank">Found a transcription error? Report it on GitHub →</a>
+    </div>
+    <footer>
+        <div class="footer-links">
+            Dumbgeons &amp; Dragons &copy; Dumb Dragons Productions. All rights reserved.
+            &bull; <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new" target="_blank">Report a transcript error</a>
+        </div>
+        <p class="disclaimer">Transcripts are generated using AI speech-to-text technology (OpenAI Whisper) and may contain errors, particularly around proper nouns, character names, and crosstalk. They are provided for accessibility and search purposes and should not be considered verbatim records.</p>
+    </footer>
+    
+    <script>
+        const toggleBtn = document.getElementById('dark-toggle');
+        function updateToggle() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = theme === 'dark' || (!theme && sysDark);
+            toggleBtn.textContent = isDark ? '☀️' : '🌙';
+            toggleBtn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+        }
+        toggleBtn.addEventListener('click', function() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = current === 'dark' || (!current && sysDark);
+            const next = isDark ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateToggle();
+        });
+        updateToggle();
+    </script>
+
+    <script>
+        const audio = document.getElementById('episode-audio');
+        const lines = document.querySelectorAll('.ts-line');
+        let userScrolling = false;
+        let scrollTimeout = null;
+
+        // Detect manual scrolling — pause auto-scroll for 3 seconds
+        window.addEventListener('scroll', () => {
+            userScrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                userScrolling = false;
+            }, 3000);
+        }, { passive: true });
+
+        // Click to seek and play
+        lines.forEach(line => {
+            line.addEventListener('click', () => {
+                const start = parseFloat(line.getAttribute('data-start'));
+                audio.currentTime = start;
+                audio.play();
+                // Resume auto-scroll when user clicks a line
+                userScrolling = false;
+            });
+        });
+
+        // Highlight current line as audio plays
+        audio.addEventListener('timeupdate', () => {
+            const current = audio.currentTime;
+            let active = null;
+
+            lines.forEach(line => {
+                const start = parseFloat(line.getAttribute('data-start'));
+                if (start <= current) {
+                    active = line;
+                }
+            });
+
+            lines.forEach(line => line.classList.remove('active'));
+            if (active) {
+                active.classList.add('active');
+                // Only auto-scroll if user isn't manually scrolling
+                if (!userScrolling) {
+                    const rect = active.getBoundingClientRect();
+                    const inView = rect.top >= 120 && rect.bottom <= window.innerHeight - 50;
+                    if (!inView) {
+                        active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

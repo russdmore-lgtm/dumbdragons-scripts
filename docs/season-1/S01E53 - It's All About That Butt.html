@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E53 - s01e53 - It's All About That Butt — Dumbgeons & Dragons Transcripts</title>
+    
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved) document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
+
+    <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Light mode variables (default) */
+    :root {
+        --bg: #fafafa;
+        --bg-secondary: #ffffff;
+        --text: #111111;
+        --text-muted: #888888;
+        --border: #dddddd;
+        --border-light: #eeeeee;
+        --accent: #cc2200;
+        --accent-hover: #aa1a00;
+        --yellow: #f5c518;
+        --input-bg: #fafafa;
+        --mark-bg: #f5c518;
+        --mark-text: #111111;
+    }
+
+    /* Dark mode variables */
+    [data-theme="dark"] {
+        --bg: #1a1a2e;
+        --bg-secondary: #16213e;
+        --text: #eeeeee;
+        --text-muted: #888888;
+        --border: #333333;
+        --border-light: #222222;
+        --accent: #e94560;
+        --accent-hover: #c73652;
+        --yellow: #f5c518;
+        --input-bg: #0f0f1a;
+        --mark-bg: #e94560;
+        --mark-text: #ffffff;
+    }
+
+    /* Auto dark mode if user hasn't manually chosen */
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+            --bg: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text: #eeeeee;
+            --text-muted: #888888;
+            --border: #333333;
+            --border-light: #222222;
+            --accent: #e94560;
+            --accent-hover: #c73652;
+            --yellow: #f5c518;
+            --input-bg: #0f0f1a;
+            --mark-bg: #e94560;
+            --mark-text: #ffffff;
+        }
+    }
+
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; transition: background 0.2s, color 0.2s; }
+    header .brand { color: #cc2200; text-decoration: none; font-size: 1.1rem; letter-spacing: 1px; font-weight: 900; text-transform: uppercase; }
+    header .brand:hover { text-decoration: underline; }
+    header nav { display: flex; gap: 1rem; align-items: center; }
+    header nav a { color: #111; text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    header nav a:hover { color: #cc2200; }
+    header nav a.report { border: 2px solid #111; padding: 0.3rem 0.7rem; border-radius: 3px; }
+    header nav a.report:hover { border-color: #cc2200; color: #cc2200; }
+    .dark-toggle { background: none; border: 2px solid #111; border-radius: 3px; padding: 0.3rem 0.6rem; cursor: pointer; font-size: 1rem; line-height: 1; color: #111; }
+    .dark-toggle:hover { border-color: #cc2200; }
+    .search-bar { background: var(--bg-secondary); padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+    .search-bar form { max-width: 800px; margin: 0 auto; display: flex; gap: 0.5rem; }
+    .search-bar input { flex: 1; padding: 0.5rem 1rem; background: var(--input-bg); border: 2px solid var(--border); border-radius: 3px; color: var(--text); font-size: 0.95rem; }
+    .search-bar input:focus { outline: none; border-color: var(--yellow); }
+    .search-bar button { padding: 0.5rem 1.2rem; background: var(--accent); border: none; border-radius: 3px; color: #fff; cursor: pointer; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .search-bar button:hover { background: var(--accent-hover); }
+    footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 3px solid var(--yellow); margin-top: 3rem; background: var(--bg-secondary); }
+    footer a { color: var(--text-muted); }
+    footer a:hover { color: var(--accent); }
+    .footer-links { margin-bottom: 0.75rem; }
+    .disclaimer { font-size: 0.78rem; color: var(--text-muted); max-width: 700px; margin: 0.75rem auto 0; line-height: 1.6; opacity: 0.8; }
+
+        .episode-header { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        .episode-header h1 { font-size: 1.6rem; color: var(--accent); margin-bottom: 0.3rem; font-weight: 900; text-transform: uppercase; }
+        .episode-header .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .player { position: sticky; top: 0; z-index: 100; background: var(--bg); padding: 0.75rem 0; border-bottom: 2px solid var(--yellow); margin-bottom: 0; width: 100%; }
+        .player audio { border-radius: 4px; }
+        .nav-links { display: flex; justify-content: space-between; margin-bottom: 2rem; }
+        .nav-btn { color: var(--accent); text-decoration: none; font-size: 0.9rem; padding: 0.4rem 0.8rem; border: 2px solid var(--accent); border-radius: 3px; font-weight: 700; }
+        .nav-btn:hover { background: var(--accent); color: #fff; }
+        .nav-btn.disabled { color: var(--border); border-color: var(--border); cursor: default; }
+        .transcript { max-width: 800px; margin: 0 auto 2rem; padding: 0 1rem; }
+        .transcript h2 { color: var(--accent); margin-bottom: 0.5rem; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 900; border-bottom: 3px solid var(--yellow); padding-bottom: 0.5rem; }
+        .transcript-hint { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1.5rem; font-style: italic; }
+        .transcript p { margin-bottom: 0.75rem; color: var(--text); padding: 0.3rem 0.5rem; border-left: 3px solid transparent; border-radius: 2px; transition: border-color 0.15s, background 0.15s; }
+        .transcript p.ts-line { cursor: pointer; }
+        .transcript p.ts-line:hover { border-left-color: var(--border); background: var(--bg-secondary); }
+        .transcript p.active { border-left-color: var(--accent); background: var(--bg-secondary); }
+        .report-footer { max-width: 800px; margin: 0 auto 2rem; padding: 0 1rem; }
+        .report-footer a { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; }
+        .report-footer a:hover { color: var(--accent); }
+        .downloads { display: flex; gap: 0.75rem; margin-bottom: 2rem; }
+        .download-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border: 2px solid var(--accent); border-radius: 3px; color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .download-btn:hover { background: var(--accent); color: #fff; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../../index.html" class="brand">DUMBGEONS & DRAGONS</a>
+        <nav>
+            <a href="../../search.html">Search</a>
+            <a href="../../index.html">Episodes</a>
+            <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new?title=Transcript+Error%3A+E53+-+s01e53+-+It%27s+All+About+That+Butt&body=%2A%2AEpisode%3A%2A%2A+E53+-+s01e53+-+It%27s+All+About+That+Butt%0A%0A%2A%2ATimestamp+%2F+location+in+transcript%3A%2A%2A%0A%0A%2A%2AIncorrect+text%3A%2A%2A%0A%0A%2A%2ACorrect+text%3A%2A%2A%0A" class="report" target="_blank">Report an error</a>
+            <button class="dark-toggle" id="dark-toggle" title="Toggle dark mode">🌙</button>
+        </nav>
+    </header>
+    <div class="search-bar">
+        <form action="../../search.html" method="get">
+            <input type="text" name="q" placeholder="Search transcripts...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="episode-header">
+        <p class="meta">Season 1 &bull; September 12, 2018</p>
+        <h1>E53 - s01e53 - It's All About That Butt</h1>
+        <div class="downloads">
+            <a href="S01E53 - It's All About That Butt.txt" download class="download-btn">↓ Download TXT</a>
+            <a href="S01E53 - It's All About That Butt.srt" download class="download-btn">↓ Download SRT</a>
+        </div>
+        <div class="nav-links">
+            <a href="S01E52 - Ya Doink.html" class="nav-btn">← Previous</a>
+            <a href="S01E54 - What Were We Doing Here.html" class="nav-btn">Next →</a>
+        </div>
+    </div>
+    <div class="player">
+        <div style="max-width:800px; margin:0 auto; padding:0 1rem;">
+            <audio id="episode-audio" controls style="width:100%; border-radius:4px;">
+                <source src="https://swap.fm/track/WgbGgxzM3MFRwjmX5fnx/op3.dev/e/pscrb.fm/rss/p/rss.art19.com/episodes/user/rAHpDXXd23RFF9j4G_DZoiPlDRPl1rWM/c63fd26f-3fa5-4eaf-92f8-58a7fa20cf7b.mp3?access_token=vi4Xv2OizVDreEuwLo-ZbOIwlIDxr89k&rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+    <div class="transcript">
+        <h2>Transcript</h2>
+        <p class="transcript-hint">Click any line to jump to that moment in the audio.</p>
+        <p class="ts-line" data-start="0.0" title="Click to play from here">Previously on Dumbgeons and Dragons.</p>
+<p class="ts-line" data-start="30.0" title="Click to play from here">from it you see a bloodstone that bounces off the wall and towards the exit and you are in a room of</p>
+<p class="ts-line" data-start="38.6" title="Click to play from here">even more mayhem and chaos okay what's next guys as you begin to examine the room again the</p>
+<p class="ts-line" data-start="45.1" title="Click to play from here">shadows start slowly rotating till they shrink into the gnomon we can put all the gems on the</p>
+<p class="ts-line" data-start="50.4" title="Click to play from here">sundial you reach at the exact same time and your precision is accurate and they all fall</p>
+<p class="ts-line" data-start="56.1" title="Click to play from here">through and disappear podcast over bye guys well really you don't think there's a portal</p>
+<p class="ts-line" data-start="61.5" title="Click to play from here">that they just went through try to i stand on the gnomon thea disappears flint crawls in</p>
+<p class="ts-line" data-start="67.2" title="Click to play from here">and everybody falls harmlessly back into the sundial room where the shadows are pointed at</p>
+<p class="ts-line" data-start="71.7" title="Click to play from here">every single exit the curving path you follow suddenly twists to reveal a proper maze you</p>
+<p class="ts-line" data-start="80.1" title="Click to play from here">hear the pounding of hooves is a massive stone gorgon i really hope that we never figure out</p>
+<p class="ts-line" data-start="87.1" title="Click to play from here">dnd me too i like the way we do it i like the way we do it too welcome to Dumbgeons and Dragons</p>
+<p class="ts-line" data-start="94.2" title="Click to play from here">we are dnd fifth edition actual play podcast and i'm your dungeon master Russ More and with me</p>
+<p class="ts-line" data-start="98.2" title="Click to play from here">today is Amy More i have a pink fuzzy robe on and i play thea amastasia and also sporting</p>
+<p class="ts-line" data-start="107.4" title="Click to play from here">nightwear attire maybe carla johnson i am not sporting nightwear attire but i did</p>
+<p class="ts-line" data-start="114.0" title="Click to play from here">literally say to amy when we got on this call you're wearing the robe i missed it so much</p>
+<p class="ts-line" data-start="119.0" title="Click to play from here">the robe was like one of our original players when we started playing around the table</p>
+<p class="ts-line" data-start="124.6" title="Click to play from here">also i play new lara moonbrook and tom laird and i am wearing my queens of the stone age</p>
+<p class="ts-line" data-start="131.3" title="Click to play from here">concert tee from when i saw them back in january and i play flint Firebeard russ what</p>
+<p class="ts-line" data-start="136.5" title="Click to play from here">are you wearing i am wearing an avengers infinity war thanos t-shirt it's a little</p>
+<p class="ts-line" data-start="140.8" title="Click to play from here">too intimidating i meant to say something like pretty hard is aggressive oh he's yeah he's he's</p>
+<p class="ts-line" data-start="146.7" title="Click to play from here">good like yeah i don't like it no she doesn't like it i wear it go change your shirt russ</p>
+<p class="ts-line" data-start="154.9" title="Click to play from here">it's upsetting carla and i've had numerous people say i am offended by that shirt</p>
+<p class="ts-line" data-start="159.6" title="Click to play from here">as i walk through the door okay i mean that's and he doesn't care i don't care he is a real</p>
+<p class="ts-line" data-start="165.6" title="Click to play from here">troublemaker that's me that's me um yeah welcome everybody uh this is the podcast</p>
+<p class="ts-line" data-start="174.7" title="Click to play from here">and we're gonna jump right in to the podcast but first a message from us</p>
+<p class="ts-line" data-start="181.8" title="Click to play from here">about the podcast we love you re the podcast we notice that you've been listening and we</p>
+<p class="ts-line" data-start="188.2" title="Click to play from here">appreciate you oh we do appreciate you that's true yeah definitely it's like a little psa</p>
+<p class="ts-line" data-start="194.9" title="Click to play from here">yeah i mean it's just nice to throw it back just a little bit yeah you know also you look great</p>
+<p class="ts-line" data-start="199.7" title="Click to play from here">today yeah oh you really do real good okay now pause for response good good yeah yeah um where</p>
+<p class="ts-line" data-start="208.2" title="Click to play from here">i was kind of going with this is we're on Patreon wow wow that is yeah that's whoo i don't</p>
+<p class="ts-line" data-start="214.6" title="Click to play from here">know how i was gonna get there it's a 90 degree turn yeah and when you're on Patreon</p>
+<p class="ts-line" data-start="220.0" title="Click to play from here">you get a random episode dedicated to you and today this episode is dedicated to</p>
+<p class="ts-line" data-start="226.7" title="Click to play from here">katharina sindelar thanks katharina sorry if i pronounce your name wrong yeah katharina you're</p>
+<p class="ts-line" data-start="232.5" title="Click to play from here">awesome you rock also if it's katharina we apologize oh 100 we apologize 100 but there's</p>
+<p class="ts-line" data-start="238.4" title="Click to play from here">a th in there so i feel pretty confident maybe katharina could have gone could have gone</p>
+<p class="ts-line" data-start="243.8" title="Click to play from here">either way yeah it's a cool name it's very melodic i'm deeply into it Patreon.com slash</p>
+<p class="ts-line" data-start="250.2" title="Click to play from here">dumb dragon cast go check it out uh if you're interested in supporting us uh just a little bit</p>
+<p class="ts-line" data-start="254.3" title="Click to play from here">more but i mean if you just got to listen that's totally cool too fuck it let's play dnd</p>
+<p class="ts-line" data-start="260.0" title="Click to play from here">you're still stuck in a maze yeah we are boy how are we so happy about that oh yeah</p>
+<p class="ts-line" data-start="265.0" title="Click to play from here">we're still in there just accepted it you know where we live now this is our life it's</p>
+<p class="ts-line" data-start="269.8" title="Click to play from here">guys it can't be i need to find guac moldy you're right and there are people wondering about her</p>
+<p class="ts-line" data-start="276.2" title="Click to play from here">oh there's a lot of people wondering about guac but i'm very confident that we are gonna</p>
+<p class="ts-line" data-start="281.0" title="Click to play from here">hashtag find guac that's right so you have currently find yourself in perhaps another</p>
+<p class="ts-line" data-start="286.4" title="Click to play from here">maze after you went down a pathway and you ended up in what appears to be a more different</p>
+<p class="ts-line" data-start="292.0" title="Click to play from here">type of maze perhaps even a bit more real that's the queen's english by the way more</p>
+<p class="ts-line" data-start="297.5" title="Click to play from here">mazy sort of style more mazy maze yeah like maybe it's a corn maze maybe it's maybe that's</p>
+<p class="ts-line" data-start="306.0" title="Click to play from here">whimsical right maybe just on the other side we hear like there'll be a pumpkin patch pony riding</p>
+<p class="ts-line" data-start="311.8" title="Click to play from here">and there's yeah people picking pumpkins sure to make pumpkin spice lattes out of</p>
+<p class="ts-line" data-start="317.4" title="Click to play from here">which are now available as of yesterday starbucks get on board uh sponsor this</p>
+<p class="ts-line" data-start="322.3" title="Click to play from here">podcast as this recording is released oh three weeks ago the pumpkin spice</p>
+<p class="ts-line" data-start="329.4" title="Click to play from here">it's more seasonally appropriate for us to be talking about such autumnal things when this</p>
+<p class="ts-line" data-start="333.5" title="Click to play from here">episode actually comes out so that's true yeah yeah way to go ask screw you starbucks whoa we</p>
+<p class="ts-line" data-start="340.8" title="Click to play from here">want them on board ross unless you want to sponsor this podcast unless then we're into it</p>
+<p class="ts-line" data-start="345.2" title="Click to play from here">is this like when you were gonna badmouth google the other night come on ross get it</p>
+<p class="ts-line" data-start="349.0" title="Click to play from here">together come on all these all these could be potential sponsors of ours because i'm sure</p>
+<p class="ts-line" data-start="355.6" title="Click to play from here">starbucks sponsors they're itching to get in the podcast game mediocre dnd</p>
+<p class="ts-line" data-start="361.3" title="Click to play from here">and starbucks are looking for us if you are give me a call five five five</p>
+<p class="ts-line" data-start="368.0" title="Click to play from here">that's my number there's the thing that people need to understand there's like a far fewer</p>
+<p class="ts-line" data-start="375.3" title="Click to play from here">people in canada so our numbers are only three that's true yeah that's very true</p>
+<p class="ts-line" data-start="379.8" title="Click to play from here">brusco five five five and it's all rotary too so oh yeah yep yeah our phone is on the wall</p>
+<p class="ts-line" data-start="386.0" title="Click to play from here">in the kitchen as we speak there are cell phones but they're the 80s zack morris brick</p>
+<p class="ts-line" data-start="390.5" title="Click to play from here">cell phones exactly we really just use them to throw at each other when we're angry but</p>
+<p class="ts-line" data-start="395.7" title="Click to play from here">that doesn't ever happen because this is canada let's face it very genteel</p>
+<p class="ts-line" data-start="399.2" title="Click to play from here">so we're in a maze so yeah the path you follow suddenly twist to reveal a proper</p>
+<p class="ts-line" data-start="407.8" title="Click to play from here">maze cut out of the surrounding hedges moments later the pounding of hooves rings out</p>
+<p class="ts-line" data-start="413.8" title="Click to play from here">and a gorgon charges out of the greenery towards you</p>
+<p class="ts-line" data-start="419.4" title="Click to play from here">roll for initiative does it smell like gorgonzola nice thanks</p>
+<p class="ts-line" data-start="425.4" title="Click to play from here">ah i'm here all day i got a 20 uh 23 i think seven sorry 27 amy that's very good</p>
+<p class="ts-line" data-start="436.5" title="Click to play from here">right no it was just a seven isn't gorgon from trolls no not trolls sorry smurfs</p>
+<p class="ts-line" data-start="446.8" title="Click to play from here">that's gargamel that is gargamel isn't that isn't a gorgon like medusa in her cronies</p>
+<p class="ts-line" data-start="453.2" title="Click to play from here">aren't they gorgons i believe so in this case yeah i'm talking real world greek mythology here</p>
+<p class="ts-line" data-start="459.8" title="Click to play from here">russ bowl yeah stone bowl a stone yes that does sound yes well that's just confusing when we're</p>
+<p class="ts-line" data-start="466.2" title="Click to play from here">talking about myths they can't they can't just take a name of a thing and make it the name</p>
+<p class="ts-line" data-start="470.1" title="Click to play from here">of another thing that's true that's not allowed i mean i guess it is wizards of the coast</p>
+<p class="ts-line" data-start="475.7" title="Click to play from here">way to be confusing so no new law you're first i'm gonna go first is that what you're saying</p>
+<p class="ts-line" data-start="483.8" title="Click to play from here">that's what i said yeah new law new lara you are up first how far is uh old mr gorgon from us</p>
+<p class="ts-line" data-start="490.8" title="Click to play from here">the gorgon has just come out of the greenery okay and he is now 25 feet charging</p>
+<p class="ts-line" data-start="499.4" title="Click to play from here">towards you and your friends who are standing in the middle of a maze there is an opening</p>
+<p class="ts-line" data-start="504.8" title="Click to play from here">to your right as you look at the gorgon and an opening behind you and to your left well i'm just</p>
+<p class="ts-line" data-start="512.2" title="Click to play from here">gonna try and stab it i know it's really big and muscular and looks like it's got some kind</p>
+<p class="ts-line" data-start="516.5" title="Click to play from here">of armor on it but i'm pretty irritated and would like to get out of this maze so</p>
+<p class="ts-line" data-start="521.4" title="Click to play from here">whether by success or death i care not okay so you're rushing forward charging at the gorgon</p>
+<p class="ts-line" data-start="529.3" title="Click to play from here">yep all right roll it up</p>
+<p class="ts-line" data-start="535.9" title="Click to play from here">all right well that was only a 14 so that probably didn't do anything</p>
+<p class="ts-line" data-start="542.1" title="Click to play from here">oh nope it's okay i'll try again okay well that was a 13 so that probably didn't do anything</p>
+<p class="ts-line" data-start="552.2" title="Click to play from here">either i'm just gonna like yeah i'm gonna scooch a little sashay a little scooch have you seen</p>
+<p class="ts-line" data-start="558.3" title="Click to play from here">that gif of um and it was also in the show of homer simpson just like into the head into the</p>
+<p class="ts-line" data-start="565.5" title="Click to play from here">head just gonna do one of those moves sure i get that um so yeah you charge forward 25 feet</p>
+<p class="ts-line" data-start="571.5" title="Click to play from here">swinging um and uh i mean it's it's we'll say it's glancing off of its horns but you</p>
+<p class="ts-line" data-start="578.2" title="Click to play from here">don't connect solid and sidestep off allowing it to continue charging forward to your friends</p>
+<p class="ts-line" data-start="584.3" title="Click to play from here">okay well donnie's gonna try he's gonna first try to recharge the old breath weapon yep didn't</p>
+<p class="ts-line" data-start="591.0" title="Click to play from here">work so he is probably going to sure he's gonna try and bite this charging bull because why</p>
+<p class="ts-line" data-start="598.7" title="Click to play from here">wouldn't he why would me you guys he's worried about um guac too they're best friends you</p>
+<p class="ts-line" data-start="606.1" title="Click to play from here">know uh that is a 16 uh 16 will not hit okay well he's gonna try and recharge his breath weapon</p>
+<p class="ts-line" data-start="613.8" title="Click to play from here">again and it didn't work again so he's gonna try and bite again and he doesn't because he got a</p>
+<p class="ts-line" data-start="622.6" title="Click to play from here">10 i'm gonna swap out my dice donnie leaps and flies just above not too high because he's</p>
+<p class="ts-line" data-start="631.8" title="Click to play from here">worried about the guac syndrome and hovers above the bull that's charging towards you</p>
+<p class="ts-line" data-start="637.1" title="Click to play from here">and takes a couple bites at its back but misses and the gorgon continues forward i feel like he</p>
+<p class="ts-line" data-start="644.0" title="Click to play from here">lies above it and just is like that and just licks down the gorgon's back</p>
+<p class="ts-line" data-start="650.6" title="Click to play from here">and just as he's about to reach the group lets forth a giant green plume that goes</p>
+<p class="ts-line" data-start="658.6" title="Click to play from here">30 feet out in front of it encompassing flint thea thaddeus and Flamikinskins who all have to make</p>
+<p class="ts-line" data-start="666.0" title="Click to play from here">a constitution saving throw yes you have to make the constitution saving throw everyone</p>
+<p class="ts-line" data-start="670.9" title="Click to play from here">has questions about poison it's not poison i know that's why you were confirming they had</p>
+<p class="ts-line" data-start="675.4" title="Click to play from here">to do it right i crit failed oh that is not great amy uh flint got a 19 thaddeus got an 18</p>
+<p class="ts-line" data-start="685.4" title="Click to play from here">i rolled with a different dice for Flamikinskins it's an 18 for her i know i just swapped all my dice</p>
+<p class="ts-line" data-start="692.1" title="Click to play from here">three of you are fine and you just you just this cloud comes up and over you thea however</p>
+<p class="ts-line" data-start="700.6" title="Click to play from here">we'll get to that in a second the bull as it releases this gas continues charging forward</p>
+<p class="ts-line" data-start="705.7" title="Click to play from here">moving to gore flint as he is the first one in the way or with a 21 to hit oh yeah so that's</p>
+<p class="ts-line" data-start="715.2" title="Click to play from here">15 piercing damage and you must make a strength saving throw or be knocked prone as it is in a</p>
+<p class="ts-line" data-start="720.6" title="Click to play from here">trampling charge okay so i'm gonna take 12 hit points because i can lower these things by three</p>
+<p class="ts-line" data-start="729.5" title="Click to play from here">due to my heavy armor master skill strength throw that's a 19 plus four so 23</p>
+<p class="ts-line" data-start="736.0" title="Click to play from here">you are not knocked prone suck it gorgon and then as you are gored and kind of knocked to the</p>
+<p class="ts-line" data-start="744.2" title="Click to play from here">side the the cloud settles and you see a stone figure and thea is what's called petrified</p>
+<p class="ts-line" data-start="753.4" title="Click to play from here">oh no just like a basilisk does so you can at the end of your next turn you can make another</p>
+<p class="ts-line" data-start="761.9" title="Click to play from here">saving throw and on a success you are no longer petrified on a failure the target is petrified</p>
+<p class="ts-line" data-start="767.9" title="Click to play from here">until freed by a greater restoration spell or other magic next up in rotation Flamikinskins</p>
+<p class="ts-line" data-start="776.6" title="Click to play from here">russ is banging out the uh big guns as far as side effects for us fucking failing</p>
+<p class="ts-line" data-start="781.1" title="Click to play from here">saving throws these days true i mean things things get real if i be hurt if i'm petrified</p>
+<p class="ts-line" data-start="789.6" title="Click to play from here">you have resistance against a lot of stuff if you're petrified nice um so Flamikinskins as</p>
+<p class="ts-line" data-start="794.9" title="Click to play from here">right into the right into the gorgons face Flamikinskins hurls a bubble of acid</p>
+<p class="ts-line" data-start="800.4" title="Click to play from here">and it must make a dexterity saving throw which it does not succeed on and that is a</p>
+<p class="ts-line" data-start="807.1" title="Click to play from here">high roll so that is six twelve seventeen acid damage against this gorgon's face</p>
+<p class="ts-line" data-start="814.2" title="Click to play from here">oh i've mixed up Flamikinskins and flint two fls in that list so flint you go now</p>
+<p class="ts-line" data-start="822.1" title="Click to play from here">okay so being as it kind of knocked flint off to the side i'm guessing i'm</p>
+<p class="ts-line" data-start="826.0" title="Click to play from here">just to the side of it as opposed to in front of it yes so it has a charge like five feet</p>
+<p class="ts-line" data-start="831.0" title="Click to play from here">past you okay uh i'm gonna go alongside it and kind of swing my axe in an uppercut fashion right</p>
+<p class="ts-line" data-start="839.8" title="Click to play from here">where like its front legs meets its upper body just to like just to get in that joint yeah for</p>
+<p class="ts-line" data-start="846.8" title="Click to play from here">sure and that is a 25 that will hit come on big money 13 damage on that one and i'll</p>
+<p class="ts-line" data-start="858.8" title="Click to play from here">continue attacking it in the same spot that's a 21 no 22 sorry it's another 13</p>
+<p class="ts-line" data-start="866.6" title="Click to play from here">we're consistent on the damage front and a 20 but not critical uh yes okay</p>
+<p class="ts-line" data-start="875.5" title="Click to play from here">and that's 12 more damage with like down and up swipings you're working into the joint and</p>
+<p class="ts-line" data-start="881.4" title="Click to play from here">you see like cracks begin to form on the front shoulder and creeping down the back of this</p>
+<p class="ts-line" data-start="887.5" title="Click to play from here">gorgon as it is thaddeus's turn all right everybody make a perception check as well as</p>
+<p class="ts-line" data-start="893.4" title="Click to play from here">as flint is deciding can i perceive anything i didn't think i could uh thaddeus got a</p>
+<p class="ts-line" data-start="900.9" title="Click to play from here">23 and flint critically failed carla got uh oh sorry carla's not there new laura got a 23 as</p>
+<p class="ts-line" data-start="911.6" title="Click to play from here">carla's not here man flint's too focused on defeating this is gorgon but the 23s as the</p>
+<p class="ts-line" data-start="918.7" title="Click to play from here">dust is settling you notice a diamond kind of in the middle of where it shot its blast of</p>
+<p class="ts-line" data-start="925.4" title="Click to play from here">petrified breath which he would currently be standing right over top of so the gorgon is</p>
+<p class="ts-line" data-start="930.6" title="Click to play from here">currently standing right over top of a diamond so the gorgon is standing over the diamond like</p>
+<p class="ts-line" data-start="936.0" title="Click to play from here">as if the diamond is in the floor uh like it's just a diamond that has is placed on the ground</p>
+<p class="ts-line" data-start="941.3" title="Click to play from here">it's not inset in anything okay oh i thought thaddeus had mage hand and i was like does</p>
+<p class="ts-line" data-start="947.2" title="Click to play from here">he have one of those hand spells right where he can grab things i thought that would be very</p>
+<p class="ts-line" data-start="952.3" title="Click to play from here">handy but i'm not seeing here at all handy yeah uh thaddeus is going to touch the stone</p>
+<p class="ts-line" data-start="962.1" title="Click to play from here">statue of thea and cast resistance on it so she has uh an extra d4 to a number</p>
+<p class="ts-line" data-start="973.0" title="Click to play from here">rolled on a saving throw of its choice ah thanks okay i'll need it may i roll two d20s</p>
+<p class="ts-line" data-start="981.6" title="Click to play from here">because i think if i if i add them together i could maybe get it's possible oh and thaddeus</p>
+<p class="ts-line" data-start="991.1" title="Click to play from here">kind of gets out of the way as well so he can go like back into his right as far as where the</p>
+<p class="ts-line" data-start="997.1" title="Click to play from here">gorgon is or back into the left uh he will go to the left to the left back into the left</p>
+<p class="ts-line" data-start="1005.5" title="Click to play from here">so kind of just in that doorway there so he runs back and down and just out of sight</p>
+<p class="ts-line" data-start="1011.1" title="Click to play from here">or just you know peering around the corner at the action happening thea you get to make a</p>
+<p class="ts-line" data-start="1016.8" title="Click to play from here">saving throw yeah i do do it do you remember what kind of saving through it is what i don't</p>
+<p class="ts-line" data-start="1023.2" title="Click to play from here">care i rolled a 19 is it constitution it was a constitution okay so 21 so and you can add a d4</p>
+<p class="ts-line" data-start="1031.2" title="Click to play from here">to it if you want do it did my 21 i'm pretty sure my 21 made it up to you yeah the effect</p>
+<p class="ts-line" data-start="1042.1" title="Click to play from here">effect ends so you the stone begins to fall away from your skin but that is the end of your turn</p>
+<p class="ts-line" data-start="1048.0" title="Click to play from here">you should be doing this like when you have like luna's face masks on it gets on crack</p>
+<p class="ts-line" data-start="1053.9" title="Click to play from here">you're making all those faces back to the top and that's new lara okay well i'm going to try</p>
+<p class="ts-line" data-start="1059.9" title="Click to play from here">again that's a 27 so you're rushing back towards the gorgon to attack stab it in the</p>
+<p class="ts-line" data-start="1067.7" title="Click to play from here">butt nice while i'm behind it so realistically i'm gonna stab it in the butt yeah or how about</p>
+<p class="ts-line" data-start="1074.2" title="Click to play from here">doesn't have horns this sounds better i'm gonna stab it like in the rear flank oh sure how about</p>
+<p class="ts-line" data-start="1079.8" title="Click to play from here">how about that well you do have all that animal handling stuff so just a fancy way to say butt</p>
+<p class="ts-line" data-start="1085.3" title="Click to play from here">stab so that's 18 damage okay i'm gonna stab it in the butt again i'm gonna stab it in the</p>
+<p class="ts-line" data-start="1093.3" title="Click to play from here">other side of its butt uh no maybe i'm not 16 does not hit 16 is not a butt stab okay not</p>
+<p class="ts-line" data-start="1100.9" title="Click to play from here">a butt stab it's a it's a glance off it's it's a spank stony hide okay you just spanked it</p>
+<p class="ts-line" data-start="1108.7" title="Click to play from here">donnie's gonna try and recharge didn't work so he's gonna try and bite that is a 23</p>
+<p class="ts-line" data-start="1116.2" title="Click to play from here">yeah uh for six damage recharge attempt recharge fail bite attempt 25</p>
+<p class="ts-line" data-start="1126.2" title="Click to play from here">uh and seven damage where is beginning to show and the cracks are beginning to spread throughout</p>
+<p class="ts-line" data-start="1133.6" title="Click to play from here">this gorgon as it is its turn and it rears up and stomps to the ground and releases another</p>
+<p class="ts-line" data-start="1142.9" title="Click to play from here">petrifying breath which spreads out and encompasses everybody except thaddeus yeah thaddeus</p>
+<p class="ts-line" data-start="1151.1" title="Click to play from here">everybody's got to make a constitution saving throw again i'm glad i didn't use that d4</p>
+<p class="ts-line" data-start="1158.1" title="Click to play from here">15 i'm using a d4 i got a 20 flay mccain's got a 19 flink got a 20 donnie did donnie roll</p>
+<p class="ts-line" data-start="1165.6" title="Click to play from here">donnie got a 12 uh so as the cloud comes up you hear a thud like a stone hitting the ground</p>
+<p class="ts-line" data-start="1176.3" title="Click to play from here">as donnie falls to the ground from the brief small height that he was up and he too is</p>
+<p class="ts-line" data-start="1181.8" title="Click to play from here">petrified it's not as bad as it looks donnie the gorgon jumps through the greenery in front</p>
+<p class="ts-line" data-start="1190.9" title="Click to play from here">and comes back out from the other end down by on the other side of thea</p>
+<p class="ts-line" data-start="1197.6" title="Click to play from here">and begins charging back towards you but does not make it as far since it was charging past</p>
+<p class="ts-line" data-start="1204.0" title="Click to play from here">thaddeus does he have an opportunity attack yeah yeah yeah i'll give you an opportunity</p>
+<p class="ts-line" data-start="1208.2" title="Click to play from here">attack yeah all right he's gonna swing his war hammer at this bad boy and that is a 22</p>
+<p class="ts-line" data-start="1217.4" title="Click to play from here">yeah and nine damage his hit stops him in his tracks and he turns and looks</p>
+<p class="ts-line" data-start="1223.5" title="Click to play from here">at him and now it is truly flint's turn all right uh how far out from flint is this bad</p>
+<p class="ts-line" data-start="1230.6" title="Click to play from here">boy now 30 feet flint is going to grab his dwarven thrower and throw that bad boy at this</p>
+<p class="ts-line" data-start="1240.2" title="Click to play from here">fucking gorgon yeah ranged weapon and that is a 17 17 will not hit okay he's going to do the</p>
+<p class="ts-line" data-start="1250.9" title="Click to play from here">same thing again so you throw your hammer and recall it back to you instantly that's right</p>
+<p class="ts-line" data-start="1257.4" title="Click to play from here">only to whip it again that's right and this is a nat 20 yeah it is we haven't had a nat 20</p>
+<p class="ts-line" data-start="1263.5" title="Click to play from here">in a long time it feels like a while yeah so that's 17 plus five is 22 damage tell me how</p>
+<p class="ts-line" data-start="1271.8" title="Click to play from here">your hammer destroys this gorgon uh well after it missed on the first flyby it noticed a little</p>
+<p class="ts-line" data-start="1279.2" title="Click to play from here">weak spot where we've been hitting the gorgon repeatedly and there's cracks showing so</p>
+<p class="ts-line" data-start="1283.9" title="Click to play from here">as uh flint let it fly again it strikes true and shatters the gorgon into a million pieces</p>
+<p class="ts-line" data-start="1291.4" title="Click to play from here">yeah it does thea shakes off the rest of the rock and goes whoo dust herself off good job team</p>
+<p class="ts-line" data-start="1297.4" title="Click to play from here">uh yeah so your hammer strikes true and the gorgon explodes and crumbles and begins to mist</p>
+<p class="ts-line" data-start="1304.4" title="Click to play from here">up into the air and you have seemingly defeated the gorgon he just i don't like the sound of</p>
+<p class="ts-line" data-start="1310.2" title="Click to play from here">that seemingly you have defeated the gorgon yay i don't know what you're talking about i didn't</p>
+<p class="ts-line" data-start="1315.4" title="Click to play from here">say seemingly when the gorgons destroyed does donnie magically become unpetrified negative</p>
+<p class="ts-line" data-start="1322.0" title="Click to play from here">okay uh guys can somebody do help me out here uh that is that is is gonna cast uh that same</p>
+<p class="ts-line" data-start="1331.0" title="Click to play from here">spell again that resistance spell um so should he just should i just roll so it would be</p>
+<p class="ts-line" data-start="1336.6" title="Click to play from here">that is his turn flaming kins there's like i can't fucking do shit thea no sorry uh and</p>
+<p class="ts-line" data-start="1343.6" title="Click to play from here">then it's back to you and donnie so yeah we'd say you'd have to make a constitution</p>
+<p class="ts-line" data-start="1349.3" title="Click to play from here">saving throw at the end of his turn uh that is a 17 you can add a d4 to that if needed</p>
+<p class="ts-line" data-start="1358.1" title="Click to play from here">and a d4 because why the heck not that is a 21 you see the stone begin to retreat from donnie</p>
+<p class="ts-line" data-start="1365.8" title="Click to play from here">as he stands up he's like well that was a shitty experience yeah but we went through</p>
+<p class="ts-line" data-start="1371.4" title="Click to play from here">together donnie yeah high five over here all right with my hand claw which clearly i have</p>
+<p class="ts-line" data-start="1376.4" title="Click to play from here">yeah that's weird right didn't we decide that it was like weird baby hands yeah and also you</p>
+<p class="ts-line" data-start="1381.4" title="Click to play from here">have a pretty bitching hat so right well not anymore now it's just tiny oh yeah well that</p>
+<p class="ts-line" data-start="1387.3" title="Click to play from here">makes it even more bitching that's adorable it's adorable new lara you told me that it was</p>
+<p class="ts-line" data-start="1392.2" title="Click to play from here">adorable is it not adorable no it's no donnie it's adorable you look amazing oh i'm gonna have</p>
+<p class="ts-line" data-start="1397.2" title="Click to play from here">a compLex no i gotta hang out with you all the time i wouldn't want you to look like an idiot</p>
+<p class="ts-line" data-start="1401.4" title="Click to play from here">shit all right where are we we're in a maze donnie i think the stone is at the same place we've been</p>
+<p class="ts-line" data-start="1407.8" title="Click to play from here">forever yeah somebody ought to uh pick up that diamond you look back to the diamond and it is</p>
+<p class="ts-line" data-start="1413.6" title="Click to play from here">gone motherfucker well how about thea turns to her right and says how about we go this way you</p>
+<p class="ts-line" data-start="1420.9" title="Click to play from here">guys do you do you go as a group do you split up what are you doing well traditionally</p>
+<p class="ts-line" data-start="1426.3" title="Click to play from here">we love splitting the party so oh we never split up yeah you kind of follow each other around</p>
+<p class="ts-line" data-start="1431.8" title="Click to play from here">throughout this throughout this maze about a minute passes as you're trying to find some</p>
+<p class="ts-line" data-start="1438.1" title="Click to play from here">sort of exit and you seem to be just kind of looping around not really getting anywhere</p>
+<p class="ts-line" data-start="1444.7" title="Click to play from here">and you hear the beating of hooves and charging out from in front of you thea</p>
+<p class="ts-line" data-start="1451.9" title="Click to play from here">the gorgon returns</p>
+<p class="ts-line" data-start="1455.7" title="Click to play from here">releasing his breath directly down towards you so thea and flint need to make a constitution</p>
+<p class="ts-line" data-start="1463.7" title="Click to play from here">saving throw i get stuck and i don't get to fight this gorgon again that's an 18</p>
+<p class="ts-line" data-start="1470.3" title="Click to play from here">oh yeah that's an 18 without any added fun so you're fine but you get a gore attack there</p>
+<p class="ts-line" data-start="1477.4" title="Click to play from here">thea for a 19 so that's gonna be 20 piercing damage oh yeah and you must make a strength</p>
+<p class="ts-line" data-start="1486.4" title="Click to play from here">saving throw as you were thrown about 13 and you were knocked prone and as a bonus action</p>
+<p class="ts-line" data-start="1495.1" title="Click to play from here">the gorgon stomps on you with his hooves holy shit for a 17 that will hit me for another</p>
+<p class="ts-line" data-start="1506.2" title="Click to play from here">15 bludgeoning damage oh my god damn so he is currently on top of you and will continue</p>
+<p class="ts-line" data-start="1514.0" title="Click to play from here">in initiative order so i guess we'll go back to the top there new lara you and donnie are up</p>
+<p class="ts-line" data-start="1521.7" title="Click to play from here">did he drop a diamond when he released his breath weapon yes you see down in the mist</p>
+<p class="ts-line" data-start="1527.3" title="Click to play from here">a crystallizing diamond form as he is stomping on your friend okay i hope my friend starts</p>
+<p class="ts-line" data-start="1534.3" title="Click to play from here">crawling towards that she's really tough she'll be fine in spirit yeah she's tough in spirit her</p>
+<p class="ts-line" data-start="1541.2" title="Click to play from here">body is weak and brittle she's very willowy and slender uh okay i am going to uh you know try</p>
+<p class="ts-line" data-start="1553.1" title="Click to play from here">and stab stab the guy that is a 20 19 damage yeah i'm gonna do it again because i got 22</p>
+<p class="ts-line" data-start="1564.7" title="Click to play from here">it's 22 damage uh donnie's gonna try and recharge hey it worked guys guys it worked</p>
+<p class="ts-line" data-start="1572.9" title="Click to play from here">worked so he uh is going to well god can he even do that where is everybody here</p>
+<p class="ts-line" data-start="1579.6" title="Click to play from here">thea is directly underneath the gorgon but like she's up a little she's all flat on the ground</p>
+<p class="ts-line" data-start="1585.8" title="Click to play from here">oh i'm so flat on the ground so prone i'm trying to be very like unassuming and</p>
+<p class="ts-line" data-start="1592.2" title="Click to play from here">yeah so maybe he'll stop stomping on me if i pretend i'm not there like sinking into the</p>
+<p class="ts-line" data-start="1599.4" title="Click to play from here">grass um i think that now that donnie has recharged he's not gonna shoot fire when</p>
+<p class="ts-line" data-start="1609.0" title="Click to play from here">he is right there seems like a bad idea so he'll he'll he'll do a he'll do a bite move</p>
+<p class="ts-line" data-start="1616.3" title="Click to play from here">which is a 19 okay for seven damage and then he will do that again uh but that is only a 14</p>
+<p class="ts-line" data-start="1626.3" title="Click to play from here">so that's probably a big old nothing 14 doesn't hit so donnie leaps almost on top of and begins</p>
+<p class="ts-line" data-start="1633.4" title="Click to play from here">biting at the gorgon as it begins attempting to buck him off and flint what's the what's the</p>
+<p class="ts-line" data-start="1640.7" title="Click to play from here">deal with this diamond russ is it directly below the gorgon what's what's the situation</p>
+<p class="ts-line" data-start="1644.8" title="Click to play from here">here yeah it looks like it formed like it started its its breath kind of as it came out</p>
+<p class="ts-line" data-start="1649.7" title="Click to play from here">of the the greenery so it's kind of just behind where the gorgon is right now and since the</p>
+<p class="ts-line" data-start="1656.4" title="Click to play from here">gorgon is all like distracted from stomping on thea would i be able to make some sort of</p>
+<p class="ts-line" data-start="1661.5" title="Click to play from here">acrobatic like run and jump uh kind of off to the side and maybe go grab this diamond</p>
+<p class="ts-line" data-start="1668.6" title="Click to play from here">if you roll for it well i suppose i could roll for it this is d and d after all hey nat 20 again</p>
+<p class="ts-line" data-start="1676.3" title="Click to play from here">oh my goodness the sweetest of flips occur yeah so i do like some parkour moves using like the</p>
+<p class="ts-line" data-start="1683.0" title="Click to play from here">hedge the side of the hedge and like run up the hedge kind of crouching tiger style</p>
+<p class="ts-line" data-start="1688.0" title="Click to play from here">and uh jump in behind and grab this diamond okay as you pick up the diamond thea and flint</p>
+<p class="ts-line" data-start="1694.9" title="Click to play from here">make a perception roll thea at disadvantage because you've got a gorgon stomping on top of you</p>
+<p class="ts-line" data-start="1700.3" title="Click to play from here">as a 16 for flint 14 i rolled a 15 and a 14 plus an eight oh right plus eight 22 you've</p>
+<p class="ts-line" data-start="1707.7" title="Click to play from here">been adding your modifiers yes i have just not right now so flint as you pick this up</p>
+<p class="ts-line" data-start="1714.6" title="Click to play from here">uh you and thea hear greenery like moving um and you see down the corridor behind you</p>
+<p class="ts-line" data-start="1724.1" title="Click to play from here">a doorway open up about 30 feet down the next aisle that you were right beside there</p>
+<p class="ts-line" data-start="1731.4" title="Click to play from here">do i alert everyone can everyone else see this is it just something that we can see what's</p>
+<p class="ts-line" data-start="1735.7" title="Click to play from here">happening here it's just that something that you two have seen uh everybody else is kind</p>
+<p class="ts-line" data-start="1740.6" title="Click to play from here">of out of eye shot of where they would be able to see it i do should we like attack</p>
+<p class="ts-line" data-start="1745.1" title="Click to play from here">this thing or like disengage and run for it what's what's the group consensus here</p>
+<p class="ts-line" data-start="1749.4" title="Click to play from here">run flint but you're kind of trapped under this army crawl my way out it'll be okay</p>
+<p class="ts-line" data-start="1756.8" title="Click to play from here">uh i don't want to abandon everyone carla any thoughts it's in the moment man</p>
+<p class="ts-line" data-start="1761.1" title="Click to play from here">time's ticking turn's gonna be over in five four three uh i'm gonna attack the gorgon okay</p>
+<p class="ts-line" data-start="1769.4" title="Click to play from here">stab it in the butt you're behind it right i am behind it gonna pull a real carla butt</p>
+<p class="ts-line" data-start="1774.2" title="Click to play from here">stab here yep no carla's not there it's new lara yeah but it was carla who wanted to do the</p>
+<p class="ts-line" data-start="1782.1" title="Click to play from here">uh that's a 25 on the first attack yes sir uh so that's 14 damage okay i'll give a second</p>
+<p class="ts-line" data-start="1789.6" title="Click to play from here">attack uh and that's a 21 on the second attack yes sir oh that's only 10 damage</p>
+<p class="ts-line" data-start="1796.8" title="Click to play from here">swiping your axe into its butt uh you begin to</p>
+<p class="ts-line" data-start="1804.5" title="Click to play from here">create new butt cracks as it becomes uh thea's turn oh god is this does this thing have me</p>
+<p class="ts-line" data-start="1813.1" title="Click to play from here">pinned with its big no you're not fucking you're not pinned you are prone though all right</p>
+<p class="ts-line" data-start="1817.0" title="Click to play from here">while i'm prone can i cast a spell well i'm in a wild shape sure yeah i'm in a wild</p>
+<p class="ts-line" data-start="1824.6" title="Click to play from here">shape into a winter wolf look at me with all my hit points i yell guys a door yes winter wolves</p>
+<p class="ts-line" data-start="1834.2" title="Click to play from here">can speak common we've already been over it it's just been so long since she wild shaped these</p>
+<p class="ts-line" data-start="1838.7" title="Click to play from here">are for the it has been it has been and you know for any new listeners sure so yes they do</p>
+<p class="ts-line" data-start="1844.2" title="Click to play from here">speak basic common and i say guys a door and i disengage Flamikins kens yells a window it's</p>
+<p class="ts-line" data-start="1853.7" title="Click to play from here">not a window from the window to the wall yeah yeah it's from yeah finish finish the lure</p>
+<p class="ts-line" data-start="1860.4" title="Click to play from here">dress seems like it would be a song Flamikins kens would be that's true yeah yeah facebook.com</p>
+<p class="ts-line" data-start="1866.6" title="Click to play from here">slash dumb dragon cast group i don't know what the fuck it is go put that song in there now</p>
+<p class="ts-line" data-start="1870.4" title="Click to play from here">oh yeah oh and the beyonce to the left oh yeah yeah got a couple in this one uh so i</p>
+<p class="ts-line" data-start="1877.8" title="Click to play from here">i yell to them that there's a door and i i want to disengage and dash to the door okay you are</p>
+<p class="ts-line" data-start="1886.7" title="Click to play from here">i'm gonna dnd disengage and dash that's right so how far are you going well i can move 50 feet</p>
+<p class="ts-line" data-start="1898.6" title="Click to play from here">okay i'm gonna go right to the fucking door okay and just wait because guys i'm like</p>
+<p class="ts-line" data-start="1905.7" title="Click to play from here">i'm hurting real bad i want nothing to do with any more fighting that's fine um</p>
+<p class="ts-line" data-start="1912.7" title="Click to play from here">now with this bullshit right ah</p>
+<p class="ts-line" data-start="1917.8" title="Click to play from here">Flamikins kens comes around the corner and she's like what's going on oh shit and then Flamikins</p>
+<p class="ts-line" data-start="1923.3" title="Click to play from here">kens casts dimension door what's that she teleports herself from her current location</p>
+<p class="ts-line" data-start="1929.4" title="Click to play from here">to another spot within range and she arrives at exactly the spot desired so she's going to</p>
+<p class="ts-line" data-start="1935.8" title="Click to play from here">dimension door herself right oh that's the girl oh excuse me she sends the girl on a one</p>
+<p class="ts-line" data-start="1943.8" title="Click to play from here">why Flamikins kens why uh Flamikins kens dimension doors right over to the door and then it's</p>
+<p class="ts-line" data-start="1950.5" title="Click to play from here">thaddeus's turn he starts like big time like what the where's what she comes in like almost</p>
+<p class="ts-line" data-start="1955.9" title="Click to play from here">at a run hey i like snarl like these squares on your map are roughly 10 by 10 exactly 10</p>
+<p class="ts-line" data-start="1963.6" title="Click to play from here">by 10 i think if that is like hugs the fucking uh the shrub wall and dashes over there he can</p>
+<p class="ts-line" data-start="1973.1" title="Click to play from here">just zip right on over to that door like you guys have been walking around the maze so you</p>
+<p class="ts-line" data-start="1977.6" title="Click to play from here">kind of have a feeling that um where thea and Flamikins kens is he could get to from the</p>
+<p class="ts-line" data-start="1984.6" title="Click to play from here">other side it's just based on your travels through so he could dash and get to thea without</p>
+<p class="ts-line" data-start="1989.6" title="Click to play from here">even passing the gorgon okay he will do that then yeah so wait maybe he should like yeah no</p>
+<p class="ts-line" data-start="1996.0" title="Click to play from here">he'll do that that's fine yeah so thaddeus uh turns and heads back down a pathway that you</p>
+<p class="ts-line" data-start="2001.2" title="Click to play from here">guys have kind of researched and heads back to the group over there and then it is the gorgon's</p>
+<p class="ts-line" data-start="2011.8" title="Click to play from here">turn boom he likes you go home and as the gorgon kind of sees all the commotion of everybody</p>
+<p class="ts-line" data-start="2022.2" title="Click to play from here">running away and moving uh flint you look down in your hand and the diamond begins to disappear</p>
+<p class="ts-line" data-start="2028.6" title="Click to play from here">and as the diamond disappears so does the door son of a bitch and the gorgon releases another</p>
+<p class="ts-line" data-start="2036.7" title="Click to play from here">breath out in your direction flint and down and banks around the corner</p>
+<p class="ts-line" data-start="2043.8" title="Click to play from here">to where uh Flamikins kens thea and thaddeus are and you all need to make a constitution saving throw</p>
+<p class="ts-line" data-start="2052.7" title="Click to play from here">it probably doesn't hit thaddeus but that is just out of range for all these things</p>
+<p class="ts-line" data-start="2057.0" title="Click to play from here">yeah he's lucky it's pretty good uh that's a 17 for flint oh Flamikins kens doesn't do well</p>
+<p class="ts-line" data-start="2061.8" title="Click to play from here">either so Flamikins kens and thea are now petrified and flint you see at the base of</p>
+<p class="ts-line" data-start="2069.4" title="Click to play from here">where the gorgon is about 10 feet away a new diamond forming in place and just for good</p>
+<p class="ts-line" data-start="2077.4" title="Click to play from here">measure the gorgon charges you with of course yeah oh it doesn't do well though that's a 14</p>
+<p class="ts-line" data-start="2084.2" title="Click to play from here">oh hooray yeah uh new laura you're up so whereabouts is that diamond</p>
+<p class="ts-line" data-start="2091.3" title="Click to play from here">it is about 10 feet in front of the gorgon so on the opposite side of where you are currently</p>
+<p class="ts-line" data-start="2096.9" title="Click to play from here">located it turned and faced towards flint and the rest of the group so i have to stab it in</p>
+<p class="ts-line" data-start="2102.1" title="Click to play from here">the butt again wow is it always behind so i'm not like i'm not really into butt stabbing all</p>
+<p class="ts-line" data-start="2108.9" title="Click to play from here">of a sudden just as always facing away from me or maybe i always have been i mean everybody's</p>
+<p class="ts-line" data-start="2117.0" title="Click to play from here">got secret character motivations right this is like an m night shamAlydin level twist here</p>
+<p class="ts-line" data-start="2122.1" title="Click to play from here">yeah it's my twist butt stabs uh okay so let's go for the old butt stab that is a 25</p>
+<p class="ts-line" data-start="2132.1" title="Click to play from here">yeah that's a solid butt stab and that is eight that is 24 damage whoa that is almost</p>
+<p class="ts-line" data-start="2141.0" title="Click to play from here">the most i could get i'm gonna do it again i'm not gonna do it again that was a 12</p>
+<p class="ts-line" data-start="2147.6" title="Click to play from here">well like you needed to you just nailed you just gave more damage in that one roll than i have</p>
+<p class="ts-line" data-start="2153.4" title="Click to play from here">since we started recording this episode because it would zero i've given zero to</p>
+<p class="ts-line" data-start="2160.5" title="Click to play from here">okay how far okay is it is our map positions right now accurate uh as far as i've been</p>
+<p class="ts-line" data-start="2168.5" title="Click to play from here">trying to keep up with them so yeah they should be fairly accurate have you determined</p>
+<p class="ts-line" data-start="2173.4" title="Click to play from here">in canon that breath weapons go through shrubberies because i feel like you have</p>
+<p class="ts-line" data-start="2179.8" title="Click to play from here">didn't that just happen with the gorgon well it went through like the doorway in front of it</p>
+<p class="ts-line" data-start="2183.8" title="Click to play from here">and banked around like it hit the wall and kept going well i noticed that it's bleeding but</p>
+<p class="ts-line" data-start="2190.6" title="Click to play from here">it's kind of sticking behind that oh well that's because i can't put it anywhere else</p>
+<p class="ts-line" data-start="2195.9" title="Click to play from here">like it just where the thing that's okay i think donnie's gonna sure its butt is hanging</p>
+<p class="ts-line" data-start="2202.7" title="Click to play from here">no it's fine i mean it's a it's a fire weapon so fire can go through trees trust me as we have</p>
+<p class="ts-line" data-start="2209.3" title="Click to play from here">all learned in british columbia oh yeah like light this shit up yeah fire fire can go through</p>
+<p class="ts-line" data-start="2214.6" title="Click to play from here">trees so he is going to do his fire weapon which means ye old gorgon needs to uh do a</p>
+<p class="ts-line" data-start="2228.5" title="Click to play from here">deck save and this is not going to be good it's going to be amazing it's going to be a seven</p>
+<p class="ts-line" data-start="2235.9" title="Click to play from here">it's going to be seven does that save it's it's it doesn't see it coming it just goes</p>
+<p class="ts-line" data-start="2240.6" title="Click to play from here">straight up its butthole oh jeez jesus oh boy did donnie put his lips to it like how is his</p>
+<p class="ts-line" data-start="2248.4" title="Click to play from here">oh my god why with the visual no the butthole it's too far russe did you hear how many dice</p>
+<p class="ts-line" data-start="2257.2" title="Click to play from here">a lot of dice anytime i get a lot of dice it's 22 damage so canonically he's blown this fire</p>
+<p class="ts-line" data-start="2265.7" title="Click to play from here">up his butthole and cooks him from the inside out and bursts in a cloud of stony dust vapor</p>
+<p class="ts-line" data-start="2275.9" title="Click to play from here">and as he does those watching the diamond it does the same thing and dissolves into the</p>
+<p class="ts-line" data-start="2281.9" title="Click to play from here">ground so we're going to go through and make some saving throws at this point uh it would be</p>
+<p class="ts-line" data-start="2288.4" title="Click to play from here">flint's turn next if there's anything you want to do flint uh i go and cheer real loud</p>
+<p class="ts-line" data-start="2295.5" title="Click to play from here">for thea's saving throw that she's going to make all right make a constitution saving throw</p>
+<p class="ts-line" data-start="2300.6" title="Click to play from here">the uh</p>
+<p class="ts-line" data-start="2305.0" title="Click to play from here">oh not 20 whoa i have to whisper to my dice right against a fall away and you are back the same</p>
+<p class="ts-line" data-start="2313.0" title="Click to play from here">Flamikinskins however did not fare so well and as the stone falls away you're kind of just</p>
+<p class="ts-line" data-start="2319.8" title="Click to play from here">watching Flamikinskins hoping the same happens but nothing does happen</p>
+<p class="ts-line" data-start="2325.4" title="Click to play from here">hey there i'm your dungeon master russ more thanks for joining us for episode 53 of</p>
+<p class="ts-line" data-start="2332.0" title="Click to play from here">Dumbgeons and Dragons it's all about that butt as mentioned off the top if you enjoy what we do</p>
+<p class="ts-line" data-start="2338.0" title="Click to play from here">and can support us in a monetary for perks and rewards fashion visit us on Patreon where</p>
+<p class="ts-line" data-start="2343.2" title="Click to play from here">we have many different tiers and rewards to give you access to amazing bonus content</p>
+<p class="ts-line" data-start="2348.1" title="Click to play from here">patrons have access to tons of cool stuff like monthly bonus episodes character sheets</p>
+<p class="ts-line" data-start="2354.5" title="Click to play from here">naming of NPCs and much much more right now patrons can go on and fill out a survey to let</p>
+<p class="ts-line" data-start="2360.8" title="Click to play from here">us know what they currently like and would like to see more of in the Patreon community so we can</p>
+<p class="ts-line" data-start="2365.0" title="Click to play from here">help mold it and make it the best that we can for the people who are taking advantage of it</p>
+<p class="ts-line" data-start="2370.3" title="Click to play from here">so if you're a patron go fill that out and if you sign up to be a new patron you can fill</p>
+<p class="ts-line" data-start="2374.7" title="Click to play from here">that out too check out all the details at Patreon.com dumb dragon cast another way you</p>
+<p class="ts-line" data-start="2380.5" title="Click to play from here">can support the show is to share a link to your favorite episode or just the show in general to</p>
+<p class="ts-line" data-start="2384.6" title="Click to play from here">social media talk about us to your friends and family or write a review on apple podcast</p>
+<p class="ts-line" data-start="2389.0" title="Click to play from here">stitcher or wherever else you can rate or review podcasts every little bit helps get us out in</p>
+<p class="ts-line" data-start="2394.6" title="Click to play from here">front of all those people who hopefully will love the show as much as you and we do and</p>
+<p class="ts-line" data-start="2399.5" title="Click to play from here">thanks to sirenscape for some of the amazing atmosphere in this episode make sure you check</p>
+<p class="ts-line" data-start="2403.8" title="Click to play from here">them out at sirenscape.com to bring your games to life links for everything mentioned</p>
+<p class="ts-line" data-start="2407.9" title="Click to play from here">today can be found in the description and the next episode will be out wednesday september 19th</p>
+<p class="ts-line" data-start="2412.6" title="Click to play from here">when maybe just maybe the adventures will be able to get out of this darn maze maybe i make</p>
+<p class="ts-line" data-start="2419.3" title="Click to play from here">no promises but maybe but let's jump back into the action and see if they can figure out</p>
+<p class="ts-line" data-start="2424.5" title="Click to play from here">this diamond riddle diamonds can be pricey though so you know it might be tough have</p>
+<p class="ts-line" data-start="2429.3" title="Click to play from here">a great week we'll talk soon that is kind of gives the old like chin like thinks about it</p>
+<p class="ts-line" data-start="2439.6" title="Click to play from here">for a second he says i might uh rust does the voice for this guy but he sounds like an old man</p>
+<p class="ts-line" data-start="2445.3" title="Click to play from here">says i might have something for this and he digs around in his spell component pouch</p>
+<p class="ts-line" data-start="2451.2" title="Click to play from here">and he opens up a couple different containers and he can't quite find what he's looking for</p>
+<p class="ts-line" data-start="2454.7" title="Click to play from here">and finally he finds a container with the ruby dust in it and he puts a little bit in his palm</p>
+<p class="ts-line" data-start="2461.5" title="Click to play from here">and just blows the the ruby dust over the the statue form of flamikins and says</p>
+<p class="ts-line" data-start="2469.4" title="Click to play from here">heal thyself he's casting greater restoration uh the ruby dust sprinkles down over top of</p>
+<p class="ts-line" data-start="2477.0" title="Click to play from here">flamikins and she she was like standing with her face and like a weird kind of motif seems</p>
+<p class="ts-line" data-start="2483.6" title="Click to play from here">pretty normal for her and as the stone falls away she's like okay we're back are we out yet</p>
+<p class="ts-line" data-start="2490.6" title="Click to play from here">uh nope not yet guys we gotta we gotta game plan this it seems like we only have a limited</p>
+<p class="ts-line" data-start="2495.7" title="Click to play from here">time with the open exit and the diamond so uh i think next time we gotta have people like</p>
+<p class="ts-line" data-start="2502.6" title="Click to play from here">make a break for the exit right away and then we gotta get lucky with some some some</p>
+<p class="ts-line" data-start="2508.2" title="Click to play from here">acrobatic type of stuff and get that diamond and go agreed how's everybody feeling</p>
+<p class="ts-line" data-start="2515.0" title="Click to play from here">i've been better but i'm okay you're still a wolf form right i am perfect that's good because</p>
+<p class="ts-line" data-start="2521.9" title="Click to play from here">that will be more uh acrobatic than i assume everybody's gone over to where the stone stone</p>
+<p class="ts-line" data-start="2528.6" title="Click to play from here">features were thereabouts oh yeah if everyone was yeah like as you guys are game planning</p>
+<p class="ts-line" data-start="2535.8" title="Click to play from here">you begin to hear the sound of hooves again so this is your time so if you're doing anything</p>
+<p class="ts-line" data-start="2540.4" title="Click to play from here">in particular okay you guys as soon as you see the diamond one of us will grab it once that</p>
+<p class="ts-line" data-start="2546.0" title="Click to play from here">stone door opens up and makes itself known we just need to high tail it there get it high</p>
+<p class="ts-line" data-start="2554.1" title="Click to play from here">tail it there i swish my tail i i mean agreed i think whoever grabs it run to the door and</p>
+<p class="ts-line" data-start="2561.6" title="Click to play from here">try to open the door maybe the door will stay open once it's open as you finish discussing this out</p>
+<p class="ts-line" data-start="2567.4" title="Click to play from here">of the greenery right behind flint you hear the charging hooves of the gorgon as he runs towards</p>
+<p class="ts-line" data-start="2574.7" title="Click to play from here">and blasts its petrifying breath out and down towards flint thaddeus and thea god i had to be</p>
+<p class="ts-line" data-start="2582.9" title="Click to play from here">in the fucking corner please nobody puts baby in the corner 11 uh thaddeus got a 16 and flint</p>
+<p class="ts-line" data-start="2593.6" title="Click to play from here">got a 15 and i say not again mother and then as i turn to stone thea turns to stone again</p>
+<p class="ts-line" data-start="2601.9" title="Click to play from here">and flint and thaddeus are fine except for the charging trample that flint receives</p>
+<p class="ts-line" data-start="2607.8" title="Click to play from here">uh that's a natural 20 35 piercing damage and you must make a strength saving throw</p>
+<p class="ts-line" data-start="2617.0" title="Click to play from here">so that's 32 damage let me just subtract three from that small victories oh boy okay that's a</p>
+<p class="ts-line" data-start="2625.6" title="Click to play from here">lot of uh that's a lot of damage and a strength throw you bet that is a 15 that doesn't make it</p>
+<p class="ts-line" data-start="2633.5" title="Click to play from here">you are knocked that makes no and as a bonus action it tries to trample you with its hooves</p>
+<p class="ts-line" data-start="2640.9" title="Click to play from here">wait a minute wait a minute wait one goddamn minute waiting waiting i am going to use my</p>
+<p class="ts-line" data-start="2649.0" title="Click to play from here">indomitable skill and re-roll a saving throw that i fail</p>
+<p class="ts-line" data-start="2654.3" title="Click to play from here">17 that makes it so you are not prone yay and it doesn't trample you with its hooves</p>
+<p class="ts-line" data-start="2664.6" title="Click to play from here">even better yeah that doesn't feel good doesn't feel good it did not look fun when you were</p>
+<p class="ts-line" data-start="2669.1" title="Click to play from here">doing it so no uh new lara you were up did it drop a diamond did it drop it you were around</p>
+<p class="ts-line" data-start="2675.8" title="Click to play from here">the corner presently so unless you move around the corner you may not be able to see if only</p>
+<p class="ts-line" data-start="2682.2" title="Click to play from here">someone else who could see asked regardless right do you remember the plan i am going to</p>
+<p class="ts-line" data-start="2693.0" title="Click to play from here">i was busy saving things i know you were rolling around and like not getting stomped on it was</p>
+<p class="ts-line" data-start="2699.0" title="Click to play from here">amazing i assume i couldn't see i'm gonna come around the corner though and uh you know i guess</p>
+<p class="ts-line" data-start="2706.0" title="Click to play from here">try and stab it in the front this time which seems seems crazy but well maybe it'll work</p>
+<p class="ts-line" data-start="2712.7" title="Click to play from here">maybe it'll work uh it's a 25 that will hit so you push your way through</p>
+<p class="ts-line" data-start="2720.6" title="Click to play from here">and uh make it in front not on the hedges but you're like yeah you're beside flint not</p>
+<p class="ts-line" data-start="2725.8" title="Click to play from here">standing on top of it in the front and the back yeah so that is 24 damage okay i'm going</p>
+<p class="ts-line" data-start="2733.4" title="Click to play from here">to try and stab it again but i failed because i rolled a nine that will not hit okay donnie's</p>
+<p class="ts-line" data-start="2741.1" title="Click to play from here">gonna try and recharge didn't work he wasn't gonna use it anyway because all of his friends</p>
+<p class="ts-line" data-start="2745.2" title="Click to play from here">are in the way this time but he's gonna try to bite he he fails he's gonna try again</p>
+<p class="ts-line" data-start="2753.0" title="Click to play from here">and he probably succeeds because as a 24 yeah 11 damage</p>
+<p class="ts-line" data-start="2759.0" title="Click to play from here">oh hey now do i see a diamond you sure do right at uh like pretty much right at your feet within</p>
+<p class="ts-line" data-start="2767.8" title="Click to play from here">five feet of where you are great i'm super gonna grab it you grab it and right behind you in the</p>
+<p class="ts-line" data-start="2773.2" title="Click to play from here">same spot that it was before right behind where you the main group of you is pretty much where</p>
+<p class="ts-line" data-start="2778.9" title="Click to play from here">i'm frozen yeah no donnie you know oh there's a lot of people in here i know we're all up</p>
+<p class="ts-line" data-start="2784.2" title="Click to play from here">there clustered yeah you're there you're there you're there there's a gorgon here sure you're in</p>
+<p class="ts-line" data-start="2790.5" title="Click to play from here">that vicinity but right where thea is okay the hedges move away and an exit forms flint should</p>
+<p class="ts-line" data-start="2797.7" title="Click to play from here">i go try and open the door guys you're it's it's an open oh no you're not like it's an</p>
+<p class="ts-line" data-start="2802.5" title="Click to play from here">open we've been over this i'm sorry oh it's not right beside me yeah i'm like right beside</p>
+<p class="ts-line" data-start="2809.4" title="Click to play from here">you can i just hand it to you i mean i guess can i because i can i just can i just steal it from</p>
+<p class="ts-line" data-start="2815.7" title="Click to play from here">her hand yeah yeah absolutely i feel like we should all go at once but i will go all right</p>
+<p class="ts-line" data-start="2822.0" title="Click to play from here">i'm gonna i'm gonna disengage i don't even think i've been fighting this thing i'm gonna</p>
+<p class="ts-line" data-start="2826.2" title="Click to play from here">disengage yeah well you're within range so yeah i'm gonna book it over to that opening with</p>
+<p class="ts-line" data-start="2831.7" title="Click to play from here">my diamond in my hand oh sure he's stealing the diamond so you're gonna stand like right</p>
+<p class="ts-line" data-start="2837.3" title="Click to play from here">in the entryway like it's open like essentially it's just another pathway down a maze yeah</p>
+<p class="ts-line" data-start="2842.9" title="Click to play from here">essentially i'm going to stand in the way as if there was a door there that might try to close</p>
+<p class="ts-line" data-start="2847.7" title="Click to play from here">and i'm at the supermarket and it's not going to be able to close because i'm in the sensor</p>
+<p class="ts-line" data-start="2851.7" title="Click to play from here">i like it uh anything else you're doing before we go to the next person uh i tell everyone</p>
+<p class="ts-line" data-start="2856.6" title="Click to play from here">to get the fuck over here see how does that sound like a character and whatnot tom uh it's</p>
+<p class="ts-line" data-start="2862.7" title="Click to play from here">really i'm just running and grumbling so it's like and then i'm over at the door</p>
+<p class="ts-line" data-start="2868.4" title="Click to play from here">and we've been with him long enough to know you guys got the gist of it clearly get the</p>
+<p class="ts-line" data-start="2872.4" title="Click to play from here">fuck out of here um thea your turn 19 so the stone falls away from you and that's the end of</p>
+<p class="ts-line" data-start="2879.0" title="Click to play from here">your turn yeah um but you are right beside the the entrance that's not gonna turn</p>
+<p class="ts-line" data-start="2884.8" title="Click to play from here">yeah she does it's her turn next oh Flamikins kins um hurl something just vomit</p>
+<p class="ts-line" data-start="2895.2" title="Click to play from here">did she just oh she literally just hurls does she have a nervous tummy when she fights</p>
+<p class="ts-line" data-start="2901.2" title="Click to play from here">rough night guys rough night uh that's gonna be five feet away from me so i'm just gonna</p>
+<p class="ts-line" data-start="2907.0" title="Click to play from here">go stand with you flint and see what happens okay can you can you drag thea over here with</p>
+<p class="ts-line" data-start="2913.0" title="Click to play from here">you i pull her does she what her hair she moves but she growls oh yeah she's a wolf</p>
+<p class="ts-line" data-start="2923.2" title="Click to play from here">fatius's turn yeah he's just gonna back away and go for the fucking door while the pathway</p>
+<p class="ts-line" data-start="2929.7" title="Click to play from here">that's open yeah so he backs away and continues to go for the door everybody is standing</p>
+<p class="ts-line" data-start="2935.3" title="Click to play from here">roughly in the doorway as it becomes the gorgon's turn and where before as it readied its</p>
+<p class="ts-line" data-start="2941.2" title="Click to play from here">petrifying breath the old diamond would disappear flint you look at it now standing within this</p>
+<p class="ts-line" data-start="2946.7" title="Click to play from here">newly created maze exit the diamond remains present but the gorgon still gets a turn and</p>
+<p class="ts-line" data-start="2953.4" title="Click to play from here">tries to gore uh new lara why did i roll your dice fuck oh it was bad guys it was a 15</p>
+<p class="ts-line" data-start="2964.6" title="Click to play from here">15 to hit okay doesn't hit and then it's new lara's turn i can use well i probably don't even</p>
+<p class="ts-line" data-start="2971.3" title="Click to play from here">need to use this can i just like run away yep you can disengage and run okay that's what i am</p>
+<p class="ts-line" data-start="2977.1" title="Click to play from here">going to do donnie's gonna come with me all right so both of you uh disengage and run</p>
+<p class="ts-line" data-start="2983.7" title="Click to play from here">towards the group that is standing in the exit um and as you continue down the path you turn</p>
+<p class="ts-line" data-start="2990.5" title="Click to play from here">and see that the gorgon stops at the passageway that is created and kind of steps back and tips</p>
+<p class="ts-line" data-start="2997.1" title="Click to play from here">his hat because he was wearing a hat that we didn't say um exhales a giant green plume</p>
+<p class="ts-line" data-start="3005.0" title="Click to play from here">and turns and exits into the hedges beside it and you guys run back down this maze that</p>
+<p class="ts-line" data-start="3012.2" title="Click to play from here">is created and after a short while you enter back into the sundial room where the shadows</p>
+<p class="ts-line" data-start="3020.5" title="Click to play from here">are pointed still at a through h i see why sundials are no longer in favor</p>
+<p class="ts-line" data-start="3042.9" title="Click to play from here">music in today's episode was by Kavin mcleod of incompetech.filmmusic.io i mean sorry about</p>
+<p class="ts-line" data-start="3048.9" title="Click to play from here">your cat but um it's kind of dark and angry yeah no i wish you hadn't said that i didn't like</p>
+<p class="ts-line" data-start="3056.0" title="Click to play from here">it at all i think you should probably cut that part out someone's gonna be like how did you</p>
+<p class="ts-line" data-start="3061.0" title="Click to play from here">know my cat died and then we don't need dead cat stuff happening well maybe it's something</p>
+<p class="ts-line" data-start="3066.4" title="Click to play from here">more innocent like they had to switch the cat from wet food to dry food and they're and</p>
+<p class="ts-line" data-start="3071.4" title="Click to play from here">we're just sorry about it yeah because the cat's not happy yeah however however they're probably</p>
+<p class="ts-line" data-start="3077.7" title="Click to play from here">happy because wet cat food smells disgusting oh yeah it does not smell good confirmed doesn't</p>
+<p class="ts-line" data-start="3082.5" title="Click to play from here">smell good not just not just you doing them over and over and over again just kind of like</p>
+<p class="ts-line" data-start="3088.7" title="Click to play from here">kind of how we do this joke over and over and over again yeah i know apologies it's been a</p>
+<p class="ts-line" data-start="3093.9" title="Click to play from here">while we'll brainstorm better jokes no we won't we won't brainstorm better not a chance</p>
+<p class="ts-line" data-start="3098.6" title="Click to play from here">let's stumble upon one and then hold on to it forever forever correct gorgon charges out</p>
+<p class="ts-line" data-start="3105.3" title="Click to play from here">charges charges charges right at you if i die this round doesn't mean i don't have to play</p>
+<p class="ts-line" data-start="3111.4" title="Click to play from here">the rest of this game you won't die Dumbgeons and dragons is a dumb dragons production</p>
+
+    </div>
+    <div class="report-footer">
+        <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new?title=Transcript+Error%3A+E53+-+s01e53+-+It%27s+All+About+That+Butt&body=%2A%2AEpisode%3A%2A%2A+E53+-+s01e53+-+It%27s+All+About+That+Butt%0A%0A%2A%2ATimestamp+%2F+location+in+transcript%3A%2A%2A%0A%0A%2A%2AIncorrect+text%3A%2A%2A%0A%0A%2A%2ACorrect+text%3A%2A%2A%0A" target="_blank">Found a transcription error? Report it on GitHub →</a>
+    </div>
+    <footer>
+        <div class="footer-links">
+            Dumbgeons &amp; Dragons &copy; Dumb Dragons Productions. All rights reserved.
+            &bull; <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new" target="_blank">Report a transcript error</a>
+        </div>
+        <p class="disclaimer">Transcripts are generated using AI speech-to-text technology (OpenAI Whisper) and may contain errors, particularly around proper nouns, character names, and crosstalk. They are provided for accessibility and search purposes and should not be considered verbatim records.</p>
+    </footer>
+    
+    <script>
+        const toggleBtn = document.getElementById('dark-toggle');
+        function updateToggle() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = theme === 'dark' || (!theme && sysDark);
+            toggleBtn.textContent = isDark ? '☀️' : '🌙';
+            toggleBtn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+        }
+        toggleBtn.addEventListener('click', function() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = current === 'dark' || (!current && sysDark);
+            const next = isDark ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateToggle();
+        });
+        updateToggle();
+    </script>
+
+    <script>
+        const audio = document.getElementById('episode-audio');
+        const lines = document.querySelectorAll('.ts-line');
+        let userScrolling = false;
+        let scrollTimeout = null;
+
+        // Detect manual scrolling — pause auto-scroll for 3 seconds
+        window.addEventListener('scroll', () => {
+            userScrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                userScrolling = false;
+            }, 3000);
+        }, { passive: true });
+
+        // Click to seek and play
+        lines.forEach(line => {
+            line.addEventListener('click', () => {
+                const start = parseFloat(line.getAttribute('data-start'));
+                audio.currentTime = start;
+                audio.play();
+                // Resume auto-scroll when user clicks a line
+                userScrolling = false;
+            });
+        });
+
+        // Highlight current line as audio plays
+        audio.addEventListener('timeupdate', () => {
+            const current = audio.currentTime;
+            let active = null;
+
+            lines.forEach(line => {
+                const start = parseFloat(line.getAttribute('data-start'));
+                if (start <= current) {
+                    active = line;
+                }
+            });
+
+            lines.forEach(line => line.classList.remove('active'));
+            if (active) {
+                active.classList.add('active');
+                // Only auto-scroll if user isn't manually scrolling
+                if (!userScrolling) {
+                    const rect = active.getBoundingClientRect();
+                    const inView = rect.top >= 120 && rect.bottom <= window.innerHeight - 50;
+                    if (!inView) {
+                        active.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
