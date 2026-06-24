@@ -125,6 +125,7 @@
             .filters { flex-wrap: wrap; gap: 0.75rem; }
         }
     </style>
+    </style>
 </head>
 <body>
         <nav class="main-nav">
@@ -142,10 +143,10 @@
         <a href="https://scripts.dumbdragons.com" class="active">Transcripts</a>
     </nav>
     <header>
-        <a href="index.html" class="brand">DUMBGEONS & DRAGONS</a>
+        <a href="index.html" class="brand">DUMBGEONS &amp; DRAGONS</a>
         <nav>
             <a href="index.html">Episodes</a>
-            <button class="dark-toggle" id="dark-toggle" title="Toggle dark mode">🌙</button>
+            <button class="dark-toggle" id="dark-toggle" title="Toggle dark mode">&#x1F319;</button>
         </nav>
     </header>
     <div class="search-bar">
@@ -174,95 +175,79 @@
     </footer>
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <script>
-        let searchIndex = null;
-        let episodeData = null;
-        let indexLoaded = false;
-        let indexLoading = false;
+        var searchIndex = null, episodeData = null, indexLoaded = false, indexLoading = false;
 
         function loadIndex(callback) {
             if (indexLoaded) { callback(); return; }
-            if (indexLoading) { setTimeout(() => loadIndex(callback), 100); return; }
+            if (indexLoading) { setTimeout(function() { loadIndex(callback); }, 100); return; }
             indexLoading = true;
             document.getElementById('results').innerHTML = '<p style="color:var(--text-muted)">Loading search index...</p>';
-            fetch('search-index.json')
-                .then(r => r.json())
-                .then(data => {
-                    episodeData = data;
-                    searchIndex = lunr(function() {
-                        this.ref('id');
-                        this.field('title', { boost: 10 });
-                        this.field('transcript');
-                        data.forEach(ep => this.add(ep));
-                    });
-                    indexLoaded = true;
-                    indexLoading = false;
-                    document.getElementById('results').innerHTML = '';
-                    callback();
+            fetch('search-index.json').then(function(r) { return r.json(); }).then(function(data) {
+                episodeData = data;
+                searchIndex = lunr(function() {
+                    this.ref('id');
+                    this.field('title', { boost: 10 });
+                    this.field('transcript');
+                    data.forEach(function(ep) { this.add(ep); }, this);
                 });
+                indexLoaded = true; indexLoading = false;
+                document.getElementById('results').innerHTML = '';
+                callback();
+            });
         }
 
-        document.getElementById('search-input').addEventListener('focus', () => {
-            loadIndex(() => {});
-        });
+        document.getElementById('search-input').addEventListener('focus', function() { loadIndex(function() {}); });
 
         function doSearch(e) {
             e.preventDefault();
-            const q = document.getElementById('search-input').value.trim();
-            if (q) loadIndex(() => runSearch(q));
+            var q = document.getElementById('search-input').value.trim();
+            if (q) loadIndex(function() { runSearch(q); });
         }
 
         function getSelectedSeasons() {
-            return Array.from(document.querySelectorAll('.season-filter:checked')).map(el => el.value);
+            return Array.from(document.querySelectorAll('.season-filter:checked')).map(function(el) { return el.value; });
         }
 
         function runSearch(q) {
             if (!searchIndex) return;
-            const selectedSeasons = getSelectedSeasons();
-            const results = searchIndex.search(q);
-            const container = document.getElementById('results');
-
-            const filtered = results.filter(r => {
-                const ep = episodeData.find(e => e.id === r.ref);
+            var selectedSeasons = getSelectedSeasons();
+            var results = searchIndex.search(q);
+            var container = document.getElementById('results');
+            var filtered = results.filter(function(r) {
+                var ep = episodeData.find(function(e) { return e.id === r.ref; });
                 return ep && selectedSeasons.includes(String(ep.season));
             });
-
             if (filtered.length === 0) {
                 container.innerHTML = '<p class="no-results">No results found for "<strong>' + q + '</strong>".</p>';
                 return;
             }
-
-            let html = '<h3>' + filtered.length + ' result' + (filtered.length > 1 ? 's' : '') + ' for "' + q + '"</h3><ul>';
-            filtered.slice(0, 100).forEach(r => {
-                const ep = episodeData.find(e => e.id === r.ref);
+            var html = '<h3>' + filtered.length + ' result' + (filtered.length > 1 ? 's' : '') + ' for "' + q + '"</h3><ul>';
+            filtered.slice(0, 100).forEach(function(r) {
+                var ep = episodeData.find(function(e) { return e.id === r.ref; });
                 if (!ep) return;
-                const snippetText = ep.transcript;
-                const idx = snippetText.toLowerCase().indexOf(q.toLowerCase());
-                const start = Math.max(0, idx - 80);
-                const end = Math.min(snippetText.length, idx + q.length + 120);
-                const snippet = (start > 0 ? '...' : '') + snippetText.slice(start, end).replace(new RegExp(q, 'gi'), '<mark>$&</mark>') + (end < snippetText.length ? '...' : '');
-                html += '<li>';
-                html += '<div class="meta">Season ' + ep.season + ' &bull; ' + ep.date + '</div>';
-                html += '<a href="' + ep.url + '">' + ep.title + '</a>';
-                html += '<div class="snippet">' + snippet + '</div>';
-                html += '</li>';
+                var snippetText = ep.transcript;
+                var idx = snippetText.toLowerCase().indexOf(q.toLowerCase());
+                var start = Math.max(0, idx - 80);
+                var end = Math.min(snippetText.length, idx + q.length + 120);
+                var snippet = (start > 0 ? '...' : '') + snippetText.slice(start, end).replace(new RegExp(q, 'gi'), '<mark>$&</mark>') + (end < snippetText.length ? '...' : '');
+                html += '<li><div class="meta">Season ' + ep.season + ' &bull; ' + ep.date + '</div><a href="' + ep.url + '">' + ep.title + '</a><div class="snippet">' + snippet + '</div></li>';
             });
             html += '</ul>';
             container.innerHTML = html;
         }
 
-        document.querySelectorAll('.season-filter').forEach(cb => {
-            cb.addEventListener('change', () => {
-                const q = document.getElementById('search-input').value.trim();
+        document.querySelectorAll('.season-filter').forEach(function(cb) {
+            cb.addEventListener('change', function() {
+                var q = document.getElementById('search-input').value.trim();
                 if (q) runSearch(q);
             });
         });
 
-        // Check for query in URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlQ = urlParams.get('q');
+        var urlParams = new URLSearchParams(window.location.search);
+        var urlQ = urlParams.get('q');
         if (urlQ) {
             document.getElementById('search-input').value = urlQ;
-            loadIndex(() => runSearch(urlQ));
+            loadIndex(function() { runSearch(urlQ); });
         }
     </script>
     
