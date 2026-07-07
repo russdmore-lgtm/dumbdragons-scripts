@@ -258,6 +258,7 @@
             e.preventDefault();
             var q = document.getElementById('search-input').value.trim();
             if (!q) return;
+            if (window._logSearch) window._logSearch(q);
             loadIndex(function() { runSearch(q); });
         }
 
@@ -311,5 +312,28 @@
         updateToggle();
     </script>
 
+    
+    <script>
+        (function() {
+            var webhook = 'https://script.google.com/macros/s/AKfycbynAVdrsRLFAyZaopyoJIm1t9ta2Y27aS3bJFIh3NJ2kNS4hMbOBw2ZJlP37bcfCOrF/exec';
+            function logSearch(query) {
+                if (!query || !webhook) return;
+                fetch(webhook, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        query: query,
+                        page: window.location.pathname,
+                        timestamp: new Date().toISOString()
+                    })
+                }).catch(function() {});
+            }
+            window._logSearch = logSearch;
+        })();
+    </script>
+    
+    <script data-goatcounter="https://dumbdragons.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
