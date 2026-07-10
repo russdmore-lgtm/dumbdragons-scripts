@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E61 - Are the Trees Alive? &mdash; Dumbgeons &amp; Dragons Transcripts</title>
+    
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved) document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
+
+    <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Light mode variables (default) */
+    :root {
+        --bg: #fafafa;
+        --bg-secondary: #ffffff;
+        --text: #111111;
+        --text-muted: #888888;
+        --border: #dddddd;
+        --border-light: #eeeeee;
+        --accent: #cc2200;
+        --accent-hover: #aa1a00;
+        --yellow: #f5c518;
+        --input-bg: #fafafa;
+        --mark-bg: #f5c518;
+        --mark-text: #111111;
+    }
+
+    /* Dark mode variables */
+    [data-theme="dark"] {
+        --bg: #1a1a2e;
+        --bg-secondary: #16213e;
+        --text: #eeeeee;
+        --text-muted: #888888;
+        --border: #333333;
+        --border-light: #222222;
+        --accent: #e94560;
+        --accent-hover: #c73652;
+        --yellow: #f5c518;
+        --input-bg: #0f0f1a;
+        --mark-bg: #e94560;
+        --mark-text: #ffffff;
+    }
+
+    /* Auto dark mode if user hasn't manually chosen */
+    @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+            --bg: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text: #eeeeee;
+            --text-muted: #888888;
+            --border: #333333;
+            --border-light: #222222;
+            --accent: #e94560;
+            --accent-hover: #c73652;
+            --yellow: #f5c518;
+            --input-bg: #0f0f1a;
+            --mark-bg: #e94560;
+            --mark-text: #ffffff;
+        }
+    }
+
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; transition: background 0.2s, color 0.2s; }
+    .main-nav { background: #fff; border-bottom: 1px solid #ddd; padding: 0.6rem 2rem; display: flex; justify-content: center; gap: 2rem; align-items: center; flex-wrap: wrap; }
+    .main-nav a { color: #111; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .main-nav a:hover { color: #cc2200; }
+    .main-nav a.active { color: #cc2200; }
+    .main-nav .wordmark { font-weight: 900; font-size: 0.8rem; color: #111; text-decoration: none; margin-right: 1rem; }
+    .main-nav .dropdown { position: relative; }
+    .main-nav .dropdown > a::after { content: ' ▾'; font-size: 0.7rem; }
+    .main-nav .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #fff; border: 1px solid #ddd; border-radius: 4px; min-width: 220px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 500; padding: 0.4rem 0; margin-top: 0; padding-top: 0.8rem; }
+    .main-nav .dropdown-menu::before { content: ''; display: block; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+    .main-nav .dropdown-menu a { display: block; padding: 0.5rem 1rem; color: #111; font-size: 0.8rem; letter-spacing: 0.5px; white-space: nowrap; }
+    .main-nav .dropdown-menu a:hover { background: #f5f5f5; color: #cc2200; }
+    .main-nav .dropdown:hover .dropdown-menu { display: block; }
+    @media (max-width: 768px) {
+        .main-nav { gap: 0.75rem; padding: 0.5rem 1rem; font-size: 0.75rem; }
+        .main-nav .wordmark { display: none; }
+        .main-nav a { font-size: 0.75rem; letter-spacing: 0.5px; }
+        .main-nav .dropdown-menu { left: auto; right: 0; }
+    }
+    header { background: var(--yellow); padding: 1.2rem 2rem; border-bottom: 4px solid #cc2200; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    header .brand { color: #cc2200; text-decoration: none; font-size: 1.1rem; letter-spacing: 1px; font-weight: 900; text-transform: uppercase; }
+    header .brand:hover { text-decoration: underline; }
+    header nav { display: flex; gap: 1rem; align-items: center; }
+    header nav a { color: #111; text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    header nav a:hover { color: #cc2200; }
+    header nav a.report { border: 2px solid #111; padding: 0.3rem 0.7rem; border-radius: 3px; }
+    header nav a.report:hover { border-color: #cc2200; color: #cc2200; }
+    .dark-toggle { background: none; border: 2px solid #111; border-radius: 3px; padding: 0.3rem 0.6rem; cursor: pointer; font-size: 1rem; line-height: 1; color: #111; }
+    .dark-toggle:hover { border-color: #cc2200; }
+    .search-bar { background: var(--bg-secondary); padding: 1rem 2rem; border-bottom: 1px solid var(--border); }
+    .search-bar form { max-width: 800px; margin: 0 auto; display: flex; gap: 0.5rem; }
+    .search-bar input { flex: 1; padding: 0.5rem 1rem; background: var(--input-bg); border: 2px solid var(--border); border-radius: 3px; color: var(--text); font-size: 0.95rem; }
+    .search-bar input:focus { outline: none; border-color: var(--yellow); }
+    .search-bar button { padding: 0.5rem 1.2rem; background: var(--accent); border: none; border-radius: 3px; color: #fff; cursor: pointer; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .search-bar button:hover { background: var(--accent-hover); }
+    footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; border-top: 3px solid var(--yellow); margin-top: 3rem; background: var(--bg-secondary); }
+    footer a { color: var(--text-muted); }
+    footer a:hover { color: var(--accent); }
+    .footer-links { margin-bottom: 0.75rem; }
+    .disclaimer { font-size: 0.78rem; color: var(--text-muted); max-width: 700px; margin: 0.75rem auto 0; line-height: 1.6; opacity: 0.8; }
+
+        .episode-header { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        .episode-header h1 { font-size: 1.6rem; color: var(--accent); margin-bottom: 0.3rem; font-weight: 900; text-transform: uppercase; }
+        .episode-header .meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .player { position: sticky; top: 0; z-index: 100; background: var(--bg); padding: 0.75rem 0; border-bottom: 2px solid var(--yellow); margin-bottom: 0; width: 100%; }
+        .player audio { border-radius: 4px; }
+        .nav-links { display: flex; justify-content: space-between; margin-bottom: 2rem; }
+        .nav-btn { color: var(--accent); text-decoration: none; font-size: 0.9rem; padding: 0.4rem 0.8rem; border: 2px solid var(--accent); border-radius: 3px; font-weight: 700; }
+        .nav-btn:hover { background: var(--accent); color: #fff; }
+        .nav-btn.disabled { color: var(--border); border-color: var(--border); cursor: default; }
+        .transcript { max-width: 800px; margin: 0 auto 2rem; padding: 0 1rem; }
+        .transcript h2 { color: var(--accent); margin-bottom: 0.5rem; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 900; border-bottom: 3px solid var(--yellow); padding-bottom: 0.5rem; }
+        .transcript-hint { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1.5rem; font-style: italic; }
+        .transcript p { margin-bottom: 0.75rem; color: var(--text); padding: 0.3rem 0.5rem; border-left: 3px solid transparent; border-radius: 2px; transition: border-color 0.15s, background 0.15s; }
+        .transcript p.ts-line { cursor: pointer; }
+        .transcript p.ts-line:hover { border-left-color: var(--border); background: var(--bg-secondary); }
+        .transcript p.active { border-left-color: var(--accent); background: var(--bg-secondary); }
+        .ad-break { margin: 1.5rem 0; padding: 0.6rem 1rem; background: var(--bg-secondary); border: 1px solid var(--border); border-left: 4px solid var(--yellow); border-radius: 3px; color: var(--text-muted); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .report-footer { max-width: 800px; margin: 0 auto 2rem; padding: 0 1rem; }
+        .report-footer a { color: var(--text-muted); font-size: 0.85rem; text-decoration: none; }
+        .report-footer a:hover { color: var(--accent); }
+        .downloads { display: flex; gap: 0.75rem; margin-bottom: 2rem; }
+        .download-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; border: 2px solid var(--accent); border-radius: 3px; color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .download-btn:hover { background: var(--accent); color: #fff; }
+        .follow-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; background: var(--yellow); border: 2px solid var(--yellow); border-radius: 3px; color: #111; text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .follow-btn:hover { background: #e0b400; border-color: #e0b400; }
+        .follow-btn-nav { color: #111 !important; text-decoration: none; font-size: 0.85rem; font-weight: 700; background: var(--yellow); padding: 0.3rem 0.7rem; border-radius: 3px; }
+        .follow-btn-nav:hover { background: #e0b400; }
+        .back-to-top { position: fixed; bottom: 2rem; right: 1.5rem; background: var(--accent); color: #fff; border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3); display: none; align-items: center; justify-content: center; z-index: 150; transition: background 0.2s; }
+        .back-to-top.visible { display: flex; }
+        .back-to-top:hover { background: var(--accent-hover); }
+        @media (max-width: 768px) {
+            header { padding: 0.8rem 1rem; }
+            header .brand { font-size: 0.9rem; }
+            header nav { gap: 0.5rem; }
+            header nav a { font-size: 0.75rem; padding: 0.2rem 0.4rem; letter-spacing: 0; }
+            header nav a.report { border-width: 1px; font-size: 0.7rem; }
+            .follow-btn-nav { font-size: 0.75rem; padding: 0.2rem 0.4rem; }
+            .episode-header { margin: 1rem auto; }
+            .episode-header h1 { font-size: 1.2rem; }
+            .downloads { flex-wrap: wrap; gap: 0.5rem; }
+            .nav-links { gap: 0.5rem; }
+            .nav-btn { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
+            .share-toolbar { bottom: 1rem; padding: 0.5rem 0.75rem; gap: 0.4rem; }
+            .share-btn { font-size: 0.75rem; padding: 0.3rem 0.5rem; }
+            .back-to-top { bottom: 4rem; right: 1rem; width: 38px; height: 38px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+        <nav class="main-nav">
+        <a href="https://www.dumbdragons.com" class="wordmark">DUMB DRAGONS PRODUCTIONS</a>
+        <div class="dropdown">
+            <a href="https://www.dumbdragons.com">Shows</a>
+            <div class="dropdown-menu">
+                <a href="https://www.dumbdragons.com/dumbgeons-campaign-two">Dumbgeons &amp; Dragons Campaign 2</a>
+                <a href="https://www.dumbdragons.com/dumbgeons-campaign-one">Dumbgeons &amp; Dragons Campaign 1</a>
+                <a href="https://www.dumbdragons.com/chromeheads-and-corpos">Chromeheads &amp; Corpos</a>
+            </div>
+        </div>
+        <a href="https://dumbdragons.dashery.com/" target="_blank">Shirts &amp; Stuff</a>
+        <a href="https://www.patreon.com/c/DumbDragonCast" target="_blank">Join Us</a>
+        <a href="https://scripts.dumbdragons.com" class="active">Transcripts</a>
+    </nav>
+    <header>
+        <a href="../../index.html" class="brand">DUMBGEONS &amp; DRAGONS</a>
+        <nav>
+            <a href="../../search.html">Search</a>
+            <a href="../../index.html">Episodes</a>
+            <a href="https://pod.link/1191411985" class="follow-btn-nav" target="_blank">&#x1F3A7; Follow</a>
+            <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new?title=Transcript+Error%3A+E61+-+Are+the+Trees+Alive%3F&body=%2A%2AEpisode%3A%2A%2A+E61+-+Are+the+Trees+Alive%3F%0A%0A%2A%2ATimestamp+%2F+location+in+transcript%3A%2A%2A%0A%0A%2A%2AIncorrect+text%3A%2A%2A%0A%0A%2A%2ACorrect+text%3A%2A%2A%0A" class="report" target="_blank">Report an error</a>
+            <button class="dark-toggle" id="dark-toggle" title="Toggle dark mode">&#x1F319;</button>
+        </nav>
+    </header>
+    <div class="search-bar">
+        <form action="../../search.html" method="get">
+            <input type="text" name="q" placeholder="Search transcripts...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="episode-header">
+        <p class="meta">Season 4 &bull; July 10, 2026</p>
+        <h1>E61 - Are the Trees Alive?</h1>
+        <div class="player">
+            <audio id="episode-audio" controls style="width:100%; border-radius:4px;">
+                <source src="https://swap.fm/track/WgbGgxzM3MFRwjmX5fnx/op3.dev/e/pscrb.fm/rss/p/rss.art19.com/episodes/97163893-3501-450f-a021-dce77b02f6af.mp3?rss_browser=BAhJIgxNb3ppbGxhBjoGRVQ%3D--4f04cd103bfdd3e94cbbb356ead53321a4d63e94" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <div class="downloads">
+            <a href="S04E61.txt" download class="download-btn">&#x2193; TXT</a>
+            <a href="S04E61.srt" download class="download-btn">&#x2193; SRT</a>
+            <a href="https://pod.link/1191411985" class="follow-btn" target="_blank">&#x1F3A7; Follow the Show</a>
+        </div>
+        <div class="nav-links">
+            <a href="S04E60.html" class="nav-btn">&#x2190; Previous</a>
+            <span class="nav-btn disabled">Next &#x2192;</span>
+        </div>
+    </div>
+    <div class="transcript">
+        <h2>Transcript</h2>
+        <p class="transcript-hint">Ad breaks are marked in the transcript below. The audio player uses the ad-supported feed.</p>
+        <p>Dumbgeons and Dragons will begin in a moment.</p>
+<p>There's one squeaky wheel making its way through the forest.</p>
+<p>Alistair has woken up. He is in fact pulling the wagon. So I love a love a long trek. How long exactly is it to Lingersville?</p>
+<p>Hey, Russ, so is it it's just like a wag. Is it like a wheelbarrow with two handles that we're pulling behind us? Is it a</p>
+<p>rickshaw? I was picturing like a donkey pulling a wagon. But now we do have Alistair pulling it. So I don't know if I feel good about making him pull this cart. We're gonna have to pull him way more than he's gonna have to pull the cart while he's awake. Yeah, he'll fall down. You put them back in and carry. I feel okay. It's not like we're all in this. No, I assume.</p>
+<p>What if he just can't fit we just make him ride the donkey. But it sounds like there's not a donkey. He's pulling the cart. Cuz I was picturing a donkey. There's just one squeaky wheel rolling through this for one of four. One still a little bit locked. It's not rolling. So we don't have an animal with us. It's just like a cart we pull ourselves. Unless you really want a donkey.</p>
+<p>Something bad will happen to it so it's fine. Yeah, this world isn't safe for a donkey. No it's not. We don't deserve donkeys. No we don't. I don't want to have to light a bitch up. Right? Someone hurts it. Again. Again.</p>
+<p>Dumbgeons and Dragons is a D&amp;D actual play podcast and I'm your dungeon master Russ More, he him. Also with me today is Amy More as Alydin, she her. Can birds be ventriloquists? Carla Maxted as Bonwyn Everbane, she her. My nature roll to see if shit seems weird. Tom Laird as Kavlaran Goldweave, he him. More of a poke. And Kyle Claset as Bizard the Wizard, he him. Wave at the wines.</p>
+<p>Dumbgeons and Dragons is a Patreon supported show made possible by listeners like you. Join us today at patreon.com slash dumb dragon cast and get a free seven day trial to try everything out over there. And now fuck it. Let's play.</p>
+<p>Okay, so back back to the force. How long exactly is it to Lingersville? I know from when you're on the boat coming down the river, but that goes pretty quick because you're going with the current.</p>
+<p>Anybody? It's not that far. I mean, we're not we're not traveling for two weeks or anything. Don't worry. We got the car and we'll pull you if you fall asleep so you won't fall behind. Yeah.</p>
+<p>Alydin's in the back of the car laying down feet up book in hand. You got to take advantage of those opportunities to study while we're traveling. It's hard to walk and read. Yeah, I'm doing I'm doing my best here. I'm trying to keep it nice and smooth for you. Is the ride good?</p>
+<p>You're doing great. Don't don't even worry about it. I got you and when you need to get got.</p>
+<p>So I don't know. What do we think like a couple days? Well, that's that seems that seems reasonable. Yeah, I mean, we do want to kind of keep our heads on a swivel in this forest because I don't know. Is it urban legends?</p>
+<p>There always has been talk about this forest. You know, we would tell stories when we were kids about things happening.</p>
+<p>Well, I mean, we did lose a whole bunch of children. Yeah, I mean that one time, but like not here, but kind of here, right? Like they went somewhere else, but this was the way they got to the somewhere else. So yeah, just be aware.</p>
+<p>I think we should just be aware.</p>
+<p>OK, is it is anybody else seeing what I'm what I'm seeing?</p>
+<p>And he's looking backwards like he stopped walking and he's looking backwards. We've been walking along this path. Yes. Yes, I assume so.</p>
+<p>He looks back and beneath your feet in a couple steps back, you see footprints or wagon tracks and then further back, everybody sees that the footprints have vanished behind them.</p>
+<p>Hmm.</p>
+<p>Well, that's odd.</p>
+<p>I would agree. That seems like a new one.</p>
+<p>You hear the sound of a bird song, often to the left.</p>
+<p>Alydin, your eyes are drawn up there.</p>
+<p>I am looking upwards.</p>
+<p>It's true.</p>
+<p>And you you see the bird and it calls again and you see its mouth open.</p>
+<p>There's no sound.</p>
+<p>It flaps its wings and flies away.</p>
+<p>And then the bird song comes from where it was.</p>
+<p>What's that thing where something sounds close to you, but it's really far away?</p>
+<p>But it sounds like it's in one place, but then it's not like ventriloquists.</p>
+<p>Hmm.</p>
+<p>Can birds be ventriloquists?</p>
+<p>Great question.</p>
+<p>Hmm. I don't.</p>
+<p>What the bird looked like?</p>
+<p>Why do you ask?</p>
+<p>Looked like a sparrow.</p>
+<p>It was a yellow-breasted warbler.</p>
+<p>Okay.</p>
+<p>And you think it was a ventriloquist?</p>
+<p>Well, where the bird was, it was there.</p>
+<p>And then it flew away.</p>
+<p>And then it sounded like the bird was there.</p>
+<p>Hmm.</p>
+<p>I sound crazy.</p>
+<p>You don't sound crazy.</p>
+<p>All of that weird stuff was happening in Vindersmith.</p>
+<p>So maybe it's happening here too?</p>
+<p>Maybe I'm just going to make a list of weird stuff.</p>
+<p>Good call.</p>
+<p>Okay. Yeah.</p>
+<p>I guess get the disappearing tracks.</p>
+<p>And the weird bird.</p>
+<p>We're playing D&amp;D.</p>
+<p>Russ, can I roll, like, insight, I guess, or...</p>
+<p>What are you trying to follow?</p>
+<p>My nature to see if shit seems weird.</p>
+<p>My nature roll to see if shit seems weird.</p>
+<p>Yeah.</p>
+<p>But it's a dirty 20.</p>
+<p>I think shit seems weird.</p>
+<p>Shit definitely seems weird.</p>
+<p>You've grown up here.</p>
+<p>You've been out this far.</p>
+<p>You haven't been out to Lingersville in some time.</p>
+<p>But I've certainly been in the woods around the town,</p>
+<p>so I would know if, like, the flora and fauna was weird.</p>
+<p>Yeah.</p>
+<p>You haven't gone far enough out that, you know,</p>
+<p>a day trip out to go collect some materials</p>
+<p>or just spend some time in the forest.</p>
+<p>Like, you haven't gone that far out from the city yet.</p>
+<p>But yes, now that you're paying attention to it,</p>
+<p>like, sounds are appearing off.</p>
+<p>There seems to be some delay happening.</p>
+<p>You've also been able to see and notice this bird song echo</p>
+<p>like half a second or a few seconds late</p>
+<p>as you all begin to walk again.</p>
+<p>You're picking up that your footsteps appear to be doubling in sound</p>
+<p>or doubling the sound as they hit.</p>
+<p>Kind of thing.</p>
+<p>And you're more kind of paying attention to your surroundings</p>
+<p>as everybody picks up a little bit.</p>
+<p>But you hear from somewhere behind you</p>
+<p>like creaking, slow creaking wood.</p>
+<p>And as you turn around to look where the sound is coming from,</p>
+<p>it stops.</p>
+<p>You heard that too?</p>
+<p>I did.</p>
+<p>So we all heard it.</p>
+<p>Heard what?</p>
+<p>Oh, okay.</p>
+<p>And that's not just the delay of our own squeaky wheel, was it?</p>
+<p>Mm-hmm.</p>
+<p>I moved the cart back and forth a little bit.</p>
+<p>How far back do our footprints disappear?</p>
+<p>Only like two or three steps.</p>
+<p>Oh, that quickly.</p>
+<p>They appear to be disappearing, yeah.</p>
+<p>Okay, can I pick up a rock and like throw it as far as I can back</p>
+<p>to see like, I don't know, if that acts normal,</p>
+<p>like does it just go and land and be normal or does something...</p>
+<p>Or do I hit a force field, I guess is what I...</p>
+<p>Sure.</p>
+<p>Ricochet is off of it.</p>
+<p>Or does it spin around and then hit me in the forehead?</p>
+<p>Like what happens?</p>
+<p>No, yeah, you pick up a rock,</p>
+<p>hook it, you're just hocking it back down the path</p>
+<p>that you're walking on.</p>
+<p>It goes and you see it before you hear it,</p>
+<p>but you see it skid along the ground</p>
+<p>and then you hear the faint sound of it.</p>
+<p>Okay.</p>
+<p>A bit delayed from what you would expect,</p>
+<p>but you hear it skid to a stop.</p>
+<p>So it behaves normally aside from the sound thing</p>
+<p>that is obviously happening.</p>
+<p>So we're all in sync with ourselves,</p>
+<p>but anything outside of us is out of sync.</p>
+<p>So is the cart in sync with us too?</p>
+<p>Like the squeaky wheel or does that have a delay?</p>
+<p>It is intermittent,</p>
+<p>but it does appear to have a delay as well.</p>
+<p>But we don't, we're just extra loud,</p>
+<p>like our footfalls are extra loud.</p>
+<p>Correct, yeah.</p>
+<p>So you're all looking around</p>
+<p>and maybe even looking back to where you were walking,</p>
+<p>the sound of that creaking wood picks up again.</p>
+<p>As you're drawn back towards it,</p>
+<p>it's always behind you.</p>
+<p>It stops any time somebody turns and looks directly at it.</p>
+<p>This time when you look back down the path,</p>
+<p>you feel like the path has narrowed slightly.</p>
+<p>Do we think we're...</p>
+<p>You know, the night that we came,</p>
+<p>we came into the woods, like is that woods?</p>
+<p>Are we in that place now?</p>
+<p>Feels, it feels very...</p>
+<p>Fae-y.</p>
+<p>Yeah.</p>
+<p>The path isn't lined like it was.</p>
+<p>You're right.</p>
+<p>Different path, good point.</p>
+<p>We can do, and I'm going to pull a staff out of the wagon</p>
+<p>and I'm going to mark something on the road,</p>
+<p>like make a clear marking, just like a T.</p>
+<p>Okay.</p>
+<p>I'm going to groove into the road and say, let's keep going.</p>
+<p>And if we see that again,</p>
+<p>maybe that would be a little bit of an indication.</p>
+<p>And somebody just keep looking back.</p>
+<p>Okay.</p>
+<p>I position myself.</p>
+<p>I'm like, I got to stop reading though.</p>
+<p>Okay.</p>
+<p>Take a break.</p>
+<p>I'm just like sitting crisscross the back of this wagon,</p>
+<p>just like hands on my fists.</p>
+<p>Yeah.</p>
+<p>As long as you're looking back, Alastair pulling you,</p>
+<p>he's been awake for a surprising period of time.</p>
+<p>So any minute now we can expect him to go down.</p>
+<p>Yeah.</p>
+<p>That's right.</p>
+<p>You all carry forward and as long as you're looking back,</p>
+<p>the sound of that creaking wood doesn't come back.</p>
+<p>You carry along the path and you carry along</p>
+<p>for another 45 minutes to an hour.</p>
+<p>You haven't passed that T marking at all,</p>
+<p>but coming up from the sides,</p>
+<p>you see roots that begin emerging</p>
+<p>from the sides of the path very slowly,</p>
+<p>probably about 25, 30 feet ahead of where you are,</p>
+<p>making their way slowly towards the center of the path.</p>
+<p>Two or three to start,</p>
+<p>but then you see there's movement coming from the foliage</p>
+<p>and the brush alongside as well.</p>
+<p>Um, the tree roots are being weird.</p>
+<p>I'll add that to the list.</p>
+<p>Are we okay to keep going?</p>
+<p>Should we...</p>
+<p>Look, I don't know if we're going to be able to.</p>
+<p>Are the roots coming, like, because Alydin's facing backwards,</p>
+<p>they're coming behind us, closing in,</p>
+<p>or they're in front of us?</p>
+<p>Or they're just surrounding us.</p>
+<p>Or they're just surrounding us.</p>
+<p>Yeah, let's make that make sense.</p>
+<p>Yeah, you had originally seen them 25 to 30 feet ahead of you,</p>
+<p>as previously described.</p>
+<p>I didn't hear the 25 to 30 feet.</p>
+<p>I'm sorry, I was trying to get my...</p>
+<p>I was like, maybe my dagger can do something.</p>
+<p>That's okay.</p>
+<p>Blacked out.</p>
+<p>But yeah, as Alydin calls back,</p>
+<p>you realize now that it's more...</p>
+<p>They're coming in from the side.</p>
+<p>Yeah, it's more obvious from all around you.</p>
+<p>You look to the sides,</p>
+<p>and there's more of that creaking sound again,</p>
+<p>and vines are beginning to weave themselves</p>
+<p>across the path further ahead of you.</p>
+<p>The roots still binding themselves,</p>
+<p>almost trying to...</p>
+<p>almost covering the path ahead of you.</p>
+<p>Um...</p>
+<p>I've never witnessed this on my travels.</p>
+<p>How about you?</p>
+<p>Well...</p>
+<p>Well, it's a new one for me.</p>
+<p>Hello?</p>
+<p>A bigger cart?</p>
+<p>That's not a problem,</p>
+<p>and I'm gonna cast Enlarge on the cart</p>
+<p>so that we can roll over these roots.</p>
+<p>Now we got four-wheel drive, baby!</p>
+<p>Yeah!</p>
+<p>Okay, you cast Enlarge.</p>
+<p>The cart grows in size.</p>
+<p>Oh, my God!</p>
+<p>Alistair...</p>
+<p>Need some help now?</p>
+<p>He's struggling a little bit.</p>
+<p>As convenient as it is,</p>
+<p>I don't know if I'm strong enough</p>
+<p>to cast Enlarge on the cart</p>
+<p>with Alydin inside of it.</p>
+<p>Perhaps someone could give assistance here.</p>
+<p>I hop out, too.</p>
+<p>Oh, okay.</p>
+<p>Alydin, you hop out,</p>
+<p>and you feel one of these roots</p>
+<p>rolling up over your foot.</p>
+<p>Ah! Oh, no! No!</p>
+<p>I give it a little, like...</p>
+<p>Not a hard kick, but I...</p>
+<p>Yeah, I kick it.</p>
+<p>You kick it, and it recoils,</p>
+<p>and another one moves past,</p>
+<p>and you grasp at the wheels of the wagon.</p>
+<p>No!</p>
+<p>Okay, if you don't want us to come,</p>
+<p>we're going somewhere,</p>
+<p>so if you could just let us go.</p>
+<p>Am I talking to Vines right now?</p>
+<p>I don't know.</p>
+<p>We've talked to weirder things.</p>
+<p>I agree. If you understand me,</p>
+<p>give me a sign.</p>
+<p>Are the trees alive? Okay, wait.</p>
+<p>Extra alive.</p>
+<p>Are they extra alive?</p>
+<p>Are they sentient?</p>
+<p>Do we actually want to wait for Russ to do a middle?</p>
+<p>Like, what was...</p>
+<p>No, let's do our version</p>
+<p>where he has to do inserts.</p>
+<p>So we're already doing a middle,</p>
+<p>and we don't even know it?</p>
+<p>Exactly.</p>
+<p>Oh, shit. Y'all caught us.</p>
+<p>You caught us. Russ is away,</p>
+<p>and the ding-dongs will play.</p>
+<p>Ding-dongs will play!</p>
+<p>That's right.</p>
+<p>We're attempting this.</p>
+<p>People in the arts got out of the car</p>
+<p>and switched, like, driver and passenger.</p>
+<p>Oh, wow.</p>
+<p>I wonder if someone's teaching someone how to drive.</p>
+<p>There's a real drama unfolding.</p>
+<p>Well, they're obviously not listening</p>
+<p>to Dumbgeons and Dragons while they drive.</p>
+<p>That wouldn't be happening.</p>
+<p>They'd be laughing.</p>
+<p>They'd be enjoying each other's company more.</p>
+<p>Exactly.</p>
+<p>They would realize how much they need</p>
+<p>to value each other's company.</p>
+<p>That's the real takeaway of it all.</p>
+<p>You know who we value?</p>
+<p>All of our wonderful supporters.</p>
+<p>That's true.</p>
+<p>Too true.</p>
+<p>They're amazing.</p>
+<p>We got them over there on Discord,</p>
+<p>in Patreon,</p>
+<p>and if you are a patron,</p>
+<p>you do get an episode dedicated to you.</p>
+<p>Like Jay's patron.</p>
+<p>Russ,</p>
+<p>insert name here.</p>
+<p>Alex Martin.</p>
+<p>Thanks!</p>
+<p>Alex Martin.</p>
+<p>You're amazing.</p>
+<p>We love you so much.</p>
+<p>Alex Martin.</p>
+<p>And I'm sure Russ is making a fun</p>
+<p>play on your name,</p>
+<p>because we're counting on him to do it,</p>
+<p>because we love him and you.</p>
+<p>He is the Atlas</p>
+<p>supporting the world in this situation.</p>
+<p>No pressure, Russ. We love you.</p>
+<p>No pressure. Look at us</p>
+<p>jumping into it, getting the middle out of the way.</p>
+<p>We can't do things without you,</p>
+<p>or we can't do without you.</p>
+<p>Exactly.</p>
+<p>Also Amy, I thought for sure when you said</p>
+<p>they're on Discord, on Patreon,</p>
+<p>and then I thought you were going to be like,</p>
+<p>and we have special Discord channels for patrons.</p>
+<p>Just landing it all.</p>
+<p>Just landing it all.</p>
+<p>You know, we just</p>
+<p>love them and cherish</p>
+<p>them and we love that they love</p>
+<p>us and</p>
+<p>there's just so much</p>
+<p>loving and</p>
+<p>cherishing.</p>
+<p>But not outside your house, because those Yaris folks.</p>
+<p>Still yelling? Nope, they're gone now.</p>
+<p>They just needed to switch who was</p>
+<p>driving. They got it figured out.</p>
+<p>They got it figured out.</p>
+<p>I hope. For their sake.</p>
+<p>If you want to be as awesome as</p>
+<p>Alex Martin, come join us</p>
+<p>on Patreon. Patreon.com</p>
+<p>slash dumb dragon cast, where</p>
+<p>we have so many cool things.</p>
+<p>A lot of cool things, extra episodes of stuff.</p>
+<p>I'm sure there's some random one shots.</p>
+<p>For sure.</p>
+<p>There's a whole other game that Tom runs.</p>
+<p>That's true.</p>
+<p>That's very true.</p>
+<p>Six seasons of that.</p>
+<p>Crazy business.</p>
+<p>All kinds of good stuff.</p>
+<p>So join us like</p>
+<p>Alex Martin.</p>
+<p>But now let's get you back to the episode.</p>
+<p>Heck yeah. Thank you.</p>
+<p>Love you, bye.</p>
+<p>We nailed that you guys.</p>
+<p>Man, fucking money.</p>
+<p>Did it.</p>
+<p>Did it.</p>
+<p>You don't hear</p>
+<p>any response.</p>
+<p>The vines still, vines and roots</p>
+<p>still continue to like weave</p>
+<p>across this path. The vines</p>
+<p>themselves up ahead of you have created</p>
+<p>almost,</p>
+<p>there's still</p>
+<p>light that you can see through</p>
+<p>to the other side, but they're creating</p>
+<p>a wall in front of you.</p>
+<p>Um, I wanna</p>
+<p>I wanna take, I wanna use</p>
+<p>my new present.</p>
+<p>Okay.</p>
+<p>And I wanna</p>
+<p>like, cut at the wall that</p>
+<p>it's trying to do.</p>
+<p>Okay. Okay.</p>
+<p>Make an attack roll.</p>
+<p>Uh,</p>
+<p>14. Not really</p>
+<p>trying to</p>
+<p>get it, like, and slash it</p>
+<p>down. What are you trying to do with it?</p>
+<p>When I hit it, I will</p>
+<p>learn its</p>
+<p>magical</p>
+<p>school influencing it.</p>
+<p>So you're stepping over these roots that</p>
+<p>have carpeted the path in front of you.</p>
+<p>Oh yeah, I'm just</p>
+<p>hopscotching my way through this.</p>
+<p>You get up to it and you stab</p>
+<p>into it, and like there's this</p>
+<p>Like, gently, like, gently.</p>
+<p>Okay, you pour a poem into it. Yeah.</p>
+<p>You gently caress it</p>
+<p>with your new</p>
+<p>tool. And</p>
+<p>uh, there's this</p>
+<p>ripple effect</p>
+<p>that happens. And like the vines</p>
+<p>themselves recoil.</p>
+<p>You get</p>
+<p>that it's not</p>
+<p>a specific school</p>
+<p>of magic. Which</p>
+<p>triggers your</p>
+<p>memory. Something that you</p>
+<p>perhaps didn't remember about</p>
+<p>your time in the fey.</p>
+<p>Um, was actually getting to</p>
+<p>the banjo man's house.</p>
+<p>Like there was a point of</p>
+<p>which you were in the</p>
+<p>material plane.</p>
+<p>You were taken, and then</p>
+<p>you were there. You have</p>
+<p>this flashback of you walking</p>
+<p>through a</p>
+<p>very forested area. And we see</p>
+<p>the path that was</p>
+<p>more described when Kavlaran</p>
+<p>and Bizard</p>
+<p>walked down, which was more of a cobblestone</p>
+<p>path. You see</p>
+<p>ruins all along</p>
+<p>the perimeter.</p>
+<p>Along the edge of it.</p>
+<p>And you remember walking</p>
+<p>with this figure beside you. You can't quite</p>
+<p>place them. But you remember walking</p>
+<p>along with this figure. And there was a very similar</p>
+<p>like wall that was</p>
+<p>up in front of you. And this figure</p>
+<p>like waved this</p>
+<p>wall away. And it's like it opened</p>
+<p>up. And opened up onto</p>
+<p>into this wide</p>
+<p>open field where the house</p>
+<p>stood in the center.</p>
+<p>Oh, then I am.</p>
+<p>You see me like</p>
+<p>backing my shit up.</p>
+<p>Like it's</p>
+<p>with this memory, I'm</p>
+<p>probably very</p>
+<p>panicked</p>
+<p>because that was</p>
+<p>a horrifically scarring</p>
+<p>experience. And so</p>
+<p>I like backed my</p>
+<p>closer</p>
+<p>to Bizard.</p>
+<p>I don't think</p>
+<p>we should go through there. We shouldn't go through there.</p>
+<p>Pause for a second.</p>
+<p>And as</p>
+<p>horrific as the memory</p>
+<p>is, you get this faint</p>
+<p>feeling</p>
+<p>more than anything.</p>
+<p>That the vines ahead of you</p>
+<p>are not trying</p>
+<p>to trap you</p>
+<p>or</p>
+<p>they're not hostile towards</p>
+<p>you. But you feel like</p>
+<p>there is some sort of protective</p>
+<p>nature about them.</p>
+<p>They're trying to prevent you</p>
+<p>from going further.</p>
+<p>Do I get the feeling like</p>
+<p>they're protecting us or they're protecting</p>
+<p>what's</p>
+<p>past it?</p>
+<p>I would think more the former</p>
+<p>is the feeling that you get.</p>
+<p>I don't think we're</p>
+<p>supposed to go this way.</p>
+<p>I think they're keeping us</p>
+<p>out for a reason.</p>
+<p>Okay.</p>
+<p>You all right? You look a little</p>
+<p>shaken.</p>
+<p>Yeah, I just, when I</p>
+<p>went up</p>
+<p>to them, I didn't</p>
+<p>remember being taken by the banjo man</p>
+<p>and that was</p>
+<p>nice. But I</p>
+<p>just remembered walking</p>
+<p>up to a wall of vines</p>
+<p>and</p>
+<p>them just being waved away</p>
+<p>and then the house was there.</p>
+<p>So.</p>
+<p>Oh.</p>
+<p>You don't think the</p>
+<p>house is on the other side of where we are</p>
+<p>right now though. Do you think that?</p>
+<p>Oh, it better not be. I don't know. Didn't you burn</p>
+<p>that thing to the ground?</p>
+<p>Yeah. Yeah, we did.</p>
+<p>But</p>
+<p>I mean, is this just, could</p>
+<p>the people leaving Lingersville</p>
+<p>like put up a ward</p>
+<p>or something so that people wouldn't go back</p>
+<p>because of whatever happened, which</p>
+<p>is what we're trying to find out about?</p>
+<p>Is this a turn around and go the other way</p>
+<p>situation or</p>
+<p>we know we shouldn't go here, but we're going to go</p>
+<p>any way situation. What do we think?</p>
+<p>Definitely seems like a place we know we</p>
+<p>shouldn't go to, but kind of have to</p>
+<p>and. Yeah. Yeah.</p>
+<p>So.</p>
+<p>Well.</p>
+<p>If it's not</p>
+<p>threatening us and it's trying</p>
+<p>to keep us out of there, then</p>
+<p>maybe try</p>
+<p>letting it know.</p>
+<p>Know and command it in the</p>
+<p>same way that you saw. Emulate</p>
+<p>is what I'm trying to get around to. Yeah.</p>
+<p>Because you said they like</p>
+<p>shazam.</p>
+<p>They like waved it away.</p>
+<p>Yeah. Do you want,</p>
+<p>do you feel comfortable doing that?</p>
+<p>This is going to be like</p>
+<p>the cows.</p>
+<p>OK, I'll try</p>
+<p>and do whatever you like. Amy</p>
+<p>and Alydin have a lot of trauma</p>
+<p>related. Yeah. And</p>
+<p>that's understandable. Just wave</p>
+<p>at those wines, those vines.</p>
+<p>Yeah.</p>
+<p>Wave at the wines.</p>
+<p>Wave at the wines, everybody.</p>
+<p>Would you would you like somebody to come stand</p>
+<p>with you? Would that make you feel more</p>
+<p>empowered?</p>
+<p>Yeah. Yeah. I</p>
+<p>gladly do. I would gladly stand</p>
+<p>with you. You have.</p>
+<p>He holds out his quill.</p>
+<p>You have my quill.</p>
+<p>And my sword.</p>
+<p>And my hammer.</p>
+<p>You know I'm here.</p>
+<p>All right.</p>
+<p>We got you.</p>
+<p>I mean,</p>
+<p>you're a champion. You're a fighter.</p>
+<p>I'm trying to focus.</p>
+<p>We're all in your corner.</p>
+<p>And</p>
+<p>Alydin just whispers.</p>
+<p>We're OK.</p>
+<p>Thanks, though. And waves waves</p>
+<p>her hand like swoosh.</p>
+<p>Thanks, but no.</p>
+<p>Yeah. So</p>
+<p>just so I get the picture, you're not</p>
+<p>holding anything. You're just</p>
+<p>gesturing like you saw.</p>
+<p>Like I saw in my vision.</p>
+<p>My memory.</p>
+<p>Everybody else and through squinted eyes, Alydin,</p>
+<p>you see like there's</p>
+<p>there's a hesitation</p>
+<p>that you can sense from</p>
+<p>these vines.</p>
+<p>And then after a brief moment, they don't</p>
+<p>part the same way that</p>
+<p>you saw, but they</p>
+<p>pull back and create</p>
+<p>this doorway for you.</p>
+<p>The carpet</p>
+<p>of roots that have grabbed hold</p>
+<p>of the wagon</p>
+<p>slowly release</p>
+<p>and make a path that</p>
+<p>goes through the wall that</p>
+<p>was created in front of you.</p>
+<p>OK, thank you.</p>
+<p>Good job, Alydin.</p>
+<p>Yeah.</p>
+<p>That was great.</p>
+<p>And no spooky</p>
+<p>dream house. So that's a win.</p>
+<p>Yeah. What do we see? Just more forest?</p>
+<p>More forest.</p>
+<p>You actually see that the forest</p>
+<p>kind of comes to</p>
+<p>a bit of a clearing up ahead.</p>
+<p>So you see some light. You don't see</p>
+<p>it's not the same house.</p>
+<p>It's more of a hill that</p>
+<p>wraps up, not wraps</p>
+<p>up, a hill that moves</p>
+<p>up and then you see some</p>
+<p>light parting through some of the trees. But yeah, definitely</p>
+<p>not the same clearing</p>
+<p>and house situation that you saw before.</p>
+<p>That was pretty</p>
+<p>exciting. I'm glad we were all there for you, Alydin.</p>
+<p>I'm just going to</p>
+<p>Alistair passes</p>
+<p>out onto the path in</p>
+<p>front of him. OK, I can lift him, but I can't</p>
+<p>lift him up into this wagon now. It's way too high.</p>
+<p>I got you. Oh, sorry.</p>
+<p>We don't need to add brake concentration.</p>
+<p>No, we throw him over like a rag</p>
+<p>doll.</p>
+<p>You threw him up as I made it smaller</p>
+<p>and just extra falling.</p>
+<p>He goes over and</p>
+<p>whoops, poor dude.</p>
+<p>Oh, bad timing.</p>
+<p>You get Alistair back up</p>
+<p>into the regularly sized wagon</p>
+<p>and carry on and you move up</p>
+<p>this hill and you</p>
+<p>get to the top of it.</p>
+<p>And as you</p>
+<p>crest over it, you see</p>
+<p>just like this</p>
+<p>plume of smoke coming</p>
+<p>up from some of the trees up</p>
+<p>ahead. Like from a chimney</p>
+<p>or like from a forest fire?</p>
+<p>Yeah, how concentrated</p>
+<p>is this plume? Does it smell like tires?</p>
+<p>More like Vancouver Island</p>
+<p>garbage fire. Oh, OK, so</p>
+<p>like tires. Nailed it.</p>
+<p>Yeah, so a burn pile. Got it.</p>
+<p>A burn pile up through trees is</p>
+<p>what you see. Yeah.</p>
+<p>But you see that.</p>
+<p>It's tough to tell</p>
+<p>exact distance, but</p>
+<p>if you had</p>
+<p>a straight shot to it, you feel like you could get</p>
+<p>there in like 20 to 30 minutes.</p>
+<p>And it's coming in the direction that the path</p>
+<p>keeps going or a different direction?</p>
+<p>Yeah, more or</p>
+<p>less. Like you don't know</p>
+<p>which way the path kind of winds through this,</p>
+<p>but it's directly more or</p>
+<p>less in front of you with the way you're facing</p>
+<p>right now and in the direction</p>
+<p>you continue to walk.</p>
+<p>You carry along the path and</p>
+<p>everybody make a</p>
+<p>person, everybody's head zones. What's</p>
+<p>everybody's passive perception?</p>
+<p>Ten.</p>
+<p>Twelve.</p>
+<p>Fourteen.</p>
+<p>Oh my God. What? Cav, get out of</p>
+<p>here.</p>
+<p>He's too busy not working. When he wants to.</p>
+<p>He's just looking around. That's right.</p>
+<p>If it's something Cav's interested</p>
+<p>in, he's all in.</p>
+<p>It has to be an organic experience too.</p>
+<p>It can't be told by a boss. That's right.</p>
+<p>That's right. Cav,</p>
+<p>you're, everybody's</p>
+<p>focused on the path, checking</p>
+<p>things around them. You hear</p>
+<p>from off in the trees</p>
+<p>and you even catch sight</p>
+<p>of what is very clear</p>
+<p>to you of a large</p>
+<p>animal.</p>
+<p>It's tough to tell exactly what it is,</p>
+<p>but based on the</p>
+<p>cadence of the steps,</p>
+<p>you're uncertain if they are in fact</p>
+<p>delayed, but it's a very</p>
+<p>lumbering cadence that you hear.</p>
+<p>Make a nature</p>
+<p>roll for me before</p>
+<p>you reveal anything.</p>
+<p>I can do that.</p>
+<p>Ooh, a minus two</p>
+<p>to nature. That's an eleven.</p>
+<p>He's a city boy.</p>
+<p>He is a city boy. Cav's a</p>
+<p>city boy. He's traveled. He's</p>
+<p>camped. Lord Harrison has taken him out</p>
+<p>camping a couple times.</p>
+<p>Their idea of camping was not</p>
+<p>camping though. No, of course not,</p>
+<p>but you've been in the wilderness at least</p>
+<p>for a moment. You've seen trees and you've read</p>
+<p>at least five books. Exactly. One of them had to be about</p>
+<p>nature. I mean, twenty percent chance.</p>
+<p>Jack London's Call of the Wild, I think,</p>
+<p>is what he was one of them.</p>
+<p>But you see this animal</p>
+<p>before anybody else does, and</p>
+<p>you get the distinct sense</p>
+<p>that this could be a bear,</p>
+<p>making its way closer</p>
+<p>to the path that you're walking on.</p>
+<p>Do I get the impression that it's</p>
+<p>like coming straight for us?</p>
+<p>Or is it like if we</p>
+<p>make ourselves quiet</p>
+<p>and don't get in its way,</p>
+<p>it will just like mosey on around us?</p>
+<p>Make an insight roll.</p>
+<p>Is this Tom or Cav?</p>
+<p>Because that's a bad idea.</p>
+<p>We need to be quiet</p>
+<p>and sneak up on it. We've got to be loud</p>
+<p>or scared away.</p>
+<p>It's okay.</p>
+<p>That's why we have Bonwyn.</p>
+<p>Tom also has not been in the woods.</p>
+<p>Free rug.</p>
+<p>What do you mean? Come on.</p>
+<p>That is a fifteen</p>
+<p>on the insight roll. As nature</p>
+<p>worthy as you are, you get the</p>
+<p>sense that it is, whether it</p>
+<p>knows you're there or not, it is</p>
+<p>walking towards the path, kind of</p>
+<p>intersecting with where your friends are walking.</p>
+<p>Tom knows a thing or two about bears.</p>
+<p>I didn't mean to call him out. A couple.</p>
+<p>Fine.</p>
+<p>Yeah, I'll give everyone</p>
+<p>well, okay, first off,</p>
+<p>I am going to look for like any</p>
+<p>kind of like rock</p>
+<p>or any surface like that that I can</p>
+<p>hit with my hammer and create some</p>
+<p>noise with.</p>
+<p>And then after I do that,</p>
+<p>I'll explain to everyone</p>
+<p>what I'm doing.</p>
+<p>So everybody else hears</p>
+<p>behind you, around you,</p>
+<p>this loud sound</p>
+<p>of hammer hitting this</p>
+<p>this large</p>
+<p>stone that is on the side</p>
+<p>of the that you find on the side of the path</p>
+<p>draws everybody's attention</p>
+<p>back to you.</p>
+<p>And Cav, as that happens,</p>
+<p>you see that this</p>
+<p>the figure of this animal</p>
+<p>stops moving.</p>
+<p>And you can't see</p>
+<p>it directly because of all the shadow</p>
+<p>that's being cast. But like you get the</p>
+<p>sense that it's turning straight towards</p>
+<p>you. Cav, you okay?</p>
+<p>I know</p>
+<p>it is a strong hammer.</p>
+<p>You just want to check it out?</p>
+<p>You gave me a heart attack.</p>
+<p>I just thought everyone should know</p>
+<p>that there is a giant bear</p>
+<p>coming our way. And I was hoping</p>
+<p>to maybe</p>
+<p>scare it off. Okay.</p>
+<p>Okay. Okay.</p>
+<p>Oh, it's coming right for us.</p>
+<p>You hear this low rumbling</p>
+<p>growl as this</p>
+<p>hulking</p>
+<p>figure like pushes through</p>
+<p>the trees. You see some smaller trees</p>
+<p>begin to like snap as it</p>
+<p>pushes around it.</p>
+<p>What do you do? You realize it's going to get</p>
+<p>here quicker than we</p>
+<p>than we hear it, right?</p>
+<p>That's right.</p>
+<p>Was that hammer blow</p>
+<p>in right time? Like,</p>
+<p>are we still in normal time?</p>
+<p>It would have been twice as loud maybe like</p>
+<p>our footsteps. It was</p>
+<p>quite loud.</p>
+<p>And there was like this echoing delay</p>
+<p>to it. Okay.</p>
+<p>We got to be loud</p>
+<p>right and big and scare it.</p>
+<p>We're a bigger bear.</p>
+<p>Right?</p>
+<p>I think so. That's what I heard.</p>
+<p>Stand up on the cart. Yeah, stand up on the cart.</p>
+<p>Everybody yell real loud.</p>
+<p>We're a</p>
+<p>big bear.</p>
+<p>If this thing doesn't stop, I'm casting</p>
+<p>Web like right before it gets to us</p>
+<p>to try to trap it down.</p>
+<p>It doesn't stop. And then we'll eat well tonight.</p>
+<p>And right before</p>
+<p>you cast Web,</p>
+<p>some light</p>
+<p>goes through the trees</p>
+<p>and Bizarre, you get</p>
+<p>like a pretty</p>
+<p>clear picture of this</p>
+<p>bear. And it is a bear. And it looks</p>
+<p>like twice the size</p>
+<p>of the biggest grizzly bear you could picture.</p>
+<p>Oh shit.</p>
+<p>And you get</p>
+<p>a weird feeling because</p>
+<p>all along like the joints</p>
+<p>and the back of this bear,</p>
+<p>you feel like you see</p>
+<p>like mushrooms</p>
+<p>growing out of it.</p>
+<p>Okay.</p>
+<p>And is it being aggressive or is it just</p>
+<p>like plodding up to us?</p>
+<p>So far it's just, it's plodding.</p>
+<p>It has picked up pace a little bit</p>
+<p>since the loud camera shot. But it hasn't done a like</p>
+<p>Yeah, it doesn't look like it's doing</p>
+<p>like attack stance. Okay.</p>
+<p>Yeah. It's more just like</p>
+<p>what are you doing? Yeah.</p>
+<p>Why are you guys killing? Guys, I don't want to</p>
+<p>kill a bear. Like we're in the woods. I just wanted</p>
+<p>to go away. I don't</p>
+<p>think that's really, I mean, it was</p>
+<p>a bear maybe.</p>
+<p>Do you see the mushrooms? The</p>
+<p>the fungus</p>
+<p>through the light. You now see it</p>
+<p>stand up on its back legs</p>
+<p>and you see these</p>
+<p>wounds that are just</p>
+<p>overflowing with these mushrooms</p>
+<p>and it lets out this</p>
+<p>you can see its face now that like</p>
+<p>it steps out into the light</p>
+<p>and it lets out this</p>
+<p>blood curdling roar</p>
+<p>towards you as the trees themselves</p>
+<p>shake</p>
+<p>and you hear them like parting.</p>
+<p>That creaking noise</p>
+<p>comes back as they pull themselves</p>
+<p>away from this bear now.</p>
+<p>And it's standing</p>
+<p>probably eight, ten feet</p>
+<p>tall.</p>
+<p>And it lands down on its four</p>
+<p>paws and begins</p>
+<p>charging towards you.</p>
+<p>Shit!</p>
+<p>And Russ More as your dungeon master.</p>
+<p>Dialogue, editing, and sound design</p>
+<p>of today's episode is by Russ More.</p>
+<p>Our community manager is Jessica</p>
+<p>Babyok. Music is from Epidemic</p>
+<p>Sound and sound effects are from</p>
+<p>Epidemic Sound, Boom Library, and</p>
+<p>Sound Ideas. Our amazing cover</p>
+<p>art is by Matt Garbutt. A huge</p>
+<p>thank you to our supporting producers</p>
+<p>Gabriel Lynch, Jessica Babyok,</p>
+<p>Angaron Kierzen, Perry</p>
+<p>Matey, Count Waterflame, Jacob</p>
+<p>Madden, Old School Gamer D,</p>
+<p>Craig Zeiss, and L.A. Branton.</p>
+<p>Dumbgeons &amp; Dragons is a Patreon</p>
+<p>supported show and because of our Patreon</p>
+<p>supporters we get to keep telling</p>
+<p>bigger, weirder, more</p>
+<p>heartfelt stories in this world</p>
+<p>we love. And honestly,</p>
+<p>that's something we will never take for granted.</p>
+<p>Join us today at Patreon.com</p>
+<p>slash Dumb Dragon Cast and help</p>
+<p>us tell the stories that you</p>
+<p>want to hear. We hope to see you</p>
+<p>over there. Have a great week</p>
+<p>and we'll talk to you soon. Dumbgeons &amp; Dragons</p>
+<p>is a Dumb Dragons production.</p>
+
+    </div>
+
+    <button class="back-to-top" id="back-to-top" title="Back to top">&#x2191;</button>
+
+    <div class="report-footer">
+        <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new?title=Transcript+Error%3A+E61+-+Are+the+Trees+Alive%3F&body=%2A%2AEpisode%3A%2A%2A+E61+-+Are+the+Trees+Alive%3F%0A%0A%2A%2ATimestamp+%2F+location+in+transcript%3A%2A%2A%0A%0A%2A%2AIncorrect+text%3A%2A%2A%0A%0A%2A%2ACorrect+text%3A%2A%2A%0A" target="_blank">Found a transcription error? Report it on GitHub &rarr;</a>
+    </div>
+    <footer>
+        <div class="footer-links">
+            Dumbgeons &amp; Dragons &copy; Dumb Dragons Productions. All rights reserved.
+            &bull; <a href="https://github.com/russdmore-lgtm/dumbdragons-scripts/issues/new" target="_blank">Report a transcript error</a>
+        </div>
+        <p class="disclaimer">Transcripts are generated using AI speech-to-text technology (OpenAI Whisper) and may contain errors, particularly around proper nouns, character names, and crosstalk. They are provided for accessibility and search purposes and should not be considered verbatim records.</p>
+    </footer>
+    
+    <script>
+        const toggleBtn = document.getElementById('dark-toggle');
+        function updateToggle() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = theme === 'dark' || (!theme && sysDark);
+            toggleBtn.textContent = isDark ? '☀️' : '🌙';
+            toggleBtn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+        }
+        toggleBtn.addEventListener('click', function() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = current === 'dark' || (!current && sysDark);
+            const next = isDark ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateToggle();
+        });
+        updateToggle();
+    </script>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            document.getElementById('back-to-top').classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+        document.getElementById('back-to-top').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+    
+    <script data-goatcounter="https://dumbdragons.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
